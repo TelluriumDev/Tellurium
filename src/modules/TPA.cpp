@@ -1,5 +1,4 @@
 #include "TPA.h"
-#include "Global.h"
 #include <ll/api/data/KeyValueDB.h>
 #include <ll/api/thread/TickSyncTaskPool.h>
 
