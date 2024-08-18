@@ -36,7 +36,8 @@ target("TSEssential") -- Change this to your mod name.
     after_build(function (target)
         local mod_packer = import("scripts.after_build")
 
-        local tag = os.iorun("git describe --tags --abbrev=0 --always")
+        -- local tag = os.iorun("git describe --tags --abbrev=0 --always")
+        local tag = "v1.0.1"
         local major, minor, patch, suffix = tag:match("v(%d+)%.(%d+)%.(%d+)(.*)")
         if not major then
             print("Failed to parse version tag, using 0.0.0")

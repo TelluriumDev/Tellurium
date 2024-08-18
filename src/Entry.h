@@ -2,7 +2,7 @@
 
 #include "ll/api/mod/NativeMod.h"
 
-namespace TSEssential {
+namespace TSEssential::Entry {
 
 class Entry {
 
@@ -30,4 +30,4 @@ private:
   ll::mod::NativeMod &mSelf;
 };
 
-} // namespace TSEssential
+} // namespace TSEssential::Entry

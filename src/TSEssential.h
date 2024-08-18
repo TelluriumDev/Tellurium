@@ -1,6 +1,10 @@
 #pragma once
 
+#include "./Entry.h"
+
+#define LOGGER TSEssential::Entry::Entry::getInstance().getSelf().getLogger()
+
 namespace TSEssential {
-void CheckProtocolVersion();
-bool LoadConfig();
+bool Load();
+bool UnLoad();
 } // namespace TSEssential

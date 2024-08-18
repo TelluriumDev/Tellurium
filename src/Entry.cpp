@@ -1,43 +1,47 @@
-#include "Entry.h"
-#include "Global.h"
 #include "TSEssential.h"
+#include "ll/api/memory/Memory.h"
+#define LL_MEMORY_OPERATORS
+
+#include <ll/api/memory/MemoryOperators.h> // IWYU pragma: keep
+
+#include "./Entry.h"
+#include "./TSEssential.h"
 
 #include <memory>
 
-#include "ll/api/mod/RegisterHelper.h"
 #include <ll/api/Config.h>
+#include <ll/api/memory/Memory.h>
+#include <ll/api/mod/RegisterHelper.h>
 
-namespace TSEssential {
+#define TARGET_NETWORK_VERSION 686 // BDS 1.21.3.01
+
+namespace TSEssential::Entry {
+
+void CheckProtocolVersion() {
+  auto NetworkVersion = *(int *)ll::memory::resolveSymbol(
+      "?NetworkProtocolVersion@SharedConstants@@3HB");
+  if (NetworkVersion != TARGET_NETWORK_VERSION) {
+    LOGGER.warn("Unsupported Network Version: " +
+                std::to_string(NetworkVersion));
+    LOGGER.warn("The mod probably won't work correctly");
+    LOGGER.warn("Target Network Version: " +
+                std::to_string(TARGET_NETWORK_VERSION));
+  }
+}
 
 static std::unique_ptr<Entry> instance;
 
 Entry &Entry::getInstance() { return *instance; }
 
 bool Entry::load() {
-  getSelf().getLogger().debug("Checking Network Version...");
   CheckProtocolVersion();
-  getSelf().getLogger().info("Loading config.json...");
-  LoadConfig();
-  LoadModules();
-  return true;
+  return TSEssential::Load();
 }
-bool Entry::enable() {
-  getSelf().getLogger().debug("Enabling...");
-  // Code for enabling the mod goes here.
-  return true;
-}
+bool Entry::enable() { return true; }
 
-bool Entry::disable() {
-  getSelf().getLogger().debug("Disabling...");
-  // Code for disabling the mod goes here.
-  return true;
-}
+bool Entry::disable() { return false; }
 
-bool Entry::unload() {
-  getSelf().getLogger().debug("Unloading...");
-  // Code for unloading the mod goes here.
-  return true;
-}
-} // namespace TSEssential
+bool Entry::unload() { return TSEssential::UnLoad(); }
+} // namespace TSEssential::Entry
 
-LL_REGISTER_MOD(TSEssential::Entry, TSEssential::instance);
+LL_REGISTER_MOD(TSEssential::Entry::Entry, TSEssential::Entry::instance);
