@@ -1,35 +1,50 @@
-# LeviLamina Mod Template
+# TSEssential
 
-A LeviLamina mod template
+一个新时代的Essential类模组，基于LeviLamina模组开发框架
 
-This mod is a template for developing LeviLamina mods.
+为生存服务器带来许多实用功能
 
-## Install
+## 安装
 
-Generate a new repository from this template.
+前往Release页面下载最新版本，解压后放入LeviLamina模组文件夹即可
 
-## Usage
+或者你也可以使用Lip包管理器安装:
 
-Before using this mod template, make sure that you have installed XMake and a Minecraft Bedrock Server with LeviLamina.
+```shell
+lip install TSEssentialDev/TSEssential
+```
 
-1. Clone the new repository into a local folder.
+## 支持的功能
 
-1. Change the mod name and the expected LeviLamina version in `xmake.lua`.
+- [] 多语言支持
+- [] 菜单 (使用对应物品打开菜单)
+- [] 玩家互传 (TPA)
+- [] 随机传送 (TPR)
+- [] 家管理 (Home)
+- [] 公共传送点 (Warp)
+- [] 返回死亡点 (Back)
+- [] 动态服务器Motd (DynamicMotd)
+- [] 服务器公告 (Notice)
+- [] 一点小功能 (Tweaks)
+  - [] 耕地防踩踏 (FarmLandProtect)
+  - [] 刷新区块 (RefreshChunks)
 
-1. Add your code.
 
-1. Run `xmake repo -u` in the root of the repository.
 
-1. Run `xmake` to build the mod.
 
-Now the build is complete at `bin/`.
+## 用法
 
-## Contributing
+在确定已经成功安装了TSEssential模组后，你可以在配置文件中启用或禁用功能，也可以自定义一些参数。
 
-Ask questions by creating an issue.
+如果你在调整配置时遇到了一些问题，请查阅文档来获取支持。
 
-PRs accepted.
 
-## License
+## 贡献
 
-CC0-1.0 © LiteLDev
+如果你遇到了问题或者有好的建议，欢迎提交Issue或者Pull Request。
+
+我们非常欢迎你的贡献，让TSEssential变得更好！
+
+## 许可
+
+GPL-3.0, 并加有额外的条款，请查看LICENSE文件以获取更多信息。

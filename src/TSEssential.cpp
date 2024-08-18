@@ -1,14 +1,17 @@
 // Private Headers
-#include "Global.h"
 #include "TSEssential.h"
+#include "Global.h"
 
 // LLAPI Headers
 #include <ll/api/Config.h>
 #include <ll/api/Versions.h>
 
-
 namespace TSEssential {
-// 检查网络协议版本
+
+/**
+ * @brief 检查网络协议版本
+ */
+
 void CheckProtocolVersion() {
   auto NetworkVersion = ll::getNetworkProtocolVersion();
   if (NetworkVersion != TARGET_NETWORK_VERSION) {
@@ -19,7 +22,11 @@ void CheckProtocolVersion() {
                 std::to_string(TARGET_NETWORK_VERSION));
   }
 }
-// 加载配置文件
+/**
+ * @brief 加载配置文件
+ * @return 成功加载配置文件返回true，否则返回false
+ */
+
 bool LoadConfig() {
   auto path = ll::mod::getModsRoot() / "Muelsyse/config/config.json";
   try {
