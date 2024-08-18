@@ -1,8 +1,9 @@
+// Private Headers
 #include <Global.h>
-#include <map>
-#include <ll/api/Logger.h>
 #include "modules/TPA.h"
 
+// LLAPI Headers
+#include <ll/api/Logger.h>
 
 void LoadModules() {
     if (config.Modules.TPA.enabled)

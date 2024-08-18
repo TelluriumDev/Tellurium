@@ -1,9 +1,5 @@
 #pragma once
 
-#include <string>
-#include <unordered_map>
-#include <vector>
-
 namespace TSEssential {
 struct Config {
   int version = 1;     // 配置文件版本

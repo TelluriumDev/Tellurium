@@ -1,9 +1,12 @@
+// Private Headers
 #include "Entry.h"
 #include "Global.h"
 #include "TSEssential.h"
 
+// C++ STL Headers
 #include <memory>
 
+// LLAPI Headers
 #include "ll/api/mod/RegisterHelper.h"
 #include <ll/api/Config.h>
 
