@@ -16,19 +16,18 @@ lip install TSEssentialDev/TSEssential
 
 ## 支持的功能
 
-- [] 多语言支持
-- [] 菜单 (使用对应物品打开菜单)
-- [] 玩家互传 (TPA)
-- [] 随机传送 (TPR)
-- [] 家管理 (Home)
-- [] 公共传送点 (Warp)
-- [] 返回死亡点 (Back)
-- [] 动态服务器Motd (DynamicMotd)
-- [] 服务器公告 (Notice)
-- [] 一点小功能 (Tweaks)
-  - [] 耕地防踩踏 (FarmLandProtect)
-  - [] 刷新区块 (RefreshChunks)
-
+- [ ] 多语言支持
+- [ ] 菜单 (使用对应物品打开菜单)
+- [ ] 玩家互传 (TPA)
+- [ ] 随机传送 (TPR)
+- [ ] 家管理 (Home)
+- [ ] 公共传送点 (Warp)
+- [ ] 返回死亡点 (Back)
+- [ ] 动态服务器Motd (DynamicMotd)
+- [ ] 服务器公告 (Notice)
+- [ ] 一点小功能 (Tweaks)
+  - [ ] 耕地防踩踏 (FarmLandProtect)
+  - [ ] 刷新区块 (RefreshChunks)
 
 
 
