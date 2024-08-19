@@ -27,6 +27,8 @@ target("TSEssential") -- Change this to your mod name.
     add_files("src/**.cpp")
     add_files("utils/**.cc")
     add_includedirs("src")
+    add_includedirs("Includes")
+    add_includedirs("utils")
     add_packages("levilamina")
     add_shflags("/DELAYLOAD:bedrock_server.dll") -- To use symbols provided by SymbolProvider.
     set_exceptions("none") -- To avoid conflicts with /EHa.

@@ -1,11 +1,12 @@
+#include "ll/api/Versions.h"
 #define LL_MEMORY_OPERATORS
 #include <ll/api/memory/MemoryOperators.h>
 
 #include "Entry.h"
 #include "TSEssential.h"
-#include "ll/api/memory/Memory.h"
 
 #include <ll/api/Config.h>
+#include <ll/api/Versions.h>
 #include <ll/api/mod/RegisterHelper.h>
 
 #define TARGET_NETWORK_VERSION 686 // BDS 1.21.3.01
@@ -13,8 +14,7 @@
 namespace TSEssential::Entry {
 
 void CheckProtocolVersion() {
-  auto NetworkVersion = *(int *)ll::memory::resolveSymbol(
-      "?NetworkProtocolVersion@SharedConstants@@3HB");
+  auto NetworkVersion = ll::getNetworkProtocolVersion();
   if (NetworkVersion != TARGET_NETWORK_VERSION) {
     LOGGER.warn("Unsupported Network Version: " +
                 std::to_string(NetworkVersion));
@@ -29,12 +29,12 @@ static std::unique_ptr<Entry> instance;
 Entry &Entry::getInstance() { return *instance; }
 
 bool Entry::load() {
-  CheckProtocolVersion();
-  return TSEssential::Load();
+    CheckProtocolVersion();
+    return TSEssential::Load();
 }
 bool Entry::enable() { return true; }
 
-bool Entry::disable() { return false; }
+bool Entry::disable() { return TSEssential::UnLoad(); }
 
 bool Entry::unload() { return TSEssential::UnLoad(); }
 } // namespace TSEssential::Entry
