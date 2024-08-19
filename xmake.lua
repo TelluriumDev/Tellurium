@@ -25,6 +25,7 @@ target("TSEssential") -- Change this to your mod name.
     )
     add_defines("NOMINMAX", "UNICODE")
     add_files("src/**.cpp")
+    add_files("utils/**.cc")
     add_includedirs("src")
     add_packages("levilamina")
     add_shflags("/DELAYLOAD:bedrock_server.dll") -- To use symbols provided by SymbolProvider.
