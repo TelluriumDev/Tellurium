@@ -1,5 +1,4 @@
 #include "config/Config.hpp"
-#include "config/Config.h"
 
 
 namespace TSEssential::Config {
