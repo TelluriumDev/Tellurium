@@ -1,14 +1,13 @@
-#include "modules/TeleportAsker.h"
+#include "modules/TeleportAsker.h" // IWYU pragma: keep
+#include "config/Config.h"
 
 #include <ll/api/data/KeyValueDB.h>
 #include <ll/api/thread/TickSyncTaskPool.h>
 
 
-// bool LoadTPA(int ExpireTime, bool AllowTPASelf) {
-//     logger.info("Loading TPA...");
-//     logger.debug("TPA Expire Time: ", ExpireTime);
-//     logger.debug("Allow TPA Self: ", AllowTPASelf);
-//     logger.debug("Initializing Cache...");
-
-//     return true;
-// }
+namespace TSEssential::TeleportAsker {
+bool Load() {
+    // auto &conf=Config::Config::get
+    return true;
+}
+}

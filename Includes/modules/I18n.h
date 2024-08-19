@@ -1,7 +1,7 @@
 #pragma once
 
-#include "./../TSEssential.h"
 
+//别以为这是重复轮子,其实只是调用载入LL I18n
 namespace TSEssential::I18n {
-bool Init();
+bool Load();
 }

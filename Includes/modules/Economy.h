@@ -2,5 +2,5 @@
 
 
 namespace TSEssential::Economy {
-
+bool Load();
 }
