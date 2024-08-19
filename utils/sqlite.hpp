@@ -2,6 +2,8 @@
 
 class SQlite {
 public:
-    SQlite();
+    SQlite() {
+        
+    };
     
 };
