@@ -9,6 +9,5 @@ PluginConfig *PluginConfig::GetInstance() {
     return instance;
 }
 PluginConfig::PluginConfig() {
-    if ()
 }
 }

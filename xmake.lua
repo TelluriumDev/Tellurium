@@ -29,7 +29,6 @@ target("TSEssential") -- Change this to your mod name.
     add_files("utils/**.cc")
     add_includedirs("src")
     add_includedirs("Includes")
-    add_includedirs("utils")
     add_packages("levilamina")
     add_packages("sqlite3")
     add_shflags("/DELAYLOAD:bedrock_server.dll") -- To use symbols provided by SymbolProvider.
