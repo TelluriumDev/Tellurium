@@ -5,7 +5,7 @@
 namespace TSEssential::Config {
 struct BaseEnable {
     // 开关
-	bool Enable;
+    bool Enable;
 };
 struct AutoUpdateConfig : BaseEnable {
     // 自动重载
@@ -28,8 +28,6 @@ struct TPAConfig : BaseEnable {
     int Consume;
 };
 struct WarpConfig : BaseEnable {};
-
-
 
 class PluginConfig {
 public:

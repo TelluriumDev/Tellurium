@@ -1,5 +1,4 @@
 #include "modules/TeleportAsker.h" // IWYU pragma: keep
-#include "config/Config.h"
 
 #include <ll/api/data/KeyValueDB.h>
 #include <ll/api/thread/TickSyncTaskPool.h>
