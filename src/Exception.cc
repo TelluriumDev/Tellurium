@@ -6,7 +6,7 @@
 #include <ll/api/utils/ErrorUtils.h>
 
 
-namespace LL3Mine2_Class::Exception {
+namespace TSEssential::Exception {
 
 
 void ProcessException(std::exception_ptr ptr) {
