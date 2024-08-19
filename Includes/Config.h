@@ -31,12 +31,11 @@ struct WarpConfig : BaseEnable {};
 
 class PluginConfig {
 public:
-    static PluginConfig &GetInstance();
-
-public:
     PluginConfig();
 
     AutoUpdateConfig AutoUpdate;
     SelectFormConfig SelectFormConfig;
+
+    static PluginConfig *GetInstance();
 };
 } // namespace TSEssential::Config
