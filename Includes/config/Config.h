@@ -1,19 +1,26 @@
 #pragma once
 
+#include <string>
 namespace TSEssential::Config {
-struct EnableFAT {
+struct BaseEnable {
 	bool Enable;
 };
-struct AutoUpdateConfig : EnableFAT {
-	bool AutoReload;
+struct AutoUpdateConfig : BaseEnable {
+    bool AutoReload;
 };
-struct TPAConfig : EnableFAT {
-  
+struct SelectFormConfig: BaseEnable {
+    int Subsection = 10;
 };
+struct Language {
+    std::string Default = "zh_CN";
+};
+struct TPAConfig : BaseEnable {};
 class Config {
 public:
-    Config &GetInstance();
+    static Config &GetInstance();
     Config();
-    void _Init();
+
+    AutoUpdateConfig AutoUpdate;
+    
 };
 } // namespace TSEssential::Config

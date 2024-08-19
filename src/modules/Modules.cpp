@@ -1,4 +1,4 @@
-#include "Includes/modules/TPA.h"
+#include "modules/TeleportAsker.h" // IWYU pragma: export
 
 #include <ll/api/Logger.h>
 
