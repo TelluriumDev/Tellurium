@@ -7,7 +7,7 @@
 #define _CATCH_CODES(IN)                                      \
     LOGGER.error("Error In {}!",IN);                          \
     std::exception_ptr exc_ptr = std::current_exception();    \
-    LL3Mine2_Class::Exception::ProcessException(exc_ptr);
+    TSEssential::Exception::ProcessException(exc_ptr);
 
 namespace TSEssential::Exception {
 class DirCannotCreatedException : public std::exception {

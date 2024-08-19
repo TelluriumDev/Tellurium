@@ -20,7 +20,7 @@ void ProcessException(std::exception_ptr ptr) {
             LOGGER.error("Exception(STD) Message:");
             LOGGER.error(exc.what());
         } catch (const std::string &str) {
-            LOGGER.error("Exception(string) Content:");
+            LOGGER.error("Exception(STRING) Content:");
             LOGGER.error(str);
         // } catch (const int &v) {
         //     LOGGER.error("Exception(int) Content:");
