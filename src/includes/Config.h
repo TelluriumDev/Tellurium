@@ -1,41 +1,26 @@
 #pragma once
-
-#include <string>
+#include "ConfigType.h"
 
 namespace TSEssential::Config {
-struct BaseEnable {
-    // 开关
-    bool Enable;
-};
-struct AutoUpdateConfig : BaseEnable {
-    // 自动重载
-    bool AutoReload;
-};
-struct SelectFormConfig : BaseEnable {
-    // 分页数量
-    int Subsection;
-};
-struct Language {
-    // 默认语言包
-    std::string Default;
-    // 切换语言命令(此项可能与其他语言切换冲突)
-    std::string Cmd;
-};
-struct TPAConfig : BaseEnable {
-    // 过期时间(s)
-    int ExpirationTime;
-    // 消耗经济
-    int Consume;
-};
-struct WarpConfig : BaseEnable {};
-
 class PluginConfig {
 public:
     PluginConfig();
 
-    AutoUpdateConfig AutoUpdate;
-    SelectFormConfig SelectFormConfig;
+    AutoUpdateConfig      AutoUpdate;
+    SelectFormConfig      SelectForm;
+    LanguageConfig        Language;
+    TeleportAskerConfig   TPA;
+    WarpConfig            Warp;
+    BackConfig            Back;
+    HomeConfig            Home;
+    EconomyConfig         Economy;
+    NoticeConfig          Notice;
+    ShopConfig            Shop;
+    DynamicMotdConfig     DynamicMotd;
+    RandomTeleportConfig  TPR;
+    RefreshChunkConfig    RefreshChunk;
+    FarmLandProtectConfig FarmLandProtect;
 
-    static PluginConfig *GetInstance();
+    static PluginConfig* GetInstance();
 };
 } // namespace TSEssential::Config
