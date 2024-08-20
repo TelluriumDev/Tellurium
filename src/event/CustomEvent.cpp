@@ -1,6 +1,8 @@
 #include "event/CustomEvent.h"
+#include <vector>
 
-static 
+template <typename T>
+static std::vector<CustomEventBase<T>> allEvents;
 
 template <typename T>
 CustomEventBase<T>::CustomEventBase(const std::string& name, const bool& isExportEvent, const bool& canCancel) {
