@@ -6,7 +6,7 @@
 
 原TMEssential，拆分为TiMi(ya)Essential，至于为什么会改为TSEssential?
 
-因为
+另一位合作开发者叫Singl_Daemon，Singl补全为Singlarity,可以翻译为独特性，突出，寓意比较好，所以开头更名为"TS"
 
 ## 安装
 

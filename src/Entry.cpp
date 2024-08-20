@@ -32,11 +32,11 @@ bool Entry::load() {
     CheckProtocolVersion();
     return TSEssential::Load();
 }
-bool Entry::enable() { return true; }
+bool Entry::enable() { return TSEssential::Enable(); }
 
-bool Entry::disable() { return TSEssential::UnLoad(); }
+bool Entry::disable() { return TSEssential::Disable(); }
 
-bool Entry::unload() { return TSEssential::UnLoad(); }
+bool Entry::unload() { return TSEssential::Unload(); }
 } // namespace TSEssential::Entry
 
 LL_REGISTER_MOD(TSEssential::Entry::Entry, TSEssential::Entry::instance);

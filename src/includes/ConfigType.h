@@ -11,7 +11,7 @@ struct BaseEnable {
     // 开关
     bool Enable;
 };
-struct BashFuncConfig : BaseEnable {
+struct BaseFuncConfig : BaseEnable {
     // 消耗经济
     int Consume;
 };
@@ -29,12 +29,12 @@ struct LanguageConfig {
     // 切换语言命令(此项可能与其他语言切换冲突)
     std::string Cmd;
 };
-struct TeleportAskerConfig : BashFuncConfig {
+struct TeleportAskerConfig : BaseFuncConfig {
     // 过期时间(s)
     int ExpirationTime;
 };
-struct WarpConfig : BashFuncConfig {};
-struct BackConfig : BashFuncConfig {
+struct WarpConfig : BaseFuncConfig {};
+struct BackConfig : BaseFuncConfig {
     // 最大记录长度
     int MaxSave;
     // 保存到数据库
@@ -63,13 +63,13 @@ struct EconomyConfig : BaseEnable {
     bool                 MoneyChangeMsg;
     int                  PlayerInitialMoney;
 };
-struct NoticeConfig : BashFuncConfig {
+struct NoticeConfig : BaseFuncConfig {
     bool        JoinOpenNotice;
     std::string NoticeTitle;
     std::string NoticeContent;
 };
-struct ShopConfig : BashFuncConfig {};
-struct DynamicMotdConfig : BashFuncConfig {
+struct ShopConfig : BaseFuncConfig {};
+struct DynamicMotdConfig : BaseFuncConfig {
     int                      ChangeTime;
     std::vector<std::string> MotdList;
 };
@@ -77,11 +77,11 @@ struct Vec2 {
     float x;
     float z;
 };
-struct RandomTeleportConfig : BashFuncConfig {
+struct RandomTeleportConfig : BaseFuncConfig {
     std::vector<Vec2> Coordinates;
 };
-struct RefreshChunkConfig : BashFuncConfig {};
-struct FarmLandProtectConfig : BashFuncConfig {
+struct RefreshChunkConfig : BaseFuncConfig {};
+struct FarmLandProtectConfig : BaseFuncConfig {
     FarmLandProtect::ProtectType WorkType;
 };
 } // namespace TSEssential::Config

@@ -1,4 +1,5 @@
 #include "Config.h"
+#include "TSEssential.h"
 
 #include <filesystem>
 
@@ -9,5 +10,7 @@ PluginConfig *PluginConfig::GetInstance() {
     return instance;
 }
 PluginConfig::PluginConfig() {
+    auto json = SELF.getConfigDir() / "config.json";
+    
 }
 }
