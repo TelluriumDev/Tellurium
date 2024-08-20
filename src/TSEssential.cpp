@@ -1,5 +1,7 @@
 #include "TSEssential.h"
 
+#include <ll/api/event/player/PlayerJoinEvent.h>
+
 namespace TSEssential {
 
 bool Load() {
@@ -8,6 +10,14 @@ bool Load() {
 }
 bool UnLoad() {
     LOGGER.info("Plugin Unload!");
+    return true;
+}
+bool Enable() {
+    LOGGER.info("Plugin Enable!");
+    return true;
+}
+bool Disable() {
+    LOGGER.info("Plugin Disable");
     return true;
 }
 } // namespace TSEssential
