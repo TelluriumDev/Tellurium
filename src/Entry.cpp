@@ -34,7 +34,7 @@ bool Entry::load() {
 }
 bool Entry::enable() { return true; }
 
-bool Entry::disable() { return TSEssential::UnLoad(); }
+bool Entry::disable() { return TSEssential::Disable(); }
 
 bool Entry::unload() { return TSEssential::UnLoad(); }
 } // namespace TSEssential::Entry

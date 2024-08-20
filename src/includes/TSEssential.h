@@ -9,7 +9,7 @@
 
 namespace TSEssential {
 bool Load();
-bool Unload();
+bool UnLoad();
 bool Enable();
 bool Disable();
 } // namespace TSEssential
