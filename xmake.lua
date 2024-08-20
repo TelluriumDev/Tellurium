@@ -17,6 +17,7 @@ target("TSEssential") -- Change this to your mod name.
         "/EHa",
         "/utf-8",
         "/W4",
+        "/WX",
         "/w44265",
         "/w44289",
         "/w44296",
@@ -25,10 +26,11 @@ target("TSEssential") -- Change this to your mod name.
         "/w45204"
     )
     add_defines("NOMINMAX", "UNICODE")
+    set_optimize("fastest")  -- 最快运行速度的优化
     add_files("src/**.cpp")
-    add_files("utils/**.cc")
-    add_includedirs("src")
-    add_includedirs("Includes")
+    add_files("src/**.rc")
+    add_files("src/**.cc")
+    add_includedirs("src/includes")
     add_packages("levilamina")
     add_packages("sqlite3")
     add_shflags("/DELAYLOAD:bedrock_server.dll") -- To use symbols provided by SymbolProvider.
@@ -40,12 +42,11 @@ target("TSEssential") -- Change this to your mod name.
     after_build(function (target)
         local mod_packer = import("scripts.after_build")
 
-        -- local tag = os.iorun("git describe --tags --abbrev=0 --always")
-        local tag = "v1.0.1"
+        local tag = os.iorun("git describe --tags --abbrev=0 --always")
         local major, minor, patch, suffix = tag:match("v(%d+)%.(%d+)%.(%d+)(.*)")
         if not major then
-            print("Failed to parse version tag, using 0.0.0")
-            major, minor, patch = 0, 0, 0
+            print("Version tag not found, using 1.0.0")
+            major, minor, patch = 1, 0, 0
         end
         local mod_define = {
             modName = target:name(),
