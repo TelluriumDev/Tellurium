@@ -15,8 +15,7 @@ SQLite* Get(std::string& name) {
     sqlite3* db;
     int      rc = sqlite3_open(name.c_str(), &db);
     if (rc) {
-        LOGGER.error("Can't open database: %s\n", sqlite3_errmsg(db));
-        sqlite3_close(db);
+        LOGGER.debug("Can't open database: %s\n", sqlite3_errmsg(db));
         return nullptr;
     }
     return new SQLite(db);
@@ -30,10 +29,10 @@ void SQLite::Open() {
     /* Open database */
     rc = sqlite3_open(db_name.data(), &db);
     if (rc) {
-        LOGGER.error("Can't open database: %s\n", sqlite3_errmsg(db));
+        LOGGER.debug("Can't open database: %s\n", sqlite3_errmsg(db));
     } else {
         is_closed = false;
-        LOGGER.info("Opened database successfully");
+        LOGGER.debug("Opened database successfully");
     }
 }
 
@@ -41,7 +40,7 @@ void SQLite::Open() {
  * @brief 关闭数据库
  */
 void SQLite::Close() {
-    LOGGER.info("Closing database...");
+    LOGGER.debug("Closing database...");
     sqlite3_close(db);
     is_closed = true;
 }
@@ -55,11 +54,11 @@ bool SQLite::ExecSQLCommand(std::string const& updateSql) {
     char* zErrMsg = 0;
     int   rc      = sqlite3_exec(db, updateSql.data(), nullptr, 0, &zErrMsg);
     if (rc != SQLITE_OK) {
-        LOGGER.error("SQL error: %s\n", zErrMsg);
+        LOGGER.debug("SQL error: %s\n", zErrMsg);
         sqlite3_free(zErrMsg);
         return false;
     } else {
-        LOGGER.info("Operation done successfully\n");
+        LOGGER.debug("Operation done successfully\n");
         return true;
     }
 }
@@ -140,10 +139,10 @@ ResultMap SQLite::Query(std::string const& querySql) {
     );
 
     if (rc != SQLITE_OK) {
-        LOGGER.error("SQL error: %s\n", zErrMsg);
+        LOGGER.debug("SQL error: %s\n", zErrMsg);
         sqlite3_free(zErrMsg);
     } else {
-        LOGGER.info("Operation done successfully\n");
+        LOGGER.debug("Operation done successfully\n");
     }
     return results;
 }
@@ -153,7 +152,7 @@ ResultMap SQLite::Query(std::string const& querySql) {
  */
 SQLite::~SQLite() {
     if (!is_closed) {
-        LOGGER.info("Closing database...");
+        LOGGER.debug("Closing database...");
         sqlite3_close(db);
     }
 }

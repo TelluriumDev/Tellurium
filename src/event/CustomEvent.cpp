@@ -1,6 +1,5 @@
 #include "event/CustomEvent.h"
 
-static 
 
 template <typename T>
 CustomEventBase<T>::CustomEventBase(const std::string& name, const bool& isExportEvent, const bool& canCancel) {
