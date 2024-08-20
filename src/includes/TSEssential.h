@@ -12,7 +12,7 @@ namespace TSEssential {
 static PluginUnloadEvent unLoadEvent{};
 
 bool Load();
-bool UnLoad();
+bool Unload();
 bool Enable();
 bool Disable();
 } // namespace TSEssential
