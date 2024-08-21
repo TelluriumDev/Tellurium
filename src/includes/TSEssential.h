@@ -9,7 +9,7 @@
 #define SELF TSEssential::Entry::Entry::getInstance().getSelf()
 
 namespace TSEssential {
-static PluginUnloadEvent unLoadEvent{};
+PluginUnloadEvent& getUnloadEvent();
 
 bool Load();
 bool Unload();

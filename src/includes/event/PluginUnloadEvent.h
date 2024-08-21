@@ -1,10 +1,13 @@
 #pragma once
-
 #include "CustomEvent.h"
-#include <functional>
 
-class PluginUnloadEvent : public CustomEventBase<std::function<void(void)>> {
+#include <ll/api/mod/NativeMod.h>
+
+
+struct PluginUnloadEventParam {
+    ll::mod::NativeMod&  mSelf;
+};
+class PluginUnloadEvent : public CustomEventBase<PluginUnloadEventParam> {
 public:
-    PluginUnloadEvent();
-    bool CALL();
+    PluginUnloadEvent() : CustomEventBase<PluginUnloadEventParam>("PluginUnload", false, false){};
 };

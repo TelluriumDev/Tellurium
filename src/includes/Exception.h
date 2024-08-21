@@ -1,7 +1,8 @@
 #pragma once
+#include "TSEssential.h" // IWYU pragma: export
 
 #include <exception>
-#include <stdexcept>
+#include <stdexcept> // IWYU pragma: keep
 #include <string>
 
 #define _CATCH_CODES(IN)                                      \

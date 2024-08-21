@@ -2,25 +2,31 @@
 
 #include "TSEssential.h"
 
+#include <string>
+#include <vector>
+
+static std::vector<SQLite*> AllSQLites;
+
 /**
- * @brief SQLite类的构造函数
- * @param db_name_ 数据库名称
- */
-SQLite::SQLite(std::string const& db_name_) : db_name(db_name_) {}
+//  * @brief SQLite类的构造函数
+//  * @param db_name_ 数据库名称
+//  */
+// SQLite::SQLite(std::string const& db_name_) : db_name(db_name_) {}
 
 /**
  * @brief SQLite类的Get函数
  */
-SQLite* Get(std::string& name) {
-    sqlite3* db;
-    int      rc = sqlite3_open(name.c_str(), &db);
-    if (rc) {
-        LOGGER.error("Can't open database: %s\n", sqlite3_errmsg(db));
-        sqlite3_close(db);
-        return nullptr;
+SQLite* Get(std::string& nameLike) {
+    for (auto sqlite : AllSQLites) {
+        auto sql_name = sqlite->GetName();
+        if (sql_name.starts_with(nameLike)) {
+            return sqlite;
+        }
     }
-    return new SQLite(db);
+    return nullptr;
 }
+
+inline std::string SQLite::GetName() { return db_name; }
 
 /**
  * @brief 打开数据库
@@ -33,7 +39,7 @@ void SQLite::Open() {
         LOGGER.error("Can't open database: %s\n", sqlite3_errmsg(db));
     } else {
         is_closed = false;
-        LOGGER.info("Opened database successfully");
+        LOGGER.debug("Opened database successfully");
     }
 }
 
@@ -41,7 +47,7 @@ void SQLite::Open() {
  * @brief 关闭数据库
  */
 void SQLite::Close() {
-    LOGGER.info("Closing database...");
+    LOGGER.info("Closing database{0}...", GetName());
     sqlite3_close(db);
     is_closed = true;
 }
@@ -55,7 +61,7 @@ bool SQLite::ExecSQLCommand(std::string const& updateSql) {
     char* zErrMsg = 0;
     int   rc      = sqlite3_exec(db, updateSql.data(), nullptr, 0, &zErrMsg);
     if (rc != SQLITE_OK) {
-        LOGGER.error("SQL error: %s\n", zErrMsg);
+        LOGGER.error("SQLite Error: \n{0}", zErrMsg);
         sqlite3_free(zErrMsg);
         return false;
     } else {

@@ -1,13 +1,12 @@
 #include "TSEssential.h"
+#include "Config.h"
 #include "Exception.h"
-#include "includes/Config.h"
-#include "includes/event/PluginUnloadEvent.h"
-
-#include <ll/api/event/player/PlayerJoinEvent.h>
+#include "event/PluginUnloadEvent.h"
 
 namespace TSEssential {
-
 static bool loaded = false;
+static PluginUnloadEvent unLoadEvent{};
+PluginUnloadEvent& getUnloadEvent(){ return unLoadEvent; }
 
 bool Load() {
     try{
@@ -25,11 +24,14 @@ bool Load() {
     return true;
 }
 bool Unload() {
-    LOGGER.info("Plugin Unload!");
-    return true;
+    // LOGGER.info("Plugin Unload!");
+    return unLoadEvent.CALL({SELF});
 }
 bool Enable() {
-    // LOGGER.info("Plugin Enable!");
+    if (loaded) {
+        return true;
+    }
+    Load();
     return true;
 }
 bool Disable() {

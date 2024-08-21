@@ -9,10 +9,12 @@ using ResultMap = std::vector<std::map<std::string, std::string>>;
 
 struct SQLite {
 public:
+    static SQLite* Get(std::string& nameLike);
+
     SQLite(std::string const& db_name_);
     ~SQLite();
     SQLite(sqlite3* db) : db(db) {}
-    SQLite* Get(std::string& name);
+    inline std::string GetName();
     void Open();
     void Close();
     bool ExecSQLCommand(std::string const& updateSql);
