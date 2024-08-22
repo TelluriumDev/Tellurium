@@ -11,6 +11,7 @@ PluginUnloadEvent& getUnloadEvent(){ return unLoadEvent; }
 bool Load() {
     try{
         if (loaded) {
+            unLoadEvent.
             LOGGER.warn("TSEssential has be loaded!");
             return true;
         }

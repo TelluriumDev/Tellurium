@@ -38,13 +38,14 @@ target("TSEssential") -- Change this to your mod name.
     add_shflags("/DELAYLOAD:bedrock_server.dll") -- To use symbols provided by SymbolProvider.
     set_exceptions("none") -- To avoid conflicts with /EHa.
     set_kind("shared")
-    set_languages("c++20")
+    set_languages("c++23")
     set_symbols("debug")
 
     after_build(function (target)
         local mod_packer = import("scripts.after_build")
 
-        local tag = os.iorun("git describe --tags --abbrev=0 --always")
+        -- local tag = os.iorun("git describe --tags --abbrev=0 --always")
+        local tag = "v1.0.1Beta"
         local major, minor, patch, suffix = tag:match("v(%d+)%.(%d+)%.(%d+)(.*)")
         if not major then
             print("Version tag not found, using 1.0.0")
