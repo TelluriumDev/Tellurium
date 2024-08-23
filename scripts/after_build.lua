@@ -91,6 +91,8 @@ function pack_mod(target,mod_define)
         local bindir = path.join(os.projectdir(), "bin")
         local outputdir = path.join(bindir, mod_define.modName)
         local targetfile = path.join(outputdir, mod_define.modFile)
+        -- edit your bds path here
+        local debugdir = "D:\\Bedrock_Server\\plugins\\TSEssential"
         local pdbfile = path.join(outputdir, path.basename(mod_define.modFile) .. ".pdb")
         local manifestfile = path.join(outputdir, "manifest.json")
         local oritargetfile = target:targetfile()
@@ -98,13 +100,16 @@ function pack_mod(target,mod_define)
 
         os.mkdir(outputdir)
         os.cp(oritargetfile, targetfile)
+        os.cp(oritargetfile,debugdir)
+        os.cp(oripdbfile,debugdir)
+        cprint("${bright green}[ModPacker]: ${reset}Copied target to " .. debugdir)
         if os.isfile(oripdbfile) then
             os.cp(oripdbfile, pdbfile)
         end
 
         formattedmanifest = string_formatter(manifest, mod_define)
         io.writefile(manifestfile,formattedmanifest)
-        cprint("${bright green}[mod Packer]: ${reset}mod already generated to " .. outputdir)
+        cprint("${bright green}[ModPacker]: ${reset}mod already generated to " .. outputdir)
     else
         cprint("${bright yellow}warn: ${reset}not found manifest.json in root dir!")
     end

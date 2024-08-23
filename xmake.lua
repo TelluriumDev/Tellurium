@@ -30,7 +30,6 @@ target("TSEssential") -- Change this to your mod name.
     set_optimize("fastest")  -- 最快运行速度的优化
     add_files("src/**.cpp")
     add_files("src/**.rc")
-    add_files("src/**.cc")
     add_includedirs("src/includes")
     add_packages("levilamina")
     add_packages("sqlite3")
@@ -40,6 +39,10 @@ target("TSEssential") -- Change this to your mod name.
     set_kind("shared")
     set_languages("c++23")
     set_symbols("debug")
+
+    if is_mode("debug") then
+        set_symbols("debug", "edit")
+    end
 
     after_build(function (target)
         local mod_packer = import("scripts.after_build")
@@ -58,4 +61,5 @@ target("TSEssential") -- Change this to your mod name.
         }
         
         mod_packer.pack_mod(target,mod_define)
+        
     end)
