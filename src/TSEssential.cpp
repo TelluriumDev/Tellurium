@@ -9,9 +9,13 @@ static PluginUnloadEvent unLoadEvent{};
 PluginUnloadEvent& getUnloadEvent(){ return unLoadEvent; }
 
 bool Load() {
-    try{
-        if (loaded) {
-            unLoadEvent.
+    LOGGER.info("Loading Plugin...");
+    unLoadEvent.on([](const PluginUnloadEvent& info) -> bool { 
+        LOGGER.warn("Plugin Unloaded!");
+        return true; 
+    });
+    try {
+        if (loaded == false) {
             LOGGER.warn("TSEssential has be loaded!");
             return true;
         }
@@ -25,7 +29,6 @@ bool Load() {
     return true;
 }
 bool Unload() {
-    // LOGGER.info("Plugin Unload!");
     return unLoadEvent.CALL({SELF});
 }
 bool Enable() {
@@ -36,8 +39,7 @@ bool Enable() {
     return true;
 }
 bool Disable() {
-    // LOGGER.info("Plugin Disable");
-
+    unLoadEvent.CALL({SELF});
     loaded = false;
     return true;
 }

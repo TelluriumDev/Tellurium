@@ -28,33 +28,52 @@ CustomEventBase<T>::~CustomEventBase() {
     }
 }
 template <typename T>
-long CustomEventBase<T>::on(const std::function<void(T& param)>& func) {
+bool CustomEventBase<T>::onExport(const std::string&) {}
+template <typename T>
+inline long CustomEventBase<T>::on(std::function<bool(T& param)> func) {
     index++;
     beforeListener[index] = func;
     return index;
 }
 template <typename T>
-long CustomEventBase<T>::onAfter(const std::function<void(T& param)>& func) {
+inline long CustomEventBase<T>::onAfter(std::function<bool(T& param)> func) {
     index++;
     afterListener[index] = func;
     return index;
 }
+// template <typename T>
+// inline long CustomEventBase<T>::on(const std::function<void(T& param)> func) {
+//     return on([&](T &param) -> bool {
+//         func(param);
+//         return true; 
+//     });
+// }
+// template <typename T>
+// inline long CustomEventBase<T>::onAfter(const std::function<void(T& param)> func) {
+//     return on([&](T &param) -> bool {
+//         func(param);
+//         return true;
+//     });
+// }
 template <typename T>
-bool CustomEventBase<T>::unBefore(long id) {
+inline bool CustomEventBase<T>::unBefore(long id) {
     beforeListener.erase(id);
     return true;
 }
 template <typename T>
-bool CustomEventBase<T>::unAfter(long id) {
+inline bool CustomEventBase<T>::unAfter(long id) {
     afterListener.erase(id);
     return true;
 }
 template <typename T>
-bool CustomEventBase<T>::CALL(const T& param) {
+inline bool CustomEventBase<T>::CALL(const T& param) {
     bool res = true;
     try {
         for (auto& val : beforeListener) {
-            val.second(param);
+            auto val = val.second(param);
+            if (getCanCancel() && !val){
+                res = false; // 返回false则取消后续事件
+            }
         }
     } catch (...) {
         std::string str = "CALL CustomEvent \"" + getName() + "\"(BEFORE)";

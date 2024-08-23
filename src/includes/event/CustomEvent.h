@@ -1,4 +1,6 @@
 #pragma once
+#include "event/DefineHContent.h"
+
 #include <functional>
 #include <string>
 #include <unordered_map>
@@ -30,26 +32,13 @@ public:
 public:
     CustomEventBase(const std::string& name1, const bool& isExportEvent1, const bool& canCancel1 = true);
     ~CustomEventBase();
-
-    std::function<void()> onExport= []()->void{};
-
-
-    inline std::string getName() { return name; }
-    inline bool getIsExportEvent(){ return isExportEvent; }
-    inline bool getCanCancel(){ return canCancel; }
-
-    bool unBefore(long id);
-    bool unAfter(long id);
-    long on(const std::function<void(T& param)>& func);
-    long onAfter(const std::function<void(T& param)>& func);
-
-    bool CALL(const T& param);
+    __HPP_CLASS_FUNCTION_CONTENT__
 
 protected:
     std::string name;
     bool        isExportEvent;
     bool        canCancel;
-    std::unordered_map<int, std::function<void(T& param)>> beforeListener{};
-    std::unordered_map<int, std::function<void(T& param)>> afterListener{};
+    std::unordered_map<int, const std::function<bool(T& param)>> beforeListener{};
+    std::unordered_map<int, const std::function<bool(T& param)>> afterListener{};
     long index = 0;// auto++
 };
