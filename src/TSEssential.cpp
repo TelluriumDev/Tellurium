@@ -20,7 +20,8 @@ bool Load() {
             return true;
         }
         loaded = true;
-        new Config::PluginConfig();
+        auto conf = new Config::PluginConfig();
+        
         LOGGER.info("Plugin Loaded!");
     } catch (...) {
         _CATCH_CODES("Load Plugin")

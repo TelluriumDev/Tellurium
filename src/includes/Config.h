@@ -9,6 +9,7 @@ class PluginConfig {
 public:
     PluginConfig();
 
+    BaseEnable            Enable;
     AutoUpdateConfig      AutoUpdate;
     SelectFormConfig      SelectForm;
     LanguageConfig        Language;
