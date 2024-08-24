@@ -2,12 +2,9 @@ add_rules("mode.debug", "mode.release")
 
 add_repositories("liteldev-repo https://github.com/LiteLDev/xmake-repo.git")
 
--- add_requires("levilamina x.x.x") for a specific version
--- add_requires("levilamina develop") to use develop version
--- please note that you should add bdslibrary yourself if using dev version
 add_requires("levilamina")
 add_requires("sqlite3")
-add_requires("nlohmann_json v3.11.3")
+add_requires("nlohmann_json")
 add_requires("legacyremotecall")
 
 if not has_config("vs_runtime") then
@@ -28,20 +25,21 @@ target("TSEssential") -- Change this to your mod name.
         "/w45204"
     )
     add_defines("NOMINMAX", "UNICODE")
-    set_optimize("fastest")  -- 最快运行速度的优化
     add_files("src/**.cpp")
     add_files("src/**.rc")
     add_includedirs("src/includes")
     add_packages("levilamina")
-    add_packages("nlohmann_json v3.11.3")
+    add_packages("nlohmann_json")
     add_packages("sqlite3")
     add_packages("legacyremotecall")
-    add_shflags("/DELAYLOAD:bedrock_server.dll") -- To use symbols provided by SymbolProvider.
-    set_exceptions("none") -- To avoid conflicts with /EHa.
+    add_shflags("/DELAYLOAD:bedrock_server.dll")
+    set_exceptions("none")
     set_kind("shared")
     set_languages("c++23")
     set_symbols("debug")
-
+    if is_mode("release") then
+        set_optimize("fastest")
+    end
     if is_mode("debug") then
         set_symbols("debug", "edit")
     end
