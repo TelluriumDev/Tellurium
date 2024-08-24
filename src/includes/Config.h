@@ -6,7 +6,7 @@
 #include <vector>
 
 namespace TSEssential {
-void LoadConfig();
+bool LoadConfig();
 enum MoneyType { score, llmoney };
 struct Config {
     bool        Enabled = true;
