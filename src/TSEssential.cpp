@@ -1,12 +1,15 @@
 #include "TSEssential.h"
 #include "Config.h"
 #include "Global.h"
+#include "utils/I18n.h"
 
 
 namespace TSEssential {
 bool Load() {
     logger.info("Loading TSEssential...");
-    LoadConfig();
+    if (!LoadConfig()) {
+        return false;
+    }
     return true;
 }
 bool Unload() {

@@ -8,6 +8,7 @@
 namespace TSEssential {
 bool LoadConfig();
 enum MoneyType { score, llmoney };
+enum FarmProtectType { all, none, notPlayer, player };
 struct Config {
     bool        Enabled = true;
     int         version = 1;
@@ -70,8 +71,8 @@ struct Config {
             int  ConsumeMoney = 0;
         } RefreshChunk{};
         struct FarmLandProtect {
-            bool Enabled = true;
-            int  Type    = 1;
+            bool            Enabled = true;
+            FarmProtectType Type    = all;
         } FarmLandProtect{};
     } modules{};
 };

@@ -3,9 +3,9 @@
 
 namespace TSEssential::FarmLandProtect {
 enum class ProtectType {
+    All,
     OnlyEntity,
     OnlyPlayer,
-    All,
     NoWork
 };
 bool Load();

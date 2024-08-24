@@ -14,29 +14,16 @@ bool LoadConfig() {
         logger.error("TSEssential will refuse to startup.");
         return false;
     }
-    try {
-        if (ll::config::saveConfig(config, ConfigDir)) {
-            logger.warn("Overwrited config.json successfully");
-        } else {
-            logger.error("Your config.json is broken, please check it");
-            logger.error("TSEssential will refuse to startup.");
-            return false;
-        }
-    } catch (...) {
-        ll::error_utils::printCurrentException(logger);
-        logger.error("Can't confirm if your config.json is broken, TSEssential will refuse to startup.");
-        return false;
-    }
     return true;
 }
 } // namespace TSEssential
 bool saveConfig() {
     try {
         if (ll::config::saveConfig(config, ConfigPath)) {
-            logger.error("Failed to save config.json");
-            return false;
+            logger.info("Config saved successfully");
         }
     } catch (...) {
+        logger.error("Failed to save config.json");
         ll::error_utils::printCurrentException(logger);
     }
     return true;
