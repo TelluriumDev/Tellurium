@@ -7,11 +7,11 @@ namespace TSEssential {
 class Entry {
 
 public:
-    static Entry &getInstance();
+    static Entry& getInstance();
 
-    Entry(ll::mod::NativeMod &self) : mSelf(self) {}
+    Entry(ll::mod::NativeMod& self) : mSelf(self) {}
 
-    [[nodiscard]] ll::mod::NativeMod &getSelf() const { return mSelf; }
+    [[nodiscard]] ll::mod::NativeMod& getSelf() const { return mSelf; }
 
     /// @return True if the mod is loaded successfully.
     bool load();
@@ -27,7 +27,7 @@ public:
     bool unload();
 
 private:
-    ll::mod::NativeMod &mSelf;
+    ll::mod::NativeMod& mSelf;
 };
 
-} // namespace TSEssential::Entry
+} // namespace TSEssential
