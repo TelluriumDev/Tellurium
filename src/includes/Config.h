@@ -1,6 +1,5 @@
 #pragma once
 #include "ConfigType.h"
-#include "Exception.h"
 
 namespace TSEssential::Config {
 bool LoadConfig();

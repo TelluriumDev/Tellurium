@@ -3,13 +3,11 @@
 // Global.h
 
 #include "Entry.h" // IWYU pragma: export
-#include "event/PluginUnloadEvent.h"
 
 #define LOGGER TSEssential::Entry::Entry::getInstance().getSelf().getLogger()
 #define SELF TSEssential::Entry::Entry::getInstance().getSelf()
 
 namespace TSEssential {
-PluginUnloadEvent& getUnloadEvent();
 
 bool Load();
 bool Unload();
