@@ -3,6 +3,7 @@
 #include "Global.h"
 #include "utils/I18n.h"
 
+#include <ll/api/command/Command.h>
 
 namespace TSEssential {
 bool Load() {

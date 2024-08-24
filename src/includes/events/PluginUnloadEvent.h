@@ -15,6 +15,4 @@ public:
     constexpr explicit PluginUnloadEvent(ll::mod::NativeMod& self) : mSelf(self) {};
 
     inline ll::mod::NativeMod& self() const { return mSelf; };
-
-    LLAPI void serialize(CompoundTag&) const override;
 };
