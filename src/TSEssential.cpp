@@ -23,6 +23,7 @@ namespace TSEssential
     bool Disable()
     {
         logger.info("Disabling TSEssential...");
+        delete &logger;
         return true;
     }
 } // namespace TSEssential

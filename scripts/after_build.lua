@@ -97,16 +97,18 @@ function pack_mod(target,mod_define)
         local manifestfile = path.join(outputdir, "manifest.json")
         local oritargetfile = target:targetfile()
         local oripdbfile = path.join(path.directory(oritargetfile), path.basename(oritargetfile) .. ".pdb")
-
-        os.mkdir(outputdir)
-        os.cp(oritargetfile, targetfile)
-        os.cp(oritargetfile,debugdir)
-        os.cp(oripdbfile,debugdir)
-        os.cp(manifestfile,debugdir)
+        local DevMode = find_file("DevMode",os.projectdir())
+        if DevMode then
+          os.mkdir(outputdir)
+          os.cp(oritargetfile, targetfile)
+          os.cp(oritargetfile,debugdir)
+          os.cp(oripdbfile,debugdir)
+          os.cp(manifestfile,debugdir)
         cprint("${bright green}[ModPacker]: ${reset}Copied target to " .. debugdir)
         if os.isfile(oripdbfile) then
             os.cp(oripdbfile, pdbfile)
         end
+    end
 
         formattedmanifest = string_formatter(manifest, mod_define)
         io.writefile(manifestfile,formattedmanifest)
