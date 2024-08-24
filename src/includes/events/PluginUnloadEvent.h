@@ -1,12 +1,11 @@
 #pragma once
-
 #include <ll/api/mod/NativeMod.h>
 
 #include <ll/api/event/Event.h>
 #include <ll/api/event/EventBus.h>
 
 class CompoundTag;
-
+ 
 class PluginUnloadEvent : public ll::event::Event {
 private:
     ll::mod::NativeMod&  mSelf;
