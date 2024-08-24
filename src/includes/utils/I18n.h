@@ -11,7 +11,9 @@
 
 
 static std::string zh_CN = R"({
+})";
 
+static std::string en_US = R"({
 })";
 
 namespace TSEssential {
