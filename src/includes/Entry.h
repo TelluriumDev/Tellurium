@@ -2,7 +2,7 @@
 
 #include <ll/api/mod/NativeMod.h>
 
-namespace TSEssential::Entry {
+namespace TSEssential {
 
 class Entry {
 

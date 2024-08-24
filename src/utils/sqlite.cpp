@@ -1,9 +1,8 @@
 #include "utils/sqlite.hpp"
-
-#include "TSEssential.h"
-
+#include "Global.h"
 #include <string>
 #include <vector>
+#include "utils/sqlite.hpp"
 
 static std::vector<SQLite*> AllSQLites;
 
@@ -16,7 +15,7 @@ static std::vector<SQLite*> AllSQLites;
 /**
  * @brief SQLite类的Get函数
  */
-SQLite* Get(std::string& nameLike) {
+SQLite *SQLite::Get(std::string& nameLike) {
     for (auto sqlite : AllSQLites) {
         auto sql_name = sqlite->GetName();
         if (sql_name.starts_with(nameLike)) {
@@ -36,10 +35,10 @@ void SQLite::Open() {
     /* Open database */
     rc = sqlite3_open(db_name.data(), &db);
     if (rc) {
-        LOGGER.debug("Can't open database: %s\n", sqlite3_errmsg(db));
+        logger.debug("Can't open database: %s\n", sqlite3_errmsg(db));
     } else {
         is_closed = false;
-        LOGGER.debug("Opened database successfully");
+        logger.debug("Opened database successfully");
     }
 }
 
@@ -47,7 +46,7 @@ void SQLite::Open() {
  * @brief 关闭数据库
  */
 void SQLite::Close() {
-    LOGGER.info("Closing database{0}...", GetName());
+    logger.info("Closing database{0}...", GetName());
     sqlite3_close(db);
     is_closed = true;
 }
@@ -61,11 +60,11 @@ bool SQLite::ExecSQLCommand(std::string const& updateSql) {
     char* zErrMsg = 0;
     int   rc      = sqlite3_exec(db, updateSql.data(), nullptr, 0, &zErrMsg);
     if (rc != SQLITE_OK) {
-        LOGGER.error("SQLite Error: \n{0}", zErrMsg);
+        logger.error("SQLite Error: \n{0}", zErrMsg);
         sqlite3_free(zErrMsg);
         return false;
     } else {
-        LOGGER.debug("Operation done successfully\n");
+        logger.debug("Operation done successfully\n");
         return true;
     }
 }
@@ -146,10 +145,10 @@ ResultMap SQLite::Query(std::string const& querySql) {
     );
 
     if (rc != SQLITE_OK) {
-        LOGGER.debug("SQL error: %s\n", zErrMsg);
+        logger.debug("SQL error: %s\n", zErrMsg);
         sqlite3_free(zErrMsg);
     } else {
-        LOGGER.debug("Operation done successfully\n");
+        logger.debug("Operation done successfully\n");
     }
     return results;
 }
@@ -157,9 +156,10 @@ ResultMap SQLite::Query(std::string const& querySql) {
 /**
  * @brief 析构函数
  */
-SQLite::~SQLite() {
+SQLite::~SQLite()
+{
     if (!is_closed) {
-        LOGGER.debug("Closing database...");
+        logger.debug("Closing database...");
         sqlite3_close(db);
     }
 }
