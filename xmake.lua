@@ -63,3 +63,26 @@ target("TSEssential") -- Change this to your mod name.
         mod_packer.pack_mod(target,mod_define)
         
     end)
+
+
+    on_load(function (target)
+        local tag = os.iorun("git describe --tags --abbrev=0 --always")
+        local major, minor, patch, suffix = tag:match("v(%d+)%.(%d+)%.(%d+)(.*)")
+        if not major then
+            print("Failed to parse version tag, using 0.0.0")
+            major, minor, patch = 0, 0, 0
+        end
+        if suffix then
+            prerelease = suffix:match("-(.*)")
+            if prerelease then
+                prerelease = prerelease:gsub("\n", "")
+            end
+            if prerelease then
+                target:set("configvar", "TSET_VERSION_PRERELEASE", prerelease)
+            end
+        end
+        target:set("configvar", "TSET_VERSION_MAJOR", major)
+        print(major,minor,patch)
+        target:set("configvar", "TSET_VERSION_MINOR", minor)
+        target:set("configvar", "TSET_VERSION_PATCH", patch)
+    end)

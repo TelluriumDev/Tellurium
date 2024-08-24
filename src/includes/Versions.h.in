@@ -1,0 +1,34 @@
+#pragma once
+
+// clang-format off
+
+#define TSET_LABEL_ALPHA 0
+#define TSET_LABEL_BETA  1
+#define TSET_LABEL_NONE  255
+
+#define TSET_VERSION_MAJOR         ${TSET_VERSION_MAJOR}
+#define TSET_VERSION_MINOR         ${TSET_VERSION_MINOR}
+#define TSET_VERSION_PATCH         ${TSET_VERSION_PATCH}
+#define TSET_VERSION_COMMIT_SHA    ${GIT_COMMIT}
+// clang-format on
+
+#define TARGET_BDS_PROTOCOL_VERSION 686
+
+#define TSET_WORKSPACE_FOLDER R"(${TSET_WORKSPACE_FOLDER}\)"
+
+#define TSET_VERSION_TO_STRING_INNER(ver) #ver
+#define TSET_VERSION_TO_STRING(ver)       TSET_VERSION_TO_STRING_INNER(ver)
+
+#ifdef TSET_VERSION_PRERELEASE
+#define TSET_FILE_VERSION_FLAG VS_FF_DEBUG
+#define TSET_FILE_VERSION_STRING                                                                                         \
+    TSET_VERSION_TO_STRING(TSET_VERSION_MAJOR)                                                                             \
+    "." TSET_VERSION_TO_STRING(TSET_VERSION_MINOR) "." TSET_VERSION_TO_STRING(TSET_VERSION_PATCH                               \
+    ) "-" TSET_VERSION_PRERELEASE "+" TSET_VERSION_TO_STRING(TSET_VERSION_COMMIT_SHA)
+#else
+#define TSET_FILE_VERSION_FLAG 0x00000000L
+#define TSET_FILE_VERSION_STRING                                                                                         \
+    TSET_VERSION_TO_STRING(TSET_VERSION_MAJOR)                                                                             \
+    "." TSET_VERSION_TO_STRING(TSET_VERSION_MINOR) "." TSET_VERSION_TO_STRING(TSET_VERSION_PATCH                               \
+    ) "+" TSET_VERSION_TO_STRING(TSET_VERSION_COMMIT_SHA)
+#endif
