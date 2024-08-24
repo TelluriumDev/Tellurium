@@ -16,7 +16,6 @@ bool LoadConfig() {
     }
     return true;
 }
-} // namespace TSEssential
 bool saveConfig() {
     try {
         if (ll::config::saveConfig(config, ConfigPath)) {

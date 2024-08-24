@@ -6,3 +6,4 @@
 //     Event::serialize(nbt);
 //     nbt["mSelf"] = (uintptr_t)&self();
 // }
+
