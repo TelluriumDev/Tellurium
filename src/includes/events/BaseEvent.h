@@ -1,6 +1,6 @@
 #pragma once
 #include <string>
-#include <funct
+#include <functional>
 
 template<typename Param>
 class BaseEvent {
@@ -22,6 +22,6 @@ private:
     bool CanExport;
     bool CanCancel;
     
-    std::function<bool(const T&)> before;
-    std::function<bool(const T&)> after;
+    std::function<bool(T&)> before;
+    std::function<bool(T&)> after;
 }
