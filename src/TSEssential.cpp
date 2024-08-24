@@ -6,22 +6,18 @@
 
 namespace TSEssential {
 bool Load() {
-    logger.info("Loading TSEssential...");
     if (!LoadConfig()) {
         return false;
     }
+    // Load Language
+    ExtractLang();
+    ll::i18n::load(LangDir);
+    ll::i18n::getInstance()->mDefaultLocaleName = config.Language;
     return true;
 }
-bool Unload() {
-    logger.info("Unloading TSEssential...");
-    return true;
-}
-bool Enable() {
-    logger.info("Enabling TSEssential...");
-    return true;
-}
+bool Unload() { return true; }
+bool Enable() { return true; }
 bool Disable() {
-    logger.info("Disabling TSEssential...");
     delete &logger;
     return true;
 }

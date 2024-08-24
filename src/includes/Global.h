@@ -3,8 +3,9 @@
 #include "Config.h"
 #include "Entry.h"
 
-#include "ll/api/i18n/I18n.h"
+#include "utils/I18n.h"
 #include <ll/api/Logger.h>
+#include <ll/api/i18n/I18n.h>
 #include <ll/api/mod/NativeMod.h>
 #include <ll/api/utils/ErrorUtils.h>
 
@@ -21,4 +22,4 @@ const static auto ConfigPath = ConfigDir / "config.json";
 const static auto DataDir    = ModDir / "data";
 const static auto LangDir    = ModDir / "lang";
 
-static TSEssential::Config config;
+extern TSEssential::Config config;

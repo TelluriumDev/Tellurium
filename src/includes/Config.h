@@ -12,7 +12,7 @@ enum FarmProtectType { all, none, notPlayer, player };
 struct Config {
     bool        Enabled = true;
     int         version = 1;
-    std::string Language;
+    std::string Language = "zh_CN";
     bool        AutoUpdate;
     struct {
         struct TPA {
