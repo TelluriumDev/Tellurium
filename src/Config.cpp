@@ -26,4 +26,5 @@ bool saveConfig() {
         ll::error_utils::printCurrentException(logger);
     }
     return true;
+}
 } // namespace TSEssential
