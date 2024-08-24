@@ -86,7 +86,6 @@ target("TSEssential") -- Change this to your mod name.
             end
         end
         target:set("configvar", "TSET_VERSION_MAJOR", major)
-        print(major,minor,patch)
         target:set("configvar", "TSET_VERSION_MINOR", minor)
         target:set("configvar", "TSET_VERSION_PATCH", patch)
     end)
