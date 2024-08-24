@@ -12,4 +12,4 @@
     inline long onAfter(std::function<bool(T& param)> func);          \
     // inline long on(const std::function<void(T& param)> func);      \
     // inline long onAfter(const std::function<void(T& param)> func); \
-    inline bool CALL(const T& param);                                 \
+    // inline bool CALL(const T& param);
