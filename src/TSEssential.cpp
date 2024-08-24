@@ -2,6 +2,7 @@
 #include "Config.h"
 #include "Global.h"
 
+#include <ll/api/command/Command.h>
 
 namespace TSEssential {
 bool Load() {
