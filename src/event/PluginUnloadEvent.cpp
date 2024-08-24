@@ -1,7 +1,8 @@
 #include "event/PluginUnloadEvent.h"
 
-#define T PluginUnloadEventParam
+#include "mc/nbt/CompoundTag.h"
 
-bool PluginUnloadEvent::CALL(const T& param) {
-    return CustomEventBase<T>::CALL(param);
+void PluginUnloadEvent::serialize(CompoundTag& nbt) const {
+    Event::serialize(nbt);
+    nbt["self"] = (uintptr_t)&self();
 }

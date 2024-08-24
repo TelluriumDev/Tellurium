@@ -1,17 +1,20 @@
 #pragma once
-#include "CustomEvent.h"
 
 #include <ll/api/mod/NativeMod.h>
+
 #include <ll/api/event/Event.h>
 #include <ll/api/event/EventBus.h>
 
+class CompoundTag;
 
-struct PluginUnloadEventParam {
+class PluginUnloadEvent : public ll::event::Event {
+private:
     ll::mod::NativeMod&  mSelf;
-};
-class PluginUnloadEvent : public CustomEventBase<PluginUnloadEventParam> {
+
 public:
-    PluginUnloadEvent() : CustomEventBase<PluginUnloadEventParam>("PluginUnload", false, false){};
-    bool CALL(const PluginUnloadEventParam &param);
-    // bool 
+    constexpr explicit PluginUnloadEvent(ll::mod::NativeMod& self) : mSelf(self) {};
+
+    inline ll::mod::NativeMod& self() const { return mSelf; };
+
+    LLAPI void serialize(CompoundTag&) const override;
 };

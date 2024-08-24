@@ -3,17 +3,14 @@
 #include "Exception.h"
 #include "event/PluginUnloadEvent.h"
 
+#include <ll/api/event/EventBus.h>
+
 namespace TSEssential {
 static bool loaded = false;
 static PluginUnloadEvent unLoadEvent{};
 PluginUnloadEvent& getUnloadEvent(){ return unLoadEvent; }
 
 bool Load() {
-    LOGGER.info("Loading Plugin...");
-    unLoadEvent.on([](const PluginUnloadEvent& info) -> bool { 
-        LOGGER.warn("Plugin Unloaded!");
-        return true; 
-    });
     try {
         if (loaded == false) {
             LOGGER.warn("TSEssential has be loaded!");
@@ -40,6 +37,7 @@ bool Enable() {
     return true;
 }
 bool Disable() {
+    EventBus
     unLoadEvent.CALL({SELF});
     loaded = false;
     return true;
