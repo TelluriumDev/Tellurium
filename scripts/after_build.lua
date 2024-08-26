@@ -90,6 +90,17 @@ function pack_mod(target,mod_define)
         local manifest = io.readfile(manifest_path)
         local bindir = path.join(os.projectdir(), "bin")
         local outputdir = path.join(bindir, mod_define.modName)
+
+        -- 配置 bds 目录 以便调试
+        local bdsdir = "D:/Dev/LeviLamina-Dev/LLBDS1.21.1"
+        local pluginsdir = path.join(bdsdir,"plugins")
+        local outputdirbds = path.join(pluginsdir, mod_define.modName)
+        local targetfilebds = path.join(outputdirbds,mod_define.modFile)
+        local pdbfilebds = path.join(outputdirbds, path.basename(mod_define.modFile) .. ".pdb")
+        local manifestfilebds = path.join(outputdirbds, "manifest.json")
+        local oritargetfilebds = target:targetfile()
+        local oripdbfilebds = path.join(path.directory(oritargetfilebds), path.basename(oritargetfilebds) .. ".pdb")
+
         local targetfile = path.join(outputdir, mod_define.modFile)
         local pdbfile = path.join(outputdir, path.basename(mod_define.modFile) .. ".pdb")
         local manifestfile = path.join(outputdir, "manifest.json")
@@ -97,14 +108,22 @@ function pack_mod(target,mod_define)
         local oripdbfile = path.join(path.directory(oritargetfile), path.basename(oritargetfile) .. ".pdb")
 
         os.mkdir(outputdir)
+        os.mkdir(pluginsdir)
         os.cp(oritargetfile, targetfile)
+        os.cp(oritargetfilebds,targetfilebds)
+
         if os.isfile(oripdbfile) then
             os.cp(oripdbfile, pdbfile)
+        end
+        if os.isfile(oripdbfilebds) then
+            os.cp(oripdbfilebds, pdbfilebds)
         end
 
         formattedmanifest = string_formatter(manifest, mod_define)
         io.writefile(manifestfile,formattedmanifest)
+        io.writefile(manifestfilebds,formattedmanifest)
         cprint("${bright green}[mod Packer]: ${reset}mod already generated to " .. outputdir)
+         cprint("${bright green}[mod Packer]: ${reset}mod already generated to " .. outputdirbds)
     else
         cprint("${bright yellow}warn: ${reset}not found manifest.json in root dir!")
     end

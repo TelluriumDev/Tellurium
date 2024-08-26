@@ -11,7 +11,8 @@ if not has_config("vs_runtime") then
     set_runtimes("MD")
 end
 
-target("my-mod") -- Change this to your mod name.
+
+target("TSEssential") -- Change this to your mod name.
     add_cxflags(
         "/EHa",
         "/utf-8",
