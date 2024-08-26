@@ -1,5 +1,7 @@
 #pragma once
 
+#include "ll/api/base/StdInt.h"
+
 #include <filesystem>
 #include <string>
 #include <unordered_map>
