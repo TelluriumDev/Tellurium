@@ -1,4 +1,5 @@
-#include "utils/I18n/I18n.h"
+#include "Utils/I18n/I18n.h"
+#include "Config/Config.h"
 
 namespace Tellurium::I18n {
 void initI18n(ll::mod::NativeMod& self) {

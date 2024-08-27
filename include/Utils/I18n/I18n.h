@@ -1,7 +1,6 @@
 #pragma once
 
-#include "Config/Config.h"
-#include "Global.h"
+#include <ll/api/mod/NativeMod.h>
 #include <ll/api/i18n/I18n.h>
 
 using namespace ll::i18n_literals;
