@@ -2,8 +2,8 @@
 #include "Config/Config.h"
 #include "Global.h"
 
+#include <ll/api/Versions.h>
 #include <ll/api/mod/RegisterHelper.h>
-#include <mc/common/SharedConstants.h>
 #include <memory>
 
 ll::Logger logger("TSEssential");
@@ -28,12 +28,12 @@ Entry& Entry::getInstance() { return *instance; }
 
 bool Entry::load() {
     printWelcomeMsg();
-    if (TARGET_PROTOCOL != SharedConstants::NetworkProtocolVersion) {
+    if (TARGET_PROTOCOL != ll::getNetworkProtocolVersion()) {
         logger.warn("You are running on an unsupport protocol version! This may result in crash!");
         logger.warn(
             "Support protocol {0}, current protocol {1}.",
             std::to_string(TARGET_PROTOCOL),
-            std::to_string(SharedConstants::NetworkProtocolVersion)
+            std::to_string(ll::getNetworkProtocolVersion())
         );
     }
     TSConfig::initConfig(getSelf());
@@ -53,4 +53,3 @@ bool Entry::unload() { return true; }
 } // namespace TSEssential
 
 LL_REGISTER_MOD(TSEssential::Entry, TSEssential::instance);
-
