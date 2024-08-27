@@ -1,6 +1,7 @@
 #include "Entry.h"
 #include "Config/Config.h"
 #include "Global.h"
+#include "utils/I18n/i18n.h"
 
 #include <ll/api/Versions.h>
 #include <ll/api/mod/RegisterHelper.h>
@@ -11,15 +12,18 @@ ll::Logger logger("Tellurium");
 namespace Tellurium {
 
 void printWelcomeMsg() {
-    logger.info(R"(     ___________ ______                     __  _       __     )");
-    logger.info(R"(    /_  __/ ___// ____/____________  ____  / /_(_)___ _/ /     )");
-    logger.info(R"(     / /  \__ \/ __/ / ___/ ___/ _ \/ __ \/ __/ / __ `/ /      )");
-    logger.info(R"(    / /  ___/ / /___(__  |  )  __/ / / / /_/ / /_/ / / /       )");
-    logger.info(R"(   /_/  /____/_____/____/____/\___/_/ /_/\__/_/\__,_/_/        )");
-    logger.info(R"(   ------------------------------------------------------      )");
-    logger.info(R"(           Light-Weight Mod Loader for your needs              )");
-    logger.info(R"(   ------------------------------------------------------      )");
-    logger.info(R"(    Tellurium is a free mod licensed under {0}               )", "LGPLv3");
+    auto lock = logger.lock();
+    logger.info("");
+    logger.info(R"(   _______     _  _               _                       )");
+    logger.info(R"(  |__   __|   | || |             (_)                      )");
+    logger.info(R"(     | |  ___ | || | _   _  _ __  _  _   _  _ __ ___      )");
+    logger.info(R"(     | | / _ \| || || | | || '__|| || | | || '_ ` _ \     )");
+    logger.info(R"(     | ||  __/| || || |_| || |   | || |_| || | | | | |    )");
+    logger.info(R"(     |_| \___||_||_| \__,_||_|   |_| \__,_||_| |_| |_|    )");
+    logger.info("");
+    logger.info("Tellurium is a free mod under GPL Version 3 License.");
+    logger.info("Help us improve Tellurium! -> https://github.com/TelluriumDev/Tellurium");
+    logger.info("Copyright (C) 2024 TelluriumDev");
 }
 
 static std::unique_ptr<Entry> instance;
@@ -27,6 +31,8 @@ static std::unique_ptr<Entry> instance;
 Entry& Entry::getInstance() { return *instance; }
 
 bool Entry::load() {
+    TSConfig::initConfig(getSelf());
+    I18n::initI18n(getSelf());
     printWelcomeMsg();
     if (TARGET_PROTOCOL != ll::getNetworkProtocolVersion()) {
         logger.warn("You are running on an unsupport protocol version! This may result in crash!");
@@ -36,7 +42,8 @@ bool Entry::load() {
             std::to_string(ll::getNetworkProtocolVersion())
         );
     }
-    TSConfig::initConfig(getSelf());
+    // logger.info(I18n::translate("test","zh_CN"));
+    // logger.info(I18n::translate("test","en_US"));
     return true;
 }
 
