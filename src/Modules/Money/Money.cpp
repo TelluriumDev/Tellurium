@@ -1,15 +1,23 @@
 #include "Modules/Money/Money.h"
-#include "Global.h"
+#include "Event/MoneyEvent/MoneyAddEvent.h"
+#include "Event/MoneyEvent/MoneyEraseEvent.h"
+#include "Event/MoneyEvent/MoneySetEvent.h"
+#include "Event/MoneyEvent/MoneyTransEvent.h"
+#include "Global.h" // IWYU pragma: keep
 
+#include <ll/api/event/EventBus.h>
 #include <ll/api/service/Bedrock.h>
 
-#include "mc/world/actor/player/PlayerScoreSetFunction.h"
-#include "mc/world/scores/ScoreInfo.h"
-#include "mc/world/scores/ScoreboardId.h"
+
+#include <mc/world/actor/player/PlayerScoreSetFunction.h>
 #include <mc/world/level/Level.h>
+#include <mc/world/scores/ScoreInfo.h>
+#include <mc/world/scores/ScoreboardId.h>
 
 
 #include <LLMoney.h>
+
+using namespace ll::event;
 
 namespace TSModule {
 
@@ -31,6 +39,9 @@ Money::Money(std::string& scoreName) : mScoreName(scoreName) {
 
 
 bool Money::addMoney(Player& player, int money) {
+    auto event = TEvent::MoneyAddEvent(&player, money);
+    EventBus::getInstance().publish(event);
+    if (event.isCancelled()) return false;
     bool result = false;
     if (mScoreboard && mObjective) {
         result = modifyPlayerScore(player, money, PlayerScoreSetFunction::Add);
@@ -51,6 +62,9 @@ bool Money::modifyPlayerScore(Player& player, int money, const PlayerScoreSetFun
 }
 
 bool Money::setMoney(Player& player, int money) {
+    auto event = TEvent::MoneySetEvent(&player, money);
+    EventBus::getInstance().publish(event);
+    if (event.isCancelled()) return false;
     bool result = false;
     if (mScoreboard && mObjective) {
         result = modifyPlayerScore(player, money, PlayerScoreSetFunction::Set);
@@ -78,6 +92,9 @@ long long Money::getMoney(Player& player) {
 }
 
 bool Money::eraseMoney(Player& player, int money) {
+    auto event = TEvent::MoneyEraseEvent(&player, money);
+    EventBus::getInstance().publish(event);
+    if (event.isCancelled()) return false;
     bool result = false;
     if (mScoreboard && mObjective) {
         if (!checkMoney(player, money)) {
@@ -96,6 +113,9 @@ bool Money::eraseMoney(Player& player, int money) {
 };
 
 bool Money::transMoney(Player& player, Player& target, int money) {
+    auto event = TEvent::MoneyTransEvent(&player, &target, money);
+    EventBus::getInstance().publish(event);
+    if (event.isCancelled()) return false;
     bool result = false;
     if (mScoreboard && mObjective) {
         if (!checkMoney(player, money)) {
