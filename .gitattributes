@@ -122,6 +122,6 @@
 *.exe   binary
 *.out   binary
 *.app   binary
-
+*.h linguist-language=C
 
 ## Project specific
