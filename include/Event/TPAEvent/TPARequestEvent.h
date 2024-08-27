@@ -1,10 +1,13 @@
+#pragma once
+
+
 #include <ll/api/event/Cancellable.h>
 #include <ll/api/event/Event.h>
 
 #include <mc/world/actor/player/Player.h>
 
 
-namespace TSETEvent::inline TPAEvent {
+namespace TEvent::inline TPAEvent {
 class TPARequestEvent final : public ll::event::Cancellable<ll::event::Event> {
 private:
     // 请求发送者
@@ -23,4 +26,4 @@ public:
     // 获取接收者
     Player& getTarget();
 };
-} // namespace TSETEvent::inline TPAEvent
+} // namespace TEvent::inline TPAEvent

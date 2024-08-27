@@ -1,12 +1,11 @@
 #pragma once
 
-#include <Modules/Back/Back.h>
-#include <Modules/TPA/TPA.h>
+#include "Modules/Back/Back.h" // IWYU pragma: keep
+#include "Modules/TPA/TPA.h"   // IWYU pragma: keep
 
-
-namespace TSModules {
+namespace TSModule {
 
 class TPA;
 class Back;
 
-} // namespace TSModules
+} // namespace TSModule
