@@ -1,6 +1,7 @@
 #pragma once
 
 #include "ll/api/base/StdInt.h"
+#include "ll/api/mod/NativeMod.h"
 
 #include <filesystem>
 #include <string>
@@ -177,7 +178,7 @@ void loadConfig(const std::filesystem::path& path);
 
 void saveConfig(const std::filesystem::path& path);
 
-void initConfig();
+void initConfig(ll::mod::NativeMod& self);
 
 } // namespace TSConfig
 
