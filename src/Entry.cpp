@@ -2,11 +2,9 @@
 #include "Config/Config.h"
 #include "Global.h"
 
+#include <ll/api/mod/RegisterHelper.h>
+#include <mc/common/SharedConstants.h>
 #include <memory>
-
-#include "ll/api/Logger.h"
-#include "ll/api/mod/RegisterHelper.h"
-
 
 ll::Logger logger("TSEssential");
 
@@ -21,7 +19,7 @@ void printWelcomeMsg() {
     logger.info(R"(   ------------------------------------------------------      )");
     logger.info(R"(           Light-Weight Mod Loader for your needs              )");
     logger.info(R"(   ------------------------------------------------------      )");
-    logger.info(R"(    TSEssential is a free software licensed under {}           )", "LGPLv3");
+    logger.info(R"(    TSEssential is a free mod licensed under {0}               )", "LGPLv3");
 }
 
 static std::unique_ptr<Entry> instance;
@@ -30,11 +28,23 @@ Entry& Entry::getInstance() { return *instance; }
 
 bool Entry::load() {
     printWelcomeMsg();
-    TSConfig::initConfig(this->mSelf);
+    if (TARGET_PROTOCOL != SharedConstants::NetworkProtocolVersion) {
+        logger.warn("You are running on an unsupport protocol version! This may result in crash!");
+        logger.warn(
+            "Support protocol {0}, current protocol {1}.",
+            std::to_string(TARGET_PROTOCOL),
+            std::to_string(SharedConstants::NetworkProtocolVersion)
+        );
+    }
+    TSConfig::initConfig(getSelf());
     return true;
 }
 
-bool Entry::enable() { return true; }
+bool Entry::enable() {
+    logger.info("TSEssential Enabled!");
+    logger.info("Repository: {0}", "https://github.com/TSEssentialDev/TSEssential");
+    return true;
+}
 
 bool Entry::disable() { return true; }
 
@@ -43,3 +53,4 @@ bool Entry::unload() { return true; }
 } // namespace TSEssential
 
 LL_REGISTER_MOD(TSEssential::Entry, TSEssential::instance);
+

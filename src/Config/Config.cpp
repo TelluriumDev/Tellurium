@@ -1,8 +1,7 @@
 #include "Config/Config.h"
 #include "Global.h"
 
-#include "ll/api/Config.h"
-
+#include <ll/api/Config.h>
 
 TSConfig::Config config;
 

@@ -1,9 +1,8 @@
 #pragma once
 
-#include "ll/api/base/StdInt.h"
-#include "ll/api/mod/NativeMod.h"
-
 #include <filesystem>
+#include <ll/api/base/StdInt.h>
+#include <ll/api/mod/NativeMod.h>
 #include <string>
 #include <unordered_map>
 
@@ -18,7 +17,7 @@ struct Config {
     int version = 1;
     // 是否启用此模组，禁用后插件会自动卸载
     bool Enabled = true;
-    // 默认语言
+    // 插件在控制台使用的语言
     std::string Language = "zh_CN";
     // 模块设置
     struct {
@@ -46,7 +45,7 @@ struct Config {
             bool Enabled = true;
             // 是否启用持久化保存(写入数据文件)
             bool SaveToDB = true;
-            // 最大保存的数据数量，当SaveToDB为true时有效
+            // 最大保存的数据数量，当SaveToDB为false时，将会储存在缓存中
             uint SaveCount = 5;
             // 传送到目标点后的无敌时间
             uint InvincibleTime = 5;
@@ -109,9 +108,7 @@ struct Config {
             std::vector<std::string> MotdList = {
                 "§d欢迎§e来到§6***§a服务器§g！",
                 "§b当前服务器人数§6:§d%server_online%/%server_max_players%",
-                "§d喵喵喵~",
-                "§6提米是猫娘",
-                "§d可爱的提米是可以摸的哦~"
+                "§d喵喵喵~"
             };
         } DynamicMotd;
         // 随机传送模块设置

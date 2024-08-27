@@ -1,6 +1,6 @@
 #pragma once
 
-#include "ll/api/mod/NativeMod.h"
+#include <ll/api/mod/NativeMod.h>
 
 namespace TSEssential {
 
@@ -25,6 +25,4 @@ private:
     ll::mod::NativeMod& mSelf;
 };
 
-
 } // namespace TSEssential
-

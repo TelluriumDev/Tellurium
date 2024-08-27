@@ -22,7 +22,8 @@ target("TSEssential") -- Change this to your mod name.
         "/w44296",
         "/w45263",
         "/w44738",
-        "/w45204"
+        "/w45204",
+        "/WX"
     )
     add_defines("NOMINMAX", "UNICODE")
     add_files("src/**.cpp")
@@ -31,6 +32,7 @@ target("TSEssential") -- Change this to your mod name.
     add_shflags("/DELAYLOAD:bedrock_server.dll") -- To use symbols provided by SymbolProvider.
     set_exceptions("none") -- To avoid conflicts with /EHa.
     set_kind("shared")
+    set_optimize("fastest")
     set_languages("c++20")
     set_symbols("debug")
 

@@ -1,9 +1,7 @@
-#pragma once
+#include <ll/api/event/Cancellable.h>
+#include <ll/api/event/Event.h>
 
-#include "ll/api/event/Cancellable.h"
-#include "ll/api/event/Event.h"
-
-#include "mc/world/actor/player/Player.h"
+#include <mc/world/actor/player/Player.h>
 
 
 namespace TSETEvent::inline TPAEvent {

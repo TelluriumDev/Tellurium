@@ -2,5 +2,7 @@
 
 #include <ll/api/Logger.h>
 
-extern ll::Logger logger;
+// Bedrock Server 1.21.3
+#define TARGET_PROTOCOL 686
 
+extern ll::Logger logger;
