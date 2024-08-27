@@ -3,6 +3,7 @@
 namespace TSModules {
 class TPA {
     public:
-    TPA();
+        TPA();
+        
 };
 } // namespace TSModules

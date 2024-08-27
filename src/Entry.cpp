@@ -6,7 +6,7 @@
 #include <ll/api/mod/RegisterHelper.h>
 #include <memory>
 
-ll::Logger logger("TSEssential");
+ll::Logger logger("Tellurium");
 
 namespace Tellurium {
 
@@ -19,7 +19,7 @@ void printWelcomeMsg() {
     logger.info(R"(   ------------------------------------------------------      )");
     logger.info(R"(           Light-Weight Mod Loader for your needs              )");
     logger.info(R"(   ------------------------------------------------------      )");
-    logger.info(R"(    TSEssential is a free mod licensed under {0}               )", "LGPLv3");
+    logger.info(R"(    Tellurium is a free mod licensed under {0}               )", "LGPLv3");
 }
 
 static std::unique_ptr<Entry> instance;
@@ -41,8 +41,8 @@ bool Entry::load() {
 }
 
 bool Entry::enable() {
-    logger.info("TSEssential Enabled!");
-    logger.info("Repository: {0}", "https://github.com/TSEssentialDev/TSEssential");
+    logger.info("Tellurium Enabled!");
+    logger.info("Repository: {0}", "https://github.com/TelluriumDev/Tellurium");
     return true;
 }
 

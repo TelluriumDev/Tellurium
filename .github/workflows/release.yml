@@ -32,7 +32,7 @@ jobs:
 
       - uses: actions/upload-artifact@v3
         with:
-          name: TSEssential-windows-x64
+          name: Tellurium-windows-x64
           path: |
             bin/DLL/
 
@@ -58,11 +58,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Download TSEssential artifact
+      - name: Download Tellurium artifact
         uses: actions/download-artifact@v3
         with:
-          name: TSEssential-windows-x64
-          path: release/TSEssential/
+          name: Tellurium-windows-x64
+          path: release/Tellurium/
 
       - name: Download PDB artifact
         uses: actions/download-artifact@v3
@@ -78,11 +78,11 @@ jobs:
 
       - name: Copy additional files
         run: |
-          cp LICENSE README.md release/TSEssential/
-      - name: Archive TSEssential directory
+          cp LICENSE README.md release/Tellurium/
+      - name: Archive Tellurium directory
         run: |
-          cd release/TSEssential
-          zip -r ../TSEssential-windows-x64.zip *
+          cd release/Tellurium
+          zip -r ../Tellurium-windows-x64.zip *
           cd ..
       - name: Archive SDK directory
         run: |
@@ -103,6 +103,6 @@ jobs:
             | ---- | ------ |
             | SDK.zip | ${{ steps.calculate-sha256.outputs.release }} |
           files: |
-            release/TSEssential-windows-x64.zip
-            release/PDB/TSEssential.pdb
+            release/Tellurium-windows-x64.zip
+            release/PDB/Tellurium.pdb
             release/SDK.zip
