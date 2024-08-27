@@ -1,6 +1,6 @@
 {
     "format_version": 2,
-    "tooth": "my-mod",
+    "tooth": "Tellurium",
     "version": "0.0.0",
     "info": {
         "name": "My Mod Name",
@@ -18,8 +18,8 @@
     "files": {
         "place": [
             {
-                "src": "my-mod/*",
-                "dest": "plugins/my-mod/"
+                "src": "Tellurium/*",
+                "dest": "plugins/Tellurium/"
             }
         ]
     }

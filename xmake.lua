@@ -12,7 +12,7 @@ if not has_config("vs_runtime") then
 end
 
 
-target("TSEssential") -- Change this to your mod name.
+target("Tellurium") -- Change this to your mod name.
     add_cxflags(
         "/EHa",
         "/utf-8",

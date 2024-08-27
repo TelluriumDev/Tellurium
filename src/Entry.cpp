@@ -8,7 +8,7 @@
 
 ll::Logger logger("TSEssential");
 
-namespace TSEssential {
+namespace Tellurium {
 
 void printWelcomeMsg() {
     logger.info(R"(     ___________ ______                     __  _       __     )");
@@ -50,6 +50,6 @@ bool Entry::disable() { return true; }
 
 bool Entry::unload() { return true; }
 
-} // namespace TSEssential
+} // namespace Tellurium
 
-LL_REGISTER_MOD(TSEssential::Entry, TSEssential::instance);
+LL_REGISTER_MOD(Tellurium::Entry, Tellurium::instance);
