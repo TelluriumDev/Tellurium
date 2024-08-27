@@ -64,7 +64,7 @@ bool Money::setMoney(Player& player, int money) {
     return result;
 }
 
-int Money::getMoney(Player& player) {
+long long Money::getMoney(Player& player) {
     if (mScoreboard && mObjective) {
         const ScoreboardId& id    = mScoreboard->getScoreboardId(player);
         int                 money = mObjective->getPlayerScore(id).mScore;

@@ -22,13 +22,13 @@ private:
     Objective*  mObjective  = nullptr;
 
 public:
-    int  getMoney(Player& player);
-    bool addMoney(Player& player, int money);
-    bool eraseMoney(Player& player, int money);
-    bool setMoney(Player& player, int money);
-    bool checkMoney(Player& player, int money);
+    long long getMoney(Player& player);
+    bool      addMoney(Player& player, int money);
+    bool      eraseMoney(Player& player, int money);
+    bool      setMoney(Player& player, int money);
+    bool      checkMoney(Player& player, int money);
+    bool      transMoney(Player& player, Player& target, int money);
     // !: only Scoreboard can use this function
     bool modifyPlayerScore(Player& player, int money, const PlayerScoreSetFunction& function);
-    bool transMoney(Player& player, Player& target, int money);
 };
 }; // namespace TSModule
