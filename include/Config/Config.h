@@ -178,6 +178,7 @@ void saveConfig(const std::filesystem::path& path);
 void initConfig(ll::mod::NativeMod& self);
 
 const std::filesystem::path& getConfigDir();
+const std::filesystem::path& getDataDir();
 const std::filesystem::path getConfigPath();
 
 } // namespace TSConfig
