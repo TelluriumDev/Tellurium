@@ -1,7 +1,7 @@
 #include "Entry.h"
 #include "Config/Config.h"
 #include "Global.h"
-#include "utils/I18n/i18n.h"
+#include "Utils/I18n/I18n.h"
 
 #include <ll/api/Versions.h>
 #include <ll/api/mod/RegisterHelper.h>

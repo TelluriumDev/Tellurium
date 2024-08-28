@@ -1,6 +1,6 @@
 #pragma once
 
-namespace TSModules {
+namespace TSModule {
 class TPA {
     public:
         TPA();

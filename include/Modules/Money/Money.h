@@ -14,6 +14,8 @@ public:
     // 无任何实现 可以直接用在 llmoney 上
     Money();
 
+    ~Money();
+
 private:
     std::string mScoreName = "";
     //  是否启用LLMoney 别问为什么要用 因为防止意外情况
