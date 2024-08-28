@@ -27,6 +27,7 @@ target("Tellurium") -- Change this to your mod name.
     )
     add_defines("NOMINMAX", "UNICODE")
     add_files("src/**.cpp")
+    add_files("src/Tellurium.rc")
     add_includedirs(
         "src", 
         "include"
