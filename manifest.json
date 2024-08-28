@@ -3,6 +3,11 @@
     "entry": "${modFile}",
     "version": "${modVersion}",
     "type": "native",
+    "dependencies": [
+        {
+            "name": "Tellurium-loc"
+        }
+    ],
     "optionalDependencies": [
         {
             "name": "LegacyMoney"

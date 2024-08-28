@@ -1,19 +1,18 @@
 {
     "format_version": 2,
     "tooth": "Tellurium",
-    "version": "0.0.0",
+    "version": "0.0.1",
     "info": {
-        "name": "My Mod Name",
-        "description": "My Mod Description",
+        "name": "Tellurium",
+        "description": "A Minecraft plugin that allows you to create custom items and blocks with custom behavior.",
         "author": "My Name",
-        "tags": [
-            "levilamina",
-            "mod"
-        ]
+        "tags": ["levilamina", "mod"]
     },
-    "asset_url": "My Asset Url",
     "prerequisites": {
         "github.com/LiteLDev/LeviLamina": "My LeviLamina Dependency Version"
+    },
+    "dependencies": {
+        "github.com/TelluriumDev/Tellurium-loc": "0.0.1"
     },
     "files": {
         "place": [
