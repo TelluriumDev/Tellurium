@@ -2,6 +2,7 @@
 #include "Config/Config.h"
 #include "Global.h"
 #include "Utils/I18n/I18n.h"
+#include "Versions.h"
 
 #include <ll/api/Versions.h>
 #include <ll/api/mod/RegisterHelper.h>
@@ -34,11 +35,11 @@ bool Entry::load() {
     TSConfig::initConfig(getSelf());
     I18n::initI18n(getSelf());
     printWelcomeMsg();
-    if (TARGET_PROTOCOL != ll::getNetworkProtocolVersion()) {
+    if (TARGET_BDS_PROTOCOL_VERSION != ll::getNetworkProtocolVersion()) {
         logger.warn("You are running on an unsupport protocol version! This may result in crash!");
         logger.warn(
             "Support protocol {0}, current protocol {1}.",
-            std::to_string(TARGET_PROTOCOL),
+            std::to_string(TARGET_BDS_PROTOCOL_VERSION),
             std::to_string(ll::getNetworkProtocolVersion())
         );
     }
