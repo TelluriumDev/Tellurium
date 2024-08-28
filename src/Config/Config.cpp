@@ -11,8 +11,13 @@ namespace TSConfig {
 auto ConfigDir = std::filesystem::path();
 
 void loadConfig(const std::filesystem::path& path) {
-    if (!ll::config::loadConfig(config, path)) {
-        logger.warn("Old config file detected, upgrading...");
+    try {
+        if (!ll::config::loadConfig(config, path)) {
+            logger.warn("Old config file detected, upgrading...");
+            saveConfig(path);
+        }
+    } catch (...) {
+        logger.error("Failed to load config file.");
         saveConfig(path);
     }
 }
