@@ -6,12 +6,13 @@ add_repositories("liteldev-repo https://github.com/LiteLDev/xmake-repo.git")
 -- add_requires("levilamina develop") to use develop version
 -- please note that you should add bdslibrary yourself if using dev version
 add_requires("levilamina")
+add_requires("legacymoney")
 
 if not has_config("vs_runtime") then
     set_runtimes("MD")
 end
 
-target("TSEssential") -- Change this to your mod name.
+target("Tellurium") -- Change this to your mod name.
     add_cxflags(
         "/EHa",
         "/utf-8",
@@ -21,15 +22,21 @@ target("TSEssential") -- Change this to your mod name.
         "/w44296",
         "/w45263",
         "/w44738",
-        "/w45204"
+        "/w45204",
+        "/WX"
     )
     add_defines("NOMINMAX", "UNICODE")
     add_files("src/**.cpp")
-    add_includedirs("src")
+    add_includedirs(
+        "src", 
+        "include"
+    )
     add_packages("levilamina")
+    add_packages("legacymoney")
     add_shflags("/DELAYLOAD:bedrock_server.dll") -- To use symbols provided by SymbolProvider.
     set_exceptions("none") -- To avoid conflicts with /EHa.
     set_kind("shared")
+    set_optimize("fastest")
     set_languages("c++20")
     set_symbols("debug")
 

@@ -30,50 +30,79 @@ jobs:
       - run: |
           xmake -w -y
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v3
         with:
-          name: ${{ github.event.repository.name }}-windows-x64-${{ github.sha }}
+          name: Tellurium-windows-x64
           path: |
-            bin/
+            bin/DLL/
 
-  update-release-notes:
-    permissions:
-      contents: write
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - id: extract-release-notes
-        uses: ffurrer2/extract-release-notes@v2
-
-      - uses: softprops/action-gh-release@v1
+      - uses: actions/upload-artifact@v3
         with:
-          body: |
-            ${{ steps.extract-release-notes.outputs.release_notes }}
+          name: PDB
+          path: |
+            bin/PDB/
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: SDK
+          path: |
+            bin/SDK/
 
   upload-to-release:
     needs:
       - build
-      - update-release-notes
     permissions:
       contents: write
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-      - uses: actions/download-artifact@v4
+      - name: Download Tellurium artifact
+        uses: actions/download-artifact@v3
         with:
-          name: ${{ github.event.repository.name }}-windows-x64-${{ github.sha }}
-          path: artifact
+          name: Tellurium-windows-x64
+          path: release/Tellurium/
 
-      - run: |
-          cp CHANGELOG.md LICENSE README.md artifact/
-
-      - run: |
-          zip -r ../${{ github.event.repository.name }}-windows-x64.zip *
-        working-directory: artifact
-
-      - uses: softprops/action-gh-release@v1
+      - name: Download PDB artifact
+        uses: actions/download-artifact@v3
         with:
+          name: PDB
+          path: release/PDB/
+
+      - name: Download SDK artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: SDK
+          path: release/SDK/
+
+      - name: Copy additional files
+        run: |
+          cp LICENSE README.md release/Tellurium/
+      - name: Archive Tellurium directory
+        run: |
+          cd release/Tellurium
+          zip -r ../Tellurium-windows-x64.zip *
+          cd ..
+      - name: Archive SDK directory
+        run: |
+          cd release/SDK
+          zip -r ../SDK.zip *
+          cd ..
+      - name: Calculate SHA256
+        id: calculate-sha256
+        run: |
+          echo release=$(sha256sum release/SDK.zip | awk '{print $1}') >> $GITHUB_OUTPUT
+      - name: Create GitHub Release
+        id: create_release
+        uses: softprops/action-gh-release@v1
+        with:
+          append_body: true
+          body: |
+            | File | SHA256 |
+            | ---- | ------ |
+            | SDK.zip | ${{ steps.calculate-sha256.outputs.release }} |
           files: |
-            ${{ github.event.repository.name }}-windows-x64.zip
+            release/Tellurium-windows-x64.zip
+            release/PDB/Tellurium.pdb
+            release/SDK.zip

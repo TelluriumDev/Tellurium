@@ -30,11 +30,21 @@ jobs:
       - run: |
           xmake -v -y
 
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v3
         with:
-          name: ${{ github.event.repository.name }}-windows-x64-${{ github.sha }}
+          name: Tellurium-windows-x64
           path: |
-            bin/
+            bin/DLL/
+      - uses: actions/upload-artifact@v3
+        with:
+          name: PDB
+          path: |
+            bin/PDB/
+      - uses: actions/upload-artifact@v3
+        with:
+          name: SDK
+          path: |
+            bin/SDK/
 
   # clang-format:
   #   runs-on: windows-latest

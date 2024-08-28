@@ -88,23 +88,52 @@ function pack_mod(target,mod_define)
     local manifest_path = find_file("manifest.json", os.projectdir())
     if manifest_path then
         local manifest = io.readfile(manifest_path)
-        local bindir = path.join(os.projectdir(), "bin")
+        local bindir = path.join(os.projectdir(), "bin/DLL")
+        local pdbdir = path.join(os.projectdir(), "bin/PDB")
+        local libdir = path.join(os.projectdir(), "bin/SDK/lib")
+        local incdir = path.join(os.projectdir(), "bin/SDK")
         local outputdir = path.join(bindir, mod_define.modName)
         local targetfile = path.join(outputdir, mod_define.modFile)
-        local pdbfile = path.join(outputdir, path.basename(mod_define.modFile) .. ".pdb")
+        local pdbfile = path.join(pdbdir, path.basename(mod_define.modFile) .. ".pdb")
+        local libfile = path.join(libdir, path.basename(mod_define.modFile) .. ".lib")
         local manifestfile = path.join(outputdir, "manifest.json")
         local oritargetfile = target:targetfile()
         local oripdbfile = path.join(path.directory(oritargetfile), path.basename(oritargetfile) .. ".pdb")
+        local orilibfile = path.join(path.directory(oritargetfile), path.basename(oritargetfile) .. ".lib")
+        local oriincdir = path.join(os.projectdir(), "include")
+
+        -- 配置 bds 目录 以便调试
+        local bdsdir = "D:/Dev/LeviLamina-Dev/LLBDS1.21.1"
+        local pluginsdir = path.join(bdsdir,"plugins")
+        local outputdirbds = path.join(pluginsdir, mod_define.modName)
+        local targetfilebds = path.join(outputdirbds,mod_define.modFile)
+        local pdbfilebds = path.join(outputdirbds, path.basename(mod_define.modFile) .. ".pdb")
+        local manifestfilebds = path.join(outputdirbds, "manifest.json")
+        local oritargetfilebds = target:targetfile()
+        local oripdbfilebds = path.join(path.directory(oritargetfilebds), path.basename(oritargetfilebds) .. ".pdb")
 
         os.mkdir(outputdir)
+        os.mkdir(outputdirbds)
+        os.mkdir(incdir)
+        os.cp(oriincdir, incdir)
         os.cp(oritargetfile, targetfile)
+        os.cp(oritargetfilebds,targetfilebds)
+
         if os.isfile(oripdbfile) then
             os.cp(oripdbfile, pdbfile)
+        end
+        if os.isfile(oripdbfilebds) then
+            os.cp(oripdbfilebds, pdbfilebds)
+        end
+        if os.isfile(orilibfile) then
+            os.cp(orilibfile, libfile)
         end
 
         formattedmanifest = string_formatter(manifest, mod_define)
         io.writefile(manifestfile,formattedmanifest)
+        io.writefile(manifestfilebds,formattedmanifest)
         cprint("${bright green}[mod Packer]: ${reset}mod already generated to " .. outputdir)
+        cprint("${bright green}[mod Packer]: ${reset}mod already generated to " .. outputdirbds)
     else
         cprint("${bright yellow}warn: ${reset}not found manifest.json in root dir!")
     end

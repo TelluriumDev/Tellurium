@@ -1,43 +1,62 @@
 #include "Entry.h"
+#include "Config/Config.h"
 #include "Global.h"
-#include "TSEssential.h"
+#include "utils/I18n/i18n.h"
 
+#include <ll/api/Versions.h>
+#include <ll/api/mod/RegisterHelper.h>
 #include <memory>
 
-#include "ll/api/mod/RegisterHelper.h"
-#include <ll/api/Config.h>
+ll::Logger logger("Tellurium");
 
-namespace TSEssential {
+namespace Tellurium {
+
+void printWelcomeMsg() {
+    auto lock = logger.lock();
+    logger.info("");
+    logger.info(R"(   _______     _  _               _                       )");
+    logger.info(R"(  |__   __|   | || |             (_)                      )");
+    logger.info(R"(     | |  ___ | || | _   _  _ __  _  _   _  _ __ ___      )");
+    logger.info(R"(     | | / _ \| || || | | || '__|| || | | || '_ ` _ \     )");
+    logger.info(R"(     | ||  __/| || || |_| || |   | || |_| || | | | | |    )");
+    logger.info(R"(     |_| \___||_||_| \__,_||_|   |_| \__,_||_| |_| |_|    )");
+    logger.info("");
+    logger.info("Tellurium is a free mod under GPL Version 3 License.");
+    logger.info("Help us improve Tellurium! -> https://github.com/TelluriumDev/Tellurium");
+    logger.info("Copyright (C) 2024 TelluriumDev");
+}
 
 static std::unique_ptr<Entry> instance;
 
-Entry &Entry::getInstance() { return *instance; }
+Entry& Entry::getInstance() { return *instance; }
 
 bool Entry::load() {
-  getSelf().getLogger().debug("Checking Network Version...");
-  CheckProtocolVersion();
-  getSelf().getLogger().info("Loading config.json...");
-  LoadConfig();
-  LoadModules();
-  return true;
+    TSConfig::initConfig(getSelf());
+    I18n::initI18n(getSelf());
+    printWelcomeMsg();
+    if (TARGET_PROTOCOL != ll::getNetworkProtocolVersion()) {
+        logger.warn("You are running on an unsupport protocol version! This may result in crash!");
+        logger.warn(
+            "Support protocol {0}, current protocol {1}.",
+            std::to_string(TARGET_PROTOCOL),
+            std::to_string(ll::getNetworkProtocolVersion())
+        );
+    }
+    // logger.info(I18n::translate("test","zh_CN"));
+    // logger.info(I18n::translate("test","en_US"));
+    return true;
 }
+
 bool Entry::enable() {
-  getSelf().getLogger().debug("Enabling...");
-  // Code for enabling the mod goes here.
-  return true;
+    logger.info("Tellurium Enabled!");
+    logger.info("Repository: {0}", "https://github.com/TelluriumDev/Tellurium");
+    return true;
 }
 
-bool Entry::disable() {
-  getSelf().getLogger().debug("Disabling...");
-  // Code for disabling the mod goes here.
-  return true;
-}
+bool Entry::disable() { return true; }
 
-bool Entry::unload() {
-  getSelf().getLogger().debug("Unloading...");
-  // Code for unloading the mod goes here.
-  return true;
-}
-} // namespace TSEssential
+bool Entry::unload() { return true; }
 
-LL_REGISTER_MOD(TSEssential::Entry, TSEssential::instance);
+} // namespace Tellurium
+
+LL_REGISTER_MOD(Tellurium::Entry, Tellurium::instance);
