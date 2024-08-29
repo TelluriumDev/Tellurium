@@ -30,7 +30,7 @@ Modules* getModulesInstance() {
 }
 Modules::Modules() {
     // mTPA   = new TPA();
-    // mTPR   = new TPR();
+    mTPR   = new TPR();
     // mMoney = new Money();
     // mBack  = new Back();
     // TODO: 其他模块

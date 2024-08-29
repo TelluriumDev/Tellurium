@@ -1,6 +1,7 @@
 #include "Entry.h"
 #include "Config/Config.h"
 #include "Global.h"
+#include "Modules/Modules.h"
 #include "Utils/I18n/I18n.h"
 #include "Versions.h"
 
@@ -9,6 +10,8 @@
 #include <memory>
 
 ll::Logger logger("Tellurium");
+
+void RegTPRCmd();
 
 namespace Tellurium {
 
@@ -50,6 +53,8 @@ bool Entry::load() {
 bool Entry::enable() {
     logger.info("Tellurium Enabled!");
     logger.info("Repository: {0}"_tr("https://github.com/TelluriumDev/Tellurium"));
+    TSModule::initModules();
+    RegTPRCmd();
     return true;
 }
 
