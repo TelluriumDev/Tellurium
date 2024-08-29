@@ -4,7 +4,6 @@
 #include "Event/MoneyEvent/MoneySetEvent.h"
 #include "Event/MoneyEvent/MoneyTransEvent.h"
 #include "Global.h" // IWYU pragma: keep
-#include "Modules/Modules.h"
 
 #include <ll/api/event/EventBus.h>
 #include <ll/api/service/Bedrock.h>
@@ -137,8 +136,4 @@ bool Money::transMoney(Player& player, Player& target, int money) {
 
 bool Money::checkMoney(Player& player, int money) { return getMoney(player) >= money; }
 
-Money::~Money() {
-    delete getModulesInstance()->mMoney;
-    getModulesInstance()->mMoney = nullptr;
-}
 }; // namespace TSModule

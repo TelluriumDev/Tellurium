@@ -8,8 +8,6 @@
 namespace TSModule {
 class TPR {
 
-public:
-    ~TPR();
 
 private:
     // ?: 这里至于为什么不在生成坐标函数里加维度参数 是因为没必要 (可能有必要吧 但是也没必要)
