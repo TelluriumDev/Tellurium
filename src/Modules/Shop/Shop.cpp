@@ -1,6 +1,7 @@
 #include "Modules/Shop/Shop.h"
-#include "Global.h"
 #include "Entry.h"
+#include "Global.h"
+
 
 #include <filesystem>
 
@@ -20,11 +21,9 @@ Shop::Shop() { logger.debug("ShopClass 构造..."); }
     if (ShopCache[shopName] != nullptr) {
         return ShopCache[shopName];
     }
-    ::ShopData* data = nullptr;
-    auto filePath = Tellurium::Entry::getInstance().getSelf().getDataDir() / "shop" / shopName;
-    if (!exists(filePath)) {
-
-    } 
+    ::ShopData* data     = nullptr;
+    auto        filePath = Tellurium::Entry::getInstance().getSelf().getDataDir() / "shop" / shopName;
+    if (!exists(filePath)) {}
 
     return nullptr;
 }

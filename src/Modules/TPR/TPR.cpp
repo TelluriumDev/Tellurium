@@ -17,29 +17,8 @@
 
 namespace TSModule {
 
-bool TPR::isSafe(BlockPos pos, Dimension& dim) {
-
-    bool  res         = false;
-    auto& blockSource = dim.getBlockSourceFromMainChunkSource();
-    auto& chunkSource = blockSource.getChunkSource();
-
-    ChunkPos chunkPos = ChunkPos(pos);
-
-    chunkSource.getOrLoadChunk(chunkPos, ChunkSource::LoadMode::Deferred, false);
-
-    auto& block      = blockSource.getBlock(pos);
-    pos.y           += 1;
-    auto& blockUp    = blockSource.getBlock(pos);
-    pos.y           += 1;
-    auto& blockUpUp  = blockSource.getBlock(pos);
-    if (block.isEmpty() || block.isAir() || block.isLavaFlammable() || block.isWaterBlocking()
-        || (!blockUp.isAir() && !blockUpUp.isAir())) {
-        res = false;
-    } else {
-        res = true;
-    }
-
-    return res;
+bool TPR::isSafe(BlockPos, Dimension&) {
+    return false;
 }
 
 
