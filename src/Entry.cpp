@@ -36,12 +36,11 @@ bool Entry::load() {
     I18n::initI18n(getSelf());
     printWelcomeMsg();
     if (TARGET_BDS_PROTOCOL_VERSION != ll::getNetworkProtocolVersion()) {
-        logger.warn("You are running on an unsupport protocol version! This may result in crash!");
-        logger.warn(
-            "Support protocol {0}, current protocol {1}.",
+        logger.warn("You are running on an unsupport protocol version! This may result in crash!"_tr());
+        logger.warn("Support protocol {0}, current protocol {1}."_tr(
             std::to_string(TARGET_BDS_PROTOCOL_VERSION),
             std::to_string(ll::getNetworkProtocolVersion())
-        );
+        ));
     }
     // logger.info(I18n::translate("test","zh_CN"));
     // logger.info(I18n::translate("test","en_US"));
@@ -50,7 +49,7 @@ bool Entry::load() {
 
 bool Entry::enable() {
     logger.info("Tellurium Enabled!");
-    logger.info("Repository: {0}", "https://github.com/TelluriumDev/Tellurium");
+    logger.info("Repository: {0}"_tr("https://github.com/TelluriumDev/Tellurium"));
     return true;
 }
 

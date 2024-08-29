@@ -28,7 +28,7 @@ Money::Money(std::string& scoreName) : mScoreName(scoreName) {
     mScoreboard = &ll::service::getLevel()->getScoreboard();
     mObjective  = mScoreboard->getObjective(scoreName);
     if (mObjective == nullptr) {
-        logger.warn("Scoreboard objective {} not found, will create"_tr(scoreName));
+        logger.warn("Scoreboard objective {0} not found, will create"_tr(scoreName));
         mObjective = mScoreboard->addObjective(
             scoreName,
             scoreName,
@@ -131,7 +131,7 @@ bool Money::transMoney(Player& player, Player& target, int money) {
         logger.error("No scoreboard or LLMoney"_tr());
         result = false;
     }
-    if (!result) player.sendMessage("§cFailed to add money"_tr()); // TODO: 由于玩家数据系统缺失 i18n 搁置
+    if (!result) player.sendMessage("§cFailed to trans money"_tr()); // TODO: 由于玩家数据系统缺失 i18n 搁置
     return result;
 }
 

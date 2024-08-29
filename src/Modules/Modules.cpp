@@ -23,7 +23,7 @@ Modules* getModulesInstance() {
     if (modules != nullptr) {
         return modules;
     } else {
-        logger.info("Cannot find modules instance, please call initModules() first!!!"_tr());
+        logger.info("Cannot find modules instance, please initModules first!!!"_tr());
         initModules();
         return modules;
     }
