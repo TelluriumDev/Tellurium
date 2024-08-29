@@ -43,19 +43,20 @@ Modules::~Modules() {
     delete mBack;
     // TODO: 其他模块
 
-    // ?: 应该没有问题...
-    delete modules;
+    // !: 感觉有大问题 delete 会调用析构函数(这算不算析构递归)
+    // delete modules;
 
     // 防止悬空指针 别问 问就是 CodeGeeX
-    mTPA    = nullptr;
-    mTPR    = nullptr;
-    mMoney  = nullptr;
-    mBack   = nullptr;
-    modules = nullptr;
+    mTPA   = nullptr;
+    mTPR   = nullptr;
+    mMoney = nullptr;
+    mBack  = nullptr;
+    // modules = nullptr;
 }
 
 bool Modules::destroy() {
     try {
+        // ! 所以在这里进行析构函数调用
         delete modules;
         // 防止悬空指针
         modules = nullptr;
