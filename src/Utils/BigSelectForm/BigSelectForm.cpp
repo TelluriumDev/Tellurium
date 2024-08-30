@@ -10,6 +10,6 @@ inline void BigSelectForm::setCallback(const std::function<void(std::vector<std:
     mCallback = callback;
 }
 
-void BigSelectForm::sendToPlayer(Player& pl){
+void BigSelectForm::sendToPlayer(Player&){
     // pl.send
 }

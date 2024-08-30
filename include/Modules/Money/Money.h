@@ -35,22 +35,24 @@ public:
     bool setMoney(mce::UUID& playerUUID, int money, std::string& note, ::MoneySetOptions option = set);
     bool setMoney(Player& player, int money, std::string& note, ::MoneySetOptions option = set);
 
-    bool addMoney(mce::UUID& playerUUID, int money);
-    bool addMoney(Player& playerUUID, int money);
+    // bool addMoney(mce::UUID& playerUUID, int money, std::string& note);
+    // bool addMoney(Player& playerUUID, int money, std::string& note);
 
-    bool reduceMoney(mce::UUID& playerUUID, int money);
-    bool reduceMoney(Player& player, int money);
+    // bool reduceMoney(mce::UUID& playerUUID, int money, std::string& note);
+    // bool reduceMoney(Player& player, int money, std::string& note);
 
-    bool transMoney(mce::UUID& playerUUID, mce::UUID& targetPlayerUUID, int money, std::string& note);
-    bool transMoney(Player& player, Player& target, int money, std::string& note);
+    // bool transMoney(mce::UUID& playerUUID, mce::UUID& targetPlayerUUID, int money, std::string& note);
+    // bool transMoney(Player& player, Player& target, int money, std::string& note);
 
-    bool checkMoney(mce::UUID& playerUUID, int money);
-    bool checkMoney(Player& player, int money);
+    // bool checkMoney(mce::UUID& playerUUID, int money);
+    // bool checkMoney(Player& player, int money);
 
 private:
     // !: only Scoreboard can use this function
     ScoreboardId* getOrCreatePlayerScoreId(Player& player);
     // !: only Scoreboard can use this function(MCFunction)
     bool setPlayerScore(Player& player, int money);
+
+    bool getOfflinePlayerNbt(mce::UUID& uuid);
 };
 }; // namespace TSModule
