@@ -25,7 +25,7 @@ public:
       mMoney(money),
       mNote(note),
       mOption(opion) {}
-    MoneySetEvent(mce::UUID& playerUUID, int money, std::string& note, MoneySetOptions opion):
+    MoneySetEvent(mce::UUID& playerUUID, int money, std::string& note, MoneySetOptions opion)
     : Cancellable(),
       mPlayerUUID(playerUUID),
       mMoney(money),
