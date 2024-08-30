@@ -1,7 +1,7 @@
 #include "Modules/Modules.h"
 #include "Global.h"
 
-namespace TSModule {
+namespace TLModule {
 
 // ! 究极大屎山
 
@@ -119,4 +119,4 @@ bool Modules::destroy(ModuleType& type) {
     }
     }
 }
-} // namespace TSModule
+} // namespace TLModule

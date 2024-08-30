@@ -13,7 +13,7 @@ enum MoneySetOptions : int {
     init, // 玩家初始化经济
     pay   // 玩家交易
 };
-namespace TSModule {
+namespace TLModule {
 class Money {
 public:
     Money(std::string& scoreName);
@@ -55,4 +55,4 @@ private:
 
     bool getOfflinePlayerNbt(mce::UUID& uuid);
 };
-}; // namespace TSModule
+}; // namespace TLModule

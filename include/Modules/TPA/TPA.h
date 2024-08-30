@@ -1,9 +1,9 @@
 #pragma once
 
-namespace TSModule {
+namespace TLModule {
 class TPA {
     public:
         TPA();
         
 };
-} // namespace TSModules
+} // namespace TLModules

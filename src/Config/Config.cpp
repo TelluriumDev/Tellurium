@@ -5,9 +5,9 @@
 #include <filesystem>
 #include <ll/api/Config.h>
 
-TSConfig::Config config;
+TLConfig::Config config;
 
-namespace TSConfig {
+namespace TLConfig {
 
 auto ConfigDir = std::filesystem::path();
 auto DataDir   = std::filesystem::path();
@@ -41,4 +41,4 @@ const std::filesystem::path& getConfigDir() { return ConfigDir; };
 const std::filesystem::path& getDataDir() { return DataDir; };
 
 const std::filesystem::path getConfigPath() { return ConfigDir / "config.json"; };
-} // namespace TSConfig
+} // namespace TLConfig

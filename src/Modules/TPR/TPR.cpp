@@ -15,7 +15,7 @@
 #include <stdlib.h>
 
 
-namespace TSModule {
+namespace TLModule {
 
 bool TPR::isSafe(BlockPos, Dimension&) {
     return false;
@@ -48,4 +48,4 @@ bool TPR::TPRPlayer(Player& player, bool& res) {
     }
     return res;
 }
-} // namespace TSModule
+} // namespace TLModule

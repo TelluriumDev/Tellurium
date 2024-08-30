@@ -4,14 +4,14 @@
 #include <ll/api/event/Event.h>
 #include <mc/world/actor/player/Player.h>
 
-namespace TEvent::inline TPAEvent {
-class TPAAcceptEvent final : public ll::event::Cancellable<ll::event::Event> {
+namespace TLEvent::inline TPAEvent {
+class TPAAccepTLEvent final : public ll::event::Cancellable<ll::event::Event> {
 private:
     Player* mSender;
     Player* mTarget;
 
 public:
-    constexpr explicit TPAAcceptEvent(Player* sender, Player* target)
+    constexpr explicit TPAAccepTLEvent(Player* sender, Player* target)
     : Cancellable(),
       mSender(sender),
       mTarget(target){};
@@ -19,4 +19,4 @@ public:
     Player& getSender();
     Player& getTarget();
 };
-} // namespace TEvent::inline TPAEvent
+} // namespace TLEvent::inline TPAEvent

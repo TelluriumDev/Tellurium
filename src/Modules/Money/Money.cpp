@@ -20,7 +20,7 @@
 
 using namespace ll::event;
 
-namespace TSModule {
+namespace TLModule {
 
 Money::Money(std::string& scoreName) : mScoreName(scoreName) {
     if (scoreName.empty()) return;
@@ -94,4 +94,4 @@ bool Money::getOfflinePlayerNbt(mce::UUID&) {
 // bool Money::checkMoney(Player& player, int money) { return getMoney(player) >= money; }
 // bool Money::checkMoney(mce::UUID& player, int money) { return getMoney(player) >= money; }
 
-}; // namespace TSModule
+}; // namespace TLModule

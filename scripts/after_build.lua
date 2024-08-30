@@ -103,7 +103,7 @@ function pack_mod(target,mod_define)
         local oriincdir = path.join(os.projectdir(), "include")
 
         -- 配置 bds 目录 以便调试
-        local bdsdir = "D:/Dev/LeviLamina-Dev/LLBDS1.21.1"
+        local bdsdir = "E:/Tellurium/BDS"
         local pluginsdir = path.join(bdsdir,"plugins")
         local outputdirbds = path.join(pluginsdir, mod_define.modName)
         local targetfilebds = path.join(outputdirbds,mod_define.modFile)
