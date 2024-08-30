@@ -11,8 +11,6 @@
 
 ll::Logger logger("Tellurium");
 
-void RegTPRCmd();
-
 namespace Tellurium {
 
 void printWelcomeMsg() {
@@ -54,7 +52,6 @@ bool Entry::enable() {
     logger.info("Tellurium Enabled!");
     logger.info("Repository: {0}"_tr("https://github.com/TelluriumDev/Tellurium"));
     TSModule::initModules();
-    RegTPRCmd();
     return true;
 }
 
