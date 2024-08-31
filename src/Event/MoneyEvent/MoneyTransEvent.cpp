@@ -3,7 +3,8 @@
 #include <ll/api/service/Bedrock.h>
 
 #include <mc/world/level/Level.h>
-namespace TEvent::inline MoneyEvent {
+
+namespace TLEvent::inline MoneyEvent {
 Player* MoneyTransEvent::tryGetPlayer() { return ll::service::getLevel()->getPlayer(mPlayerUUID); }
 
 Player* MoneyTransEvent::tryGetTarget() { return ll::service::getLevel()->getPlayer(mTargetPlayerUUID); }

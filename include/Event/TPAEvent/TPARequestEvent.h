@@ -8,7 +8,7 @@
 
 
 namespace TLEvent::inline TPAEvent {
-class TPARequesTLEvent final : public ll::event::Cancellable<ll::event::Event> {
+class TPARequestEvent final : public ll::event::Cancellable<ll::event::Event> {
 private:
     // 请求发送者
     Player* mSender;
@@ -16,7 +16,7 @@ private:
     Player* mTarget;
 
 public:
-    constexpr explicit TPARequesTLEvent(Player* sender, Player* target)
+    constexpr explicit TPARequestEvent(Player* sender, Player* target)
     : Cancellable(),
       mSender(sender),
       mTarget(target) {}

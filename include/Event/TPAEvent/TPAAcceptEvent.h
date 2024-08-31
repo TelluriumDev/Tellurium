@@ -5,13 +5,13 @@
 #include <mc/world/actor/player/Player.h>
 
 namespace TLEvent::inline TPAEvent {
-class TPAAccepTLEvent final : public ll::event::Cancellable<ll::event::Event> {
+class TPAAcceptEvent final : public ll::event::Cancellable<ll::event::Event> {
 private:
     Player* mSender;
     Player* mTarget;
 
 public:
-    constexpr explicit TPAAccepTLEvent(Player* sender, Player* target)
+    constexpr explicit TPAAcceptEvent(Player* sender, Player* target)
     : Cancellable(),
       mSender(sender),
       mTarget(target){};

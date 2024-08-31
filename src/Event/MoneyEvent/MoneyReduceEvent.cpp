@@ -4,7 +4,7 @@
 
 #include <ll/api/service/Bedrock.h>
 
-namespace TEvent::inline MoneyEvent {
+namespace TLEvent::inline MoneyEvent {
 Player* MoneyReduceEvent::tryGetPlayer() { return ll::service::getLevel()->getPlayer(mPlayerUUID); }
 
 mce::UUID& MoneyReduceEvent::getPlayerUUID() { return mPlayerUUID; }

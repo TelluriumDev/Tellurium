@@ -1,6 +1,6 @@
 #include "Event/TPAEvent/TPAAcceptEvent.h"
 
-namespace TEvent::inline TPAEvent {
+namespace TLEvent::inline TPAEvent {
 
 Player& TPAAcceptEvent::getSender() { return *mSender; }
 

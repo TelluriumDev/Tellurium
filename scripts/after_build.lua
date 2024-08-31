@@ -103,7 +103,9 @@ function pack_mod(target,mod_define)
         local oriincdir = path.join(os.projectdir(), "include")
 
         -- 配置 bds 目录 以便调试
+        --#gitignoreline_start
         local bdsdir = "E:/Tellurium/BDS"
+        --#gitignoreline_end
         local pluginsdir = path.join(bdsdir,"plugins")
         local outputdirbds = path.join(pluginsdir, mod_define.modName)
         local targetfilebds = path.join(outputdirbds,mod_define.modFile)

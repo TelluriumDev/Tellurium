@@ -36,7 +36,7 @@ Money::Money(std::string& scoreName) : mScoreName(scoreName) {
 Money::Money() {}
 
 bool Money::setMoney(Player& player, int money, std::string& note, ::MoneySetOptions option) {
-    auto event = TEvent::MoneySetEvent(&player, money, note, option);
+    auto event = TLEvent::MoneySetEvent(&player, money, note, option);
     ll::event::EventBus::getInstance().publish(event);
     if (event.isCancelled() && option != sync) {
         return false;
