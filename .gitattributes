@@ -125,4 +125,4 @@
 
 ## Project specific
 
-scripts/after_build.lua filter=gitignore
+scripts/after_build.lua merge=ours
