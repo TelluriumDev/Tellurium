@@ -39,6 +39,5 @@ void initConfig(ll::mod::NativeMod& self) {
 
 const std::filesystem::path& getConfigDir() { return ConfigDir; };
 const std::filesystem::path& getDataDir() { return DataDir; };
-
 const std::filesystem::path getConfigPath() { return ConfigDir / "config.json"; };
 } // namespace TLConfig

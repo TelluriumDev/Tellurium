@@ -57,26 +57,27 @@ bool Money::setMoney(mce::UUID& playerUUID, int money, std::string& note, ::Mone
 }
 
 
-ScoreboardId* Money::getOrCreatePlayerScoreId(Player& player) {
+const ScoreboardId* Money::getOrCreatePlayerScoreId(Player& player) {
     // ll::service::getLevel()->getLevelStorage().getCompoundTag()
     if (mScoreboard->mObjectives.find(mScoreName) == mScoreboard->mObjectives.end()) {
         logger.warn("Scoreboard objective {0} not found, will create"_tr(mScoreName));
         mObjective = mScoreboard->addObjective(mScoreName, mScoreName, *mScoreboard->getCriteria("dummy"));
     }
-    ScoreboardId& id = (ScoreboardId&)mScoreboard->getScoreboardId(player);
-    if (!id.isValid()) {
-        id = mScoreboard->createScoreboardId(player);
-    } else if (!id.isValid()) { // 非有效使用命令创建
+    const ScoreboardId* id = &mScoreboard->getScoreboardId(player);
+    if (!id->isValid()) {
+        id = &mScoreboard->createScoreboardId(player);
+    } else if (!id->isValid()) { // 非有效使用命令创建
         logger.debug("Player {0} ScoreboardId create failed, will use command to create", player.getName());
         // runcmdEx
-        id = mScoreboard->getScoreboardId(player);
-        if (!id.isValid()) {
+        id = &mScoreboard->getScoreboardId(player);
+        if (!id->isValid()) {
             logger.error("Player {0} ScoreboardId create failed!!!", player.getName());
             return nullptr;
         }
     }
-    return &id;
+    return id;
 }
+
 bool Money::setPlayerScore(Player& player, int money) {
     bool success;
     auto id = getOrCreatePlayerScoreId(player);

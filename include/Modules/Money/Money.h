@@ -49,7 +49,7 @@ public:
 
 private:
     // !: only Scoreboard can use this function
-    ScoreboardId* getOrCreatePlayerScoreId(Player& player);
+    const ScoreboardId* getOrCreatePlayerScoreId(Player& player);
     // !: only Scoreboard can use this function(MCFunction)
     bool setPlayerScore(Player& player, int money);
 

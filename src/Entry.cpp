@@ -29,7 +29,7 @@ void printWelcomeMsg() {
     logger.info("Tellurium is a free mod under GPL Version 3 License.");
     logger.info("Help us improve Tellurium! -> https://github.com/TelluriumDev/Tellurium");
     logger.info("Copyright (C) 2024 TelluriumDev");
-    ll::makeStringError("Tellurium");
+    // ll::makeStringError("Tellurium");
 }
 
 static std::unique_ptr<Entry> instance;

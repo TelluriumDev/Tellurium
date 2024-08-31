@@ -1,6 +1,5 @@
 #include "Utils/SQLite/SQLite.h"
 #include "Global.h"
-#include "Utils/I18n/I18n.h"
 
 SQLite::SQLite(std::string const& db_name_) : db_name(db_name_) {}
 
