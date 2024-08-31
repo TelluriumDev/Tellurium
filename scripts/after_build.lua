@@ -104,7 +104,7 @@ function pack_mod(target,mod_define)
 
         -- 配置 bds 目录 以便调试
         --#gitignoreline_start
-        local bdsdir = ""
+        local bdsdir = "hhhh"
         --#gitignoreline_end
         local pluginsdir = path.join(bdsdir,"plugins")
         local outputdirbds = path.join(pluginsdir, mod_define.modName)
