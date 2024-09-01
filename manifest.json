@@ -6,9 +6,6 @@
     "optionalDependencies": [
         {
             "name": "LegacyMoney"
-        },
-        {
-            "name": "Tellurium-loc"
         }
     ]
 }

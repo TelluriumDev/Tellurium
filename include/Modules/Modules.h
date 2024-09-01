@@ -6,7 +6,7 @@
 #include "Modules/TPR/TPR.h"
 
 
-namespace TSModule {
+namespace TLModule {
 
 enum ModuleType : int { ModuleTPA = 0, ModuleMoney, ModuleBack, ModuleTPR };
 
@@ -31,4 +31,4 @@ public:
 void initModules();
 
 Modules* getModulesInstance();
-} // namespace TSModule
+} // namespace TLModule

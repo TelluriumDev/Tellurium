@@ -7,7 +7,7 @@
 
 #include <string>
 
-namespace TEvent::inline MoneyEvent {
+namespace TLEvent::inline MoneyEvent {
 
 class MoneyTransEvent final : public ll::event::Cancellable<ll::event::Event> {
 

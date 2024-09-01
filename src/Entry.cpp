@@ -5,12 +5,15 @@
 #include "Utils/BigSelectForm/BigSelectForm.h"
 #include "Utils/I18n/I18n.h"
 #include "Versions.h"
-
+#include "Utils/PlayerData/PlayerData.h"
 #include <ll/api/Versions.h>
 #include <ll/api/mod/RegisterHelper.h>
+#include <ll/api/Expected.h>
 #include <memory>
 
 ll::Logger logger("Tellurium");
+
+// void RegTPRCmd();
 
 namespace Tellurium {
 
@@ -27,6 +30,7 @@ void printWelcomeMsg() {
     logger.info("Tellurium is a free mod under GPL Version 3 License.");
     logger.info("Help us improve Tellurium! -> https://github.com/TelluriumDev/Tellurium");
     logger.info("Copyright (C) 2024 TelluriumDev");
+    // ll::makeStringError("Tellurium");
 }
 
 static std::unique_ptr<Entry> instance;
@@ -34,9 +38,9 @@ static std::unique_ptr<Entry> instance;
 Entry& Entry::getInstance() { return *instance; }
 
 bool Entry::load() {
-    logger.consoleLevel = 5;
     TSConfig::initConfig(getSelf());
     I18n::initI18n(getSelf());
+    TLUtils::PlayerData::initPlayerData();
     printWelcomeMsg();
     if (TARGET_BDS_PROTOCOL_VERSION != ll::getNetworkProtocolVersion()) {
         logger.warn("You are running on an unsupport protocol version! This may result in crash!"_tr());
@@ -53,7 +57,8 @@ bool Entry::load() {
 bool Entry::enable() {
     logger.info("Tellurium Enabled!");
     logger.info("Repository: {0}"_tr("https://github.com/TelluriumDev/Tellurium"));
-    TSModule::initModules();
+    TLModule::initModules();
+    // RegTPRCmd();
     return true;
 }
 

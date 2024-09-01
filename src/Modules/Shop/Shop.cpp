@@ -6,7 +6,7 @@
 
 using namespace std::filesystem;
 
-namespace TSModules {
+namespace TLModules {
 // 文件位置/对象
 Shop::~Shop() {
     logger.debug("ShopClass 析构...");
@@ -29,4 +29,4 @@ Shop::Shop() { logger.debug("ShopClass 构造..."); }
 
     return nullptr;
 }
-} // namespace TSModules
+} // namespace TLModules

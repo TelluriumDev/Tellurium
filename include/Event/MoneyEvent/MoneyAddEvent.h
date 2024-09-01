@@ -5,7 +5,7 @@
 
 #include <mc/world/actor/player/Player.h>
 
-namespace TEvent::inline MoneyEvent {
+namespace TLEvent::inline MoneyEvent {
 
 class MoneyAddEvent final : public ll::event::Cancellable<ll::event::Event> {
 
@@ -31,4 +31,4 @@ public:
     int                getMoney();
     const std::string& getNote();
 };
-} // namespace TEvent::inline MoneyEvent
+} // namespace TLEvent::inline MoneyEvent

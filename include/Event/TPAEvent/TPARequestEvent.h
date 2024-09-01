@@ -7,7 +7,7 @@
 #include <mc/world/actor/player/Player.h>
 
 
-namespace TEvent::inline TPAEvent {
+namespace TLEvent::inline TPAEvent {
 class TPARequestEvent final : public ll::event::Cancellable<ll::event::Event> {
 private:
     // 请求发送者
@@ -26,4 +26,4 @@ public:
     // 获取接收者
     Player& getTarget();
 };
-} // namespace TEvent::inline TPAEvent
+} // namespace TLEvent::inline TPAEvent

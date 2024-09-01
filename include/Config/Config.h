@@ -6,7 +6,7 @@
 #include <string>
 #include <unordered_map>
 
-namespace TSConfig {
+namespace TLConfig {
 enum BanExplosionMode {
     None,           // 无视
     NoDestoryBlock, // 禁止破坏方块
@@ -182,7 +182,7 @@ const std::filesystem::path& getDataDir();
 
 const std::filesystem::path getConfigPath();
 
-} // namespace TSConfig
+} // namespace TLConfig
 
 // 全局配置文件
-extern TSConfig::Config config;
+extern TLConfig::Config config;

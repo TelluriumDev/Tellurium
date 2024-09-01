@@ -13,7 +13,7 @@ enum MoneySetOptions : int {
     init, // 玩家初始化经济
     pay   // 玩家交易
 };
-namespace TSModule {
+namespace TLModule {
 class Money {
 public:
     Money(std::string& scoreName);
@@ -64,4 +64,4 @@ private:
     // !: only Scoreboard can use this function
     int getPlayerScore(const mce::UUID& playerUUID);
 };
-} // namespace TSModule
+} // namespace TLModule

@@ -8,7 +8,7 @@
 #include "Modules/Money/Money.h"
 
 
-namespace TEvent::inline MoneyEvent {
+namespace TLEvent::inline MoneyEvent {
 
 class MoneySetEvent final : public ll::event::Cancellable<ll::event::Event> {
 

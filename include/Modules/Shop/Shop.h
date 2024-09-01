@@ -30,7 +30,7 @@ struct ShopGroup : ShopData {
     std::vector<std::pair<std::string, std::string>> shopData;
 };
 
-namespace TSModules {
+namespace TLModules {
 
 class Shop {
 public:
@@ -42,4 +42,4 @@ public:
 private:
     std::unordered_map<std::string, ::ShopData*> ShopCache;
 };
-} // namespace TSModules
+} // namespace TLModules

@@ -1,7 +1,7 @@
 #include "Event/TPAEvent/TPARequestEvent.h"
 #include <mc/world/actor/player/Player.h>
 
-namespace TEvent::inline TPAEvent {
+namespace TLEvent::inline TPAEvent {
 
 Player& TPARequestEvent::getSender() { return *mSender; };
 

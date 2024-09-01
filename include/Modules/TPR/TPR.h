@@ -6,7 +6,7 @@
 #include <mc/world/level/dimension/Dimension.h>
 
 
-namespace TSModule {
+namespace TLModule {
 class TPR {
 
 
@@ -21,4 +21,4 @@ private:
 public:
  bool TPRPlayer(Player& player, bool &res);
 };
-} // namespace TSModule
+} // namespace TLModule

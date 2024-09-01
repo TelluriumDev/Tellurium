@@ -20,7 +20,7 @@
 //         }
 //         auto* player = static_cast<Player*>(entity);
 //         bool  a;
-//         TSModule::getModulesInstance()->mTPR->TPRPlayer(*player, a);
+//         TLModule::getModulesInstance()->mTPR->TPRPlayer(*player, a);
 //         player->sendMessage("test command");
 //     });
 // }

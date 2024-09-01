@@ -31,7 +31,7 @@ std::string UUID2XUID(const mce::UUID& uuid) {
     auto info = ll::service::PlayerInfo::getInstance().fromUuid(uuid);
     return info->xuid;
 }
-namespace TSModule {
+namespace TLModule {
 
 Money::Money(std::string& scoreName) : mScoreName(scoreName) {
     if (scoreName.empty()) return;
@@ -44,7 +44,7 @@ Money::Money(std::string& scoreName) : mScoreName(scoreName) {
     }
     logger.debug("Money module loaded!");
     // auto _this = this;
-};
+}
 
 Money::Money() { logger.debug("Money module loaded2!"); }
 
@@ -65,7 +65,7 @@ long long Money::getMoney(const mce::UUID& playerUUID) {
 }
 
 bool Money::setMoney(Player& player, int money, const std::string& note, ::MoneySetOptions option) {
-    auto event = TEvent::MoneySetEvent(&player, money, *const_cast<std::string*>(&note), option);
+    auto event = TLEvent::MoneySetEvent(&player, money, *const_cast<std::string*>(&note), option);
     ll::event::EventBus::getInstance().publish(event);
     if (event.isCancelled() && option != sync) {
         return false;
@@ -83,7 +83,7 @@ bool Money::setMoney(const mce::UUID& playerUUID, int money, const std::string& 
     if (pl != nullptr) {
         return setMoney(*pl, money, note, option);
     }
-    auto event = TEvent::MoneySetEvent(playerUUID, money, note, option);
+    auto event = TLEvent::MoneySetEvent(playerUUID, money, note, option);
     ll::event::EventBus::getInstance().publish(event);
     if (event.isCancelled() && option != sync) {
         return false;
@@ -95,7 +95,7 @@ bool Money::setMoney(const mce::UUID& playerUUID, int money, const std::string& 
 }
 
 bool Money::addMoney(Player& player, int money, const std::string& note) {
-    auto event = TEvent::MoneyAddEvent(&player, money, *const_cast<std::string*>(&note));
+    auto event = TLEvent::MoneyAddEvent(&player, money, *const_cast<std::string*>(&note));
     ll::event::EventBus::getInstance().publish(event);
     if (event.isCancelled()) {
         return false;
@@ -110,7 +110,7 @@ bool Money::addMoney(const mce::UUID& playerUUID, int money, const std::string& 
     if (pl != nullptr) {
         return addMoney(*pl, money, note);
     }
-    auto event = TEvent::MoneyAddEvent(playerUUID, money, note);
+    auto event = TLEvent::MoneyAddEvent(playerUUID, money, note);
     ll::event::EventBus::getInstance().publish(event);
     if (event.isCancelled()) {
         return false;
@@ -119,7 +119,7 @@ bool Money::addMoney(const mce::UUID& playerUUID, int money, const std::string& 
 }
 
 bool Money::reduceMoney(Player& player, int money, const std::string& note) {
-    auto event = TEvent::MoneyReduceEvent(&player, money, note);
+    auto event = TLEvent::MoneyReduceEvent(&player, money, note);
     ll::event::EventBus::getInstance().publish(event);
     if (event.isCancelled()) {
         return false;
@@ -134,7 +134,7 @@ bool Money::reduceMoney(const mce::UUID& playerUUID, int money, const std::strin
     if (pl != nullptr) {
         return reduceMoney(*pl, money, note);
     }
-    auto event = TEvent::MoneyReduceEvent(playerUUID, money, note);
+    auto event = TLEvent::MoneyReduceEvent(playerUUID, money, note);
     ll::event::EventBus::getInstance().publish(event);
     if (event.isCancelled()) {
         return false;
@@ -143,7 +143,7 @@ bool Money::reduceMoney(const mce::UUID& playerUUID, int money, const std::strin
 }
 
 bool Money::transMoney(Player& player, Player& target, int money, const std::string& note) {
-    auto event = TEvent::MoneyTransEvent(&player, &target, money, note);
+    auto event = TLEvent::MoneyTransEvent(&player, &target, money, note);
     ll::event::EventBus::getInstance().publish(event);
     if (event.isCancelled()) {
         return false;
@@ -168,7 +168,7 @@ bool Money::transMoney(const mce::UUID& playerUUID, const mce::UUID& targetUUID,
     if (pl != nullptr && target != nullptr) {
         return transMoney(*pl, *target, money, note);
     }
-    auto event = TEvent::MoneyTransEvent(playerUUID, targetUUID, money, note);
+    auto event = TLEvent::MoneyTransEvent(playerUUID, targetUUID, money, note);
     ll::event::EventBus::getInstance().publish(event);
     if (event.isCancelled()) {
         return false;
@@ -188,7 +188,7 @@ bool Money::transMoney(const mce::UUID& playerUUID, const mce::UUID& targetUUID,
     return true;
 }
 const ScoreboardId* Money::getOrCreatePlayerScoreId(Player& player) {
-    // 防止傻逼野指针
+    // ll::service::getLevel()->getLevelStorage().getCompoundTag()
     if (mScoreboard->mObjectives.find(mScoreName) == mScoreboard->mObjectives.end()) {
         logger.warn("Scoreboard objective {0} not found, will create"_tr(mScoreName));
         mObjective = mScoreboard->addObjective(mScoreName, mScoreName, *mScoreboard->getCriteria("dummy"));
@@ -209,14 +209,10 @@ const ScoreboardId* Money::getOrCreatePlayerScoreId(Player& player) {
             )
         );
         ll::service::getMinecraft()->getCommands().executeCommand(cmdContext, false);
-        id = &mScoreboard->getScoreboardId(player);
-        if (!id->isValid()) {
-            logger.error("Player {0} ScoreboardId create failed!!!", player.getName());
-            return nullptr;
-        }
     }
     return id;
 }
+
 bool Money::setPlayerScore(Player& player, int money) {
     bool success;
     auto id = getOrCreatePlayerScoreId(player);
@@ -251,4 +247,4 @@ bool Money::checkMoney(const mce::UUID& player, int money) { return getMoney(pla
 
 double Money::getPayTax() { return 0.00; } // TODO
 
-}; // namespace TSModule
+}; // namespace TLModule
