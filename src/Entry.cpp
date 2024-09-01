@@ -38,7 +38,7 @@ static std::unique_ptr<Entry> instance;
 Entry& Entry::getInstance() { return *instance; }
 
 bool Entry::load() {
-    TSConfig::initConfig(getSelf());
+    TLConfig::initConfig(getSelf());
     I18n::initI18n(getSelf());
     TLUtils::PlayerData::initPlayerData();
     printWelcomeMsg();
