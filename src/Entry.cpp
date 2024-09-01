@@ -2,6 +2,7 @@
 #include "Config/Config.h"
 #include "Global.h"
 #include "Modules/Modules.h"
+#include "Utils/BigSelectForm/BigSelectForm.h"
 #include "Utils/I18n/I18n.h"
 #include "Versions.h"
 
@@ -33,6 +34,7 @@ static std::unique_ptr<Entry> instance;
 Entry& Entry::getInstance() { return *instance; }
 
 bool Entry::load() {
+    logger.consoleLevel = 5;
     TSConfig::initConfig(getSelf());
     I18n::initI18n(getSelf());
     printWelcomeMsg();
@@ -57,7 +59,7 @@ bool Entry::enable() {
 
 bool Entry::disable() { return true; }
 
-bool Entry::unload() { return true; }
+bool Entry::unload() { return true; } 
 
 } // namespace Tellurium
 

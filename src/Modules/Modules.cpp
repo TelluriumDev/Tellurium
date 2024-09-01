@@ -30,8 +30,11 @@ Modules* getModulesInstance() {
 }
 Modules::Modules() {
     // mTPA   = new TPA();
-    mTPR   = new TPR();
-    // mMoney = new Money();
+    // mTPR   = new TPR();
+    logger.debug("Loading Money Module...");
+    std::string scoreName = "money";
+
+    mMoney = new Money(scoreName);
     // mBack  = new Back();
     // TODO: 其他模块
 }

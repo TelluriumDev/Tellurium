@@ -77,7 +77,7 @@ struct Config {
             std::string MoneyName = "金币";
             // 是否显示余额变动信息
             bool MoneyChangeMsg = true;
-            // 玩家转账时的手续费，为直接乘算
+            // 玩家转账时的手续费，为直接乘算100*0.1
             double PayTaxRate = 0.1;
             // 最大保存的交易历史记录条数
             uint HistoryLength = 10;

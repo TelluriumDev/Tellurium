@@ -7,9 +7,9 @@
 namespace TEvent::inline MoneyEvent {
 Player* MoneyReduceEvent::tryGetPlayer() { return ll::service::getLevel()->getPlayer(mPlayerUUID); }
 
-mce::UUID& MoneyReduceEvent::getPlayerUUID() { return mPlayerUUID; }
+const mce::UUID& MoneyReduceEvent::getPlayerUUID() { return mPlayerUUID; }
 
 int MoneyReduceEvent::getMoney() { return mMoney; }
 
-std::string& MoneyReduceEvent::getNote() { return mNote; }
+const std::string& MoneyReduceEvent::getNote() { return mNote; }
 } // namespace TEvent::inline MoneyEvent

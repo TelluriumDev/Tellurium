@@ -13,20 +13,25 @@ namespace TEvent::inline MoneyEvent {
 class MoneyReduceEvent final : public ll::event::Cancellable<ll::event::Event> {
 
 private:
-    mce::UUID   mPlayerUUID;
-    int         mMoney;
-    std::string mNote;
+    const mce::UUID   mPlayerUUID;
+    int               mMoney;
+    const std::string mNote;
 
 public:
-    MoneyReduceEvent(Player* player, int money, std::string& note)
+    MoneyReduceEvent(Player* player, int money, const std::string& note)
     : Cancellable(),
       mPlayerUUID(player->getUuid()),
       mMoney(money),
       mNote(note) {}
+    MoneyReduceEvent(const mce::UUID playerUUID, int money, const std::string& note)
+    : Cancellable(),
+      mPlayerUUID(playerUUID),
+      mMoney(money),
+      mNote(note) {}
 
-    Player*      tryGetPlayer();
-    mce::UUID&   getPlayerUUID();
-    int          getMoney();
-    std::string& getNote();
+    Player*            tryGetPlayer();
+    const mce::UUID&   getPlayerUUID();
+    int                getMoney();
+    const std::string& getNote();
 };
 } // namespace TEvent::inline MoneyEvent

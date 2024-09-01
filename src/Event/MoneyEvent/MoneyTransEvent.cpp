@@ -8,11 +8,11 @@ Player* MoneyTransEvent::tryGetPlayer() { return ll::service::getLevel()->getPla
 
 Player* MoneyTransEvent::tryGetTarget() { return ll::service::getLevel()->getPlayer(mTargetPlayerUUID); }
 
-mce::UUID& MoneyTransEvent::getPlayerUUID() { return mPlayerUUID; }
+const mce::UUID& MoneyTransEvent::getPlayerUUID() { return mPlayerUUID; }
 
-mce::UUID& MoneyTransEvent::getTargetUUID() { return mTargetPlayerUUID; }
+const mce::UUID& MoneyTransEvent::getTargetUUID() { return mTargetPlayerUUID; }
 
 int MoneyTransEvent::getMoney() { return mMoney; }
 
-std::string& MoneyTransEvent::getNote() { return mNote; }
+const std::string& MoneyTransEvent::getNote() { return mNote; }
 } // namespace TEvent::inline MoneyEvent

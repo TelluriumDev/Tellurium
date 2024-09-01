@@ -7,11 +7,11 @@
 namespace TEvent::inline MoneyEvent {
 Player* MoneySetEvent::tryGetPlayer() { return ll::service::getLevel()->getPlayer(mPlayerUUID); }
 
-mce::UUID& MoneySetEvent::getPlayerUUID() { return mPlayerUUID; }
+const mce::UUID& MoneySetEvent::getPlayerUUID() { return mPlayerUUID; }
 
 int MoneySetEvent::getMoney() { return mMoney; }
 
-std::string& MoneySetEvent::getNote() { return mNote; }
+const std::string& MoneySetEvent::getNote() { return mNote; }
 
 MoneySetOptions MoneySetEvent::getOption() { return mOption; }
 } // namespace TEvent::inline MoneyEvent
