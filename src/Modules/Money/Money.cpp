@@ -208,7 +208,7 @@ const ScoreboardId* Money::getOrCreatePlayerScoreId(Player& player) {
                 0
             )
         );
-        ll::service::getMinecraft()->getCommands().executeCommand(cmdContext, false);
+        ll::service::getMinecraft()->getCommands().executeCommand(cmdContext, true);
     }
     return id;
 }
