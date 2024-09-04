@@ -1,7 +1,8 @@
 #pragma once
+
+
 #include <string>
 #include <vector>
-
 #include <unordered_map>
 
 enum ShopType { item, group };
@@ -30,7 +31,7 @@ struct ShopGroup : ShopData {
     std::vector<std::pair<std::string, std::string>> shopData;
 };
 
-namespace TLModules {
+namespace TLModule {
 
 class Shop {
 public:

@@ -1,14 +1,16 @@
 #include "Utils/I18n/I18n.h"
 #include "Config/Config.h"
 
+
+#include "ll/api/service/Bedrock.h"
+
+#include "mc/certificates/WebToken.h"
+#include "mc/network/ConnectionRequest.h"
+#include "mc/network/ServerNetworkHandler.h"
+#include "mc/world/actor/player/Player.h"
+
 #include <filesystem>
 
-#include <mc/certificates/WebToken.h>
-#include <mc/network/ConnectionRequest.h>
-#include <mc/network/ServerNetworkHandler.h>
-#include <mc/world/actor/player/Player.h>
-
-#include <ll/api/service/Bedrock.h>
 
 namespace Tellurium::I18n {
 

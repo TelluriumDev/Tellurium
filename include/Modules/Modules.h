@@ -3,7 +3,6 @@
 #include "Modules/Back/Back.h"
 #include "Modules/Money/Money.h"
 #include "Modules/TPA/TPA.h"
-#include "Modules/TPR/TPR.h"
 
 
 namespace TLModule {
@@ -19,7 +18,6 @@ public:
     TPA*   mTPA   = nullptr;
     Money* mMoney = nullptr;
     Back*  mBack  = nullptr;
-    TPR*   mTPR   = nullptr;
 
     // 构造函数内进行初始化所有模块
     Modules();

@@ -6,7 +6,6 @@
 #include <vector>
 
 
-
 using ResultMap = std::vector<std::map<std::string, std::string>>;
 
 struct SQLite {

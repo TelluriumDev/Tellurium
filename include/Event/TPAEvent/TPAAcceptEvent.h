@@ -1,8 +1,8 @@
 #pragma once
 
-#include <ll/api/event/Cancellable.h>
-#include <ll/api/event/Event.h>
-#include <mc/world/actor/player/Player.h>
+#include "ll/api/event/Cancellable.h"
+#include "ll/api/event/Event.h"
+#include "mc/world/actor/player/Player.h"
 
 namespace TLEvent::inline TPAEvent {
 class TPAAcceptEvent final : public ll::event::Cancellable<ll::event::Event> {
@@ -16,7 +16,7 @@ public:
       mSender(sender),
       mTarget(target){};
 
-    Player& getSender();
-    Player& getTarget();
+    Player* getSender();
+    Player* getTarget();
 };
 } // namespace TLEvent::inline TPAEvent

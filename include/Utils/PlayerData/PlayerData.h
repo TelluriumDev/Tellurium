@@ -2,8 +2,8 @@
 
 #include "Utils/Data/JsonHandler.h"
 
-namespace TLUtils::PlayerData {
+namespace TLUtil::PlayerData {
 void initPlayerData();
 
 JsonHandler& getInstance();
-} // namespace TLUtils::PlayerData
+} // namespace TLUtil::PlayerData

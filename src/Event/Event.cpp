@@ -1,8 +1,8 @@
 #include "Event/Event.h"
 #include "Utils/PlayerData/PlayerData.h"
 
-#include <ll/api/event/EventBus.h>
-#include <ll/api/event/player/PlayerJoinEvent.h>
+#include "ll/api/event/EventBus.h"
+#include "ll/api/event/player/PlayerJoinEvent.h"
 
 namespace ll::event::inline TLEvent {
 
@@ -14,4 +14,4 @@ void RegListener() {
 
     });
 }
-}
+} // namespace ll::event::inline TLEvent

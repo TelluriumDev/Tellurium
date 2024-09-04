@@ -2,17 +2,13 @@
 #include "Config/Config.h"
 #include "Global.h"
 #include "Modules/Modules.h"
-#include "Utils/Data/JsonHandler.h"
 #include "Utils/I18n/I18n.h"
 #include "Utils/PlayerData/PlayerData.h"
 #include "Versions.h"
 
-#include <ll/api/Expected.h>
-#include <ll/api/Versions.h>
-#include <ll/api/mod/RegisterHelper.h>
-
-#include <memory>
-#include <vector>
+#include "ll/api/Expected.h"
+#include "ll/api/Versions.h"
+#include "ll/api/mod/RegisterHelper.h"
 
 
 ll::Logger logger("Tellurium");
@@ -44,7 +40,7 @@ Entry& Entry::getInstance() { return *instance; }
 bool Entry::load() {
     TLConfig::initConfig(getSelf());
     I18n::initI18n(getSelf());
-    TLUtils::PlayerData::initPlayerData();
+    TLUtil::PlayerData::initPlayerData();
     printWelcomeMsg();
     if (TARGET_BDS_PROTOCOL_VERSION != ll::getNetworkProtocolVersion()) {
         logger.warn("You are running on an unsupport protocol version! This may result in crash!"_tr());
@@ -63,15 +59,6 @@ bool Entry::enable() {
     logger.info("Tellurium Enabled!");
     logger.info("Repository: {0}"_tr("https://github.com/TelluriumDev/Tellurium"));
     TLModule::initModules();
-    auto &pd = TLUtils::PlayerData::getInstance();
-    pd.set(
-        "cnm",
-        json({
-            {"a", 1},
-            {"b", 2}
-    })
-    );
-    auto d = pd.get<json>("cnm");
     return true;
 }
 

@@ -2,8 +2,8 @@
 
 namespace TLEvent::inline TPAEvent {
 
-Player& TPAAcceptEvent::getSender() { return *mSender; }
+Player* TPAAcceptEvent::getSender() { return mSender; }
 
-Player& TPAAcceptEvent::getTarget() { return *mTarget; }
+Player* TPAAcceptEvent::getTarget() { return mTarget; }
 
 } // namespace TEvent::inline TPAEvent

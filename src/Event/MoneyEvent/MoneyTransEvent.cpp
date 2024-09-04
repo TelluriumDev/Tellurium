@@ -1,19 +1,13 @@
 #include "Event/MoneyEvent/MoneyTransEvent.h"
 
-#include <ll/api/service/Bedrock.h>
-
-#include <mc/world/level/Level.h>
+#include "mc/world/level/Level.h"
 
 namespace TLEvent::inline MoneyEvent {
-Player* MoneyTransEvent::tryGetPlayer() { return ll::service::getLevel()->getPlayer(mPlayerUUID); }
+Player* MoneyTransEvent::getPlayer() { return mPlayer; }
 
-Player* MoneyTransEvent::tryGetTarget() { return ll::service::getLevel()->getPlayer(mTargetPlayerUUID); }
+Player* MoneyTransEvent::getTarget() { return mTarget; }
 
-const mce::UUID& MoneyTransEvent::getPlayerUUID() { return mPlayerUUID; }
-
-const mce::UUID& MoneyTransEvent::getTargetUUID() { return mTargetPlayerUUID; }
-
-int MoneyTransEvent::getMoney() { return mMoney; }
+long long  MoneyTransEvent::getMoney() { return mMoney; }
 
 const std::string& MoneyTransEvent::getNote() { return mNote; }
-} // namespace TEvent::inline MoneyEvent
+} // namespace TLEvent::inline MoneyEvent

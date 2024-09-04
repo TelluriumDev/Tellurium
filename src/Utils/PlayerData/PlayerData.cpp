@@ -5,11 +5,13 @@
 
 #include <memory>
 
-namespace TLUtils::PlayerData {
+namespace TLUtil::PlayerData {
 
 std::shared_ptr<JsonHandler> playerData = nullptr;
 
 void initPlayerData() { playerData = std::make_shared<JsonHandler>(TLConfig::getDataDir() / "playerData.json"); }
 
 JsonHandler& getInstance() { return *playerData.get(); };
-} // namespace TLUtils
+
+std::string getPlayerLang() { return getInstance().get<std::string>("lang"); }
+} // namespace TLUtil::PlayerData

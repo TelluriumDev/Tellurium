@@ -1,9 +1,10 @@
 #include "Config/Config.h"
 #include "Global.h"
-#include "nonstd/expected.hpp"
+
+#include "ll/api/Config.h"
 
 #include <filesystem>
-#include <ll/api/Config.h>
+
 
 TLConfig::Config config;
 
@@ -39,5 +40,5 @@ void initConfig(ll::mod::NativeMod& self) {
 
 const std::filesystem::path& getConfigDir() { return ConfigDir; };
 const std::filesystem::path& getDataDir() { return DataDir; };
-const std::filesystem::path getConfigPath() { return ConfigDir / "config.json"; };
+const std::filesystem::path  getConfigPath() { return ConfigDir / "config.json"; };
 } // namespace TLConfig

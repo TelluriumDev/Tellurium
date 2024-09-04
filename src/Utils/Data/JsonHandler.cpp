@@ -3,7 +3,7 @@
 
 #include <fstream>
 
-namespace TLUtils {
+namespace TLUtil {
 
 JsonHandler::JsonHandler(const std::filesystem::path& path) {
     this->mPath = path;
@@ -29,6 +29,7 @@ void JsonHandler::update() {
     std::ofstream file(mPath);
     if (!file.is_open()) {
         logger.error("Failed to open file: {0}"_tr(mPath.string()));
+        return;
     }
     file << mJson.dump(4); // 4 spaces indentation
     file.close();
@@ -39,12 +40,11 @@ T JsonHandler::get(const std::string& key) {
     return mJson[key].get<T>();
 }
 
-template int JsonHandler::get<int>(const std::string& key);
-template bool JsonHandler::get<bool>(const std::string& key);
+template int         JsonHandler::get<int>(const std::string& key);
+template bool        JsonHandler::get<bool>(const std::string& key);
 template std::string JsonHandler::get<std::string>(const std::string& key);
 template double      JsonHandler::get<double>(const std::string& key);
 template json        JsonHandler::get<json>(const std::string& key);
-template std::vector<int> JsonHandler::get<std::vector<int>>(const std::string& key);
 
 template <typename T>
 void JsonHandler::set(const std::string& key, const T& value) {
@@ -57,12 +57,21 @@ template void JsonHandler::set<bool>(const std::string& key, const bool& value);
 template void JsonHandler::set<std::string>(const std::string& key, const std::string& value);
 template void JsonHandler::set<double>(const std::string& key, const double& value);
 template void JsonHandler::set<json>(const std::string& key, const json& value);
-template void JsonHandler::set<std::vector<int>>(const std::string& key, const std::vector<int>& value);
 
+
+void JsonHandler::del(const std::string& key) {
+    mJson.erase(key);
+    update();
+}
 
 void JsonHandler::reload() {
     std::ifstream file(mPath);
-    update();
+    if (!file.is_open()) {
+        logger.error("Failed to open file: {0}"_tr(mPath.string()));
+        return;
+    }
+    file >> mJson;
+    file.close();
 }
 
 void JsonHandler::clear() {
@@ -75,4 +84,9 @@ void JsonHandler::write(json& j) {
     update();
 }
 
-} // namespace TLUtils
+json::iterator JsonHandler::begin() { return mJson.begin(); }
+
+json::iterator JsonHandler::end() { return mJson.end(); }
+
+
+} // namespace TLUtil

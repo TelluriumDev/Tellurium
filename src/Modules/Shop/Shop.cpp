@@ -6,7 +6,7 @@
 
 using namespace std::filesystem;
 
-namespace TLModules {
+namespace TLModule {
 // 文件位置/对象
 Shop::~Shop() {
     logger.debug("ShopClass 析构...");
@@ -20,13 +20,13 @@ Shop::Shop() { logger.debug("ShopClass 构造..."); }
     if (ShopCache[shopName] != nullptr) {
         return ShopCache[shopName];
     }
-    //TODO 未完工 
-    // ::ShopData* data = nullptr;
-    // auto filePath = Tellurium::Entry::getInstance().getSelf().getDataDir() / "shop" / shopName;
-    // if (!exists(filePath)) {
+    // TODO 未完工
+    //  ::ShopData* data = nullptr;
+    //  auto filePath = Tellurium::Entry::getInstance().getSelf().getDataDir() / "shop" / shopName;
+    //  if (!exists(filePath)) {
 
     // }
 
     return nullptr;
 }
-} // namespace TLModules
+} // namespace TLModule

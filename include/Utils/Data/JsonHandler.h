@@ -1,14 +1,15 @@
 #pragma once
 
-#include <filesystem>
 
 #include <nlohmann/json.hpp>
 
+#include <filesystem>
 #include <string>
+
 
 using json = nlohmann::json;
 
-namespace TLUtils {
+namespace TLUtil {
 
 class JsonHandler {
 public:
@@ -22,16 +23,15 @@ private:
     void update();
 
 public:
-    
     template <typename T>
     T get(const std::string& key);
-
     template <typename T>
     void set(const std::string& key, const T& value);
-
-    
+    void del(const std::string& key);
     void reload();
     void clear();
     void write(json& json);
+    json::iterator begin();
+    json::iterator end();
 };
-} // namespace TLUtils
+} // namespace TLUtil

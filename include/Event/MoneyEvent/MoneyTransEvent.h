@@ -1,9 +1,9 @@
 #pragma once
 
-#include <ll/api/event/Cancellable.h>
-#include <ll/api/event/Event.h>
+#include "ll/api/event/Cancellable.h"
+#include "ll/api/event/Event.h"
 
-#include <mc/world/actor/player/Player.h>
+#include "mc/world/actor/player/Player.h"
 
 #include <string>
 
@@ -12,30 +12,22 @@ namespace TLEvent::inline MoneyEvent {
 class MoneyTransEvent final : public ll::event::Cancellable<ll::event::Event> {
 
 private:
-    const mce::UUID   mPlayerUUID;
-    const mce::UUID   mTargetPlayerUUID;
-    int               mMoney;
+    Player*           mPlayer;
+    Player*           mTarget;
+    long long         mMoney;
     const std::string mNote;
 
 public:
-    MoneyTransEvent(Player* player, Player* target, int money, const std::string& note)
+    MoneyTransEvent(Player* player, Player* target, long long money, const std::string& note)
     : Cancellable(),
-      mPlayerUUID(player->getUuid()),
-      mTargetPlayerUUID(target->getUuid()),
-      mMoney(money),
-      mNote(note) {}
-    MoneyTransEvent(const mce::UUID& playerUUID, const mce::UUID& target, int money, const std::string& note)
-    : Cancellable(),
-      mPlayerUUID(playerUUID),
-      mTargetPlayerUUID(target),
+      mPlayer(player),
+      mTarget(target),
       mMoney(money),
       mNote(note) {}
 
-    Player*            tryGetPlayer();
-    Player*            tryGetTarget();
-    const mce::UUID&   getPlayerUUID();
-    const mce::UUID&   getTargetUUID();
-    int                getMoney();
+    Player*            getPlayer();
+    Player*            getTarget();
+    long long          getMoney();
     const std::string& getNote();
 };
-} // namespace TEvent::inline MoneyEvent
+} // namespace TLEvent::inline MoneyEvent

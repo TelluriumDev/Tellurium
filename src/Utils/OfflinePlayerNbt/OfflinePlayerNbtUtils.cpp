@@ -1,13 +1,13 @@
 #include "Utils/OfflinePlayerNbt/OfflinePlayerNbtUtils.h"
 #include "Global.h"
 
-#include <mc/common/DBHelpers.h>
-#include <mc/nbt/CompoundTag.h>
-#include <mc/nbt/StringTag.h>
-#include <mc/world/level/Level.h>
-#include <mc/world/level/storage/DBStorage.h>
+#include "ll/api/service/Bedrock.h"
 
-#include <ll/api/service/Bedrock.h>
+#include "mc/common/DBHelpers.h"
+#include "mc/nbt/CompoundTag.h"
+#include "mc/nbt/StringTag.h"
+#include "mc/world/level/Level.h"
+#include "mc/world/level/storage/DBStorage.h"
 
 #include <string>
 

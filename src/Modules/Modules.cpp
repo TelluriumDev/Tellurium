@@ -41,7 +41,6 @@ Modules::Modules() {
 
 Modules::~Modules() {
     delete mTPA;
-    delete mTPR;
     delete mMoney;
     delete mBack;
     // TODO: 其他模块
@@ -51,7 +50,6 @@ Modules::~Modules() {
 
     // 防止悬空指针 别问 问就是 CodeGeeX
     mTPA   = nullptr;
-    mTPR   = nullptr;
     mMoney = nullptr;
     mBack  = nullptr;
     // modules = nullptr;
@@ -85,8 +83,8 @@ bool Modules::destroy(ModuleType& type) {
     }
     case ModuleType::ModuleTPR: {
         try {
-            delete mTPR;
-            mTPR = nullptr;
+            // delete mTPR;
+            // mTPR = nullptr;
             return true;
         } catch (...) {
             logger.error("Cannot destroy TPR module!!!"_tr());
