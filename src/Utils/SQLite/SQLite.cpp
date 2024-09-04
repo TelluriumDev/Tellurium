@@ -107,9 +107,7 @@ ResultMap SQLite::Select(std::string const& table, std::string const& columns, s
     return Query(sql);
 }
 
-bool SQLite::isClosed() {
-    return is_closed;
-}
+bool SQLite::isClosed() { return is_closed; }
 
 SQLite::~SQLite() {
     if (!is_closed) {

@@ -1,6 +1,9 @@
-#include "Utils/SQLite/SQLite.h"
+#pragma once
 
-namespace TLUtils::PlayerData{
+#include "Utils/Data/JsonHandler.h"
+
+namespace TLUtils::PlayerData {
 void initPlayerData();
 
-}
+JsonHandler& getInstance();
+} // namespace TLUtils::PlayerData

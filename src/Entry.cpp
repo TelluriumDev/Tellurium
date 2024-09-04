@@ -2,14 +2,18 @@
 #include "Config/Config.h"
 #include "Global.h"
 #include "Modules/Modules.h"
-#include "Utils/BigSelectForm/BigSelectForm.h"
+#include "Utils/Data/JsonHandler.h"
 #include "Utils/I18n/I18n.h"
-#include "Versions.h"
 #include "Utils/PlayerData/PlayerData.h"
+#include "Versions.h"
+
+#include <ll/api/Expected.h>
 #include <ll/api/Versions.h>
 #include <ll/api/mod/RegisterHelper.h>
-#include <ll/api/Expected.h>
+
 #include <memory>
+#include <vector>
+
 
 ll::Logger logger("Tellurium");
 
@@ -27,8 +31,8 @@ void printWelcomeMsg() {
     logger.info(R"(     | ||  __/| || || |_| || |   | || |_| || | | | | |    )");
     logger.info(R"(     |_| \___||_||_| \__,_||_|   |_| \__,_||_| |_| |_|    )");
     logger.info("");
-    logger.info("Tellurium is a free mod under GPL Version 3 License.");
-    logger.info("Help us improve Tellurium! -> https://github.com/TelluriumDev/Tellurium");
+    logger.info("Tellurium is a free mod under GPL Version 3 License."_tr());
+    logger.info("Help us improve Tellurium! -> https://github.com/TelluriumDev/Tellurium"_tr());
     logger.info("Copyright (C) 2024 TelluriumDev");
     // ll::makeStringError("Tellurium");
 }
@@ -54,17 +58,26 @@ bool Entry::load() {
     return true;
 }
 
+
 bool Entry::enable() {
     logger.info("Tellurium Enabled!");
     logger.info("Repository: {0}"_tr("https://github.com/TelluriumDev/Tellurium"));
     TLModule::initModules();
-    // RegTPRCmd();
+    auto &pd = TLUtils::PlayerData::getInstance();
+    pd.set(
+        "cnm",
+        json({
+            {"a", 1},
+            {"b", 2}
+    })
+    );
+    auto d = pd.get<json>("cnm");
     return true;
 }
 
 bool Entry::disable() { return true; }
 
-bool Entry::unload() { return true; } 
+bool Entry::unload() { return true; }
 
 } // namespace Tellurium
 

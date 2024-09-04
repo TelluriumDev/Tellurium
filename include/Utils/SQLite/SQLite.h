@@ -1,9 +1,11 @@
 #pragma once
 
-#include <sqlite3.h>
 #include <map>
+#include <sqlite3.h>
 #include <string>
 #include <vector>
+
+
 
 using ResultMap = std::vector<std::map<std::string, std::string>>;
 
@@ -19,10 +21,11 @@ public:
     bool      Insert(std::string const& table, std::map<std::string, std::string> const& values);
     bool Update(std::string const& table, std::string const& where, std::map<std::string, std::string> const& values);
     bool Delete(std::string const& table, std::string const& where);
-    bool      isClosed();
+    bool isClosed();
 
     std::string db_name;
+
 private:
-    sqlite3*    db;
-    bool        is_closed{true};
+    sqlite3* db;
+    bool     is_closed{true};
 };
