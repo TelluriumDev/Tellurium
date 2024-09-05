@@ -14,7 +14,6 @@ namespace Tellurium::I18n {
 
 void        initI18n(ll::mod::NativeMod&);
 std::string translate(const std::string& key, const std::string& locale);
-std::string translate(const std::string& key, Player& pl);
 
 std::filesystem::path getLangDir();
 

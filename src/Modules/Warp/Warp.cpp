@@ -1,15 +1,30 @@
 #include "Modules/Warp/Warp.h"
 #include "Config/Config.h"
+#include "Event/WarpEvent/WarpAddEvent.h"
+#include "Event/WarpEvent/WarpDelEvent.h"
+#include "Event/WarpEvent/WarpGoEvent.h"
 #include "Global.h"
 #include "Utils/Data/JsonHandler.h"
 
+#include "ll/api/event/EventBus.h"
+#include "mc/world/level/dimension/Dimension.h"
+#include <vector>
+
+using namespace ll::event;
 
 namespace TLModule {
 Warp::Warp() { mWarpData = std::make_unique<TLUtil::JsonHandler>(TLConfig::getDataDir() / "warp.json"); }
 
-bool Warp::addWarp(std::string& name, Vec3& pos, Dimension& dim) {
+bool Warp::addWarp(std::string const& name, const Vec3& pos, Dimension& dim) {
     try {
-        mWarpData->set(name, json({pos.x, pos.y, pos.z, dim.getDimensionId().id}));
+        auto event = TLEvent::WarpAddEvent(name, pos, dim);
+        EventBus::getInstance().publish(event);
+        if (event.isCancelled()) return false;
+        if (!mWarpData->get<json>(name)) {
+            mWarpData->set(name, json{(int)pos.x, (int)pos.y, (int)pos.z, (int)dim.getDimensionId().id});
+        } else {
+            return false;
+        }
         return true;
     } catch (std::exception& e) {
         logger.error("Failed to add warp: {0}"_tr(e.what()));
@@ -17,9 +32,17 @@ bool Warp::addWarp(std::string& name, Vec3& pos, Dimension& dim) {
     }
 }
 
-bool Warp::removeWarp(std::string& name) {
+bool Warp::removeWarp(std::string const& name) {
+
     try {
-        mWarpData->del(name);
+        auto event = TLEvent::WarpDelEvent(name);
+        EventBus::getInstance().publish(event);
+        if (event.isCancelled()) return false;
+        if (mWarpData->get<json>(name)) {
+            mWarpData->del(name);
+        } else {
+            return false;
+        }
         return true;
     } catch (std::exception& e) {
         logger.error("Failed to remove warp: {0}"_tr(e.what()));
@@ -43,10 +66,15 @@ std::vector<std::string> Warp::listWarps() {
     return warps;
 }
 
-bool Warp::warpTo(Player& player, std::string& name) {
+bool Warp::warpTo(Player& player, std::string const& name) {
     try {
         auto pos = mWarpData->get<json>(name).get<std::vector<int>>();
-        player.teleport(Vec3(pos[0], pos[1], pos[2]), DimensionType(pos[3]));
+        if (pos.empty()) return false;
+        auto Vec3pos = Vec3(pos[0], pos[1], pos[2]);
+        auto event   = TLEvent::WarpGoEvent(&player, name, Vec3pos, DimensionType(pos[3]));
+        EventBus::getInstance().publish(event);
+        if (event.isCancelled()) return false;
+        player.teleport(Vec3pos, DimensionType(pos[3]));
         return true;
     } catch (std::exception& e) {
         logger.error("Failed to warp to {0}: {1}"_tr(name, e.what()));

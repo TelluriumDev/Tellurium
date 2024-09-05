@@ -1,10 +1,13 @@
 #include "Entry.h"
+#include "Command/WarpCommand/WarpCommand.h"
 #include "Config/Config.h"
+#include "Event/Event.h"
 #include "Global.h"
 #include "Modules/Modules.h"
 #include "Utils/I18n/I18n.h"
 #include "Utils/PlayerData/PlayerData.h"
 #include "Versions.h"
+
 
 #include "ll/api/Expected.h"
 #include "ll/api/Versions.h"
@@ -59,6 +62,7 @@ bool Entry::enable() {
     logger.info("Tellurium Enabled!");
     logger.info("Repository: {0}"_tr("https://github.com/TelluriumDev/Tellurium"));
     TLModule::initModules();
+    TLEvent::RegListener();
     return true;
 }
 

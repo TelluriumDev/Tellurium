@@ -1,14 +1,6 @@
 #include "Utils/I18n/I18n.h"
 #include "Config/Config.h"
 
-
-#include "ll/api/service/Bedrock.h"
-
-#include "mc/certificates/WebToken.h"
-#include "mc/network/ConnectionRequest.h"
-#include "mc/network/ServerNetworkHandler.h"
-#include "mc/world/actor/player/Player.h"
-
 #include <filesystem>
 
 
@@ -27,12 +19,6 @@ std::string translate(const std::string& key, const std::string& locale) {
     i18n.load(LangDir);
     i18n.mDefaultLocaleName = locale;
     return std::string(i18n.get(key));
-}
-std::string translate(const std::string& key, Player& pl) {
-    auto json = // TODO 完成PlayerData后需要重写
-        ll::service::getServerNetworkHandler()->fetchConnectionRequest(pl.getNetworkIdentifier()).mRawToken->mDataInfo;
-    auto langCode = json.get("LanguageCode", "Unknown").asString("Unknown");
-    return translate(key, langCode);
 }
 std::filesystem::path getLangDir() { return LangDir; }
 

@@ -4,6 +4,7 @@
 #include "Utils/Data/JsonHandler.h"
 
 #include <memory>
+#include <string>
 
 namespace TLUtil::PlayerData {
 
@@ -13,5 +14,5 @@ void initPlayerData() { playerData = std::make_shared<JsonHandler>(TLConfig::get
 
 JsonHandler& getInstance() { return *playerData.get(); };
 
-std::string getPlayerLang() { return getInstance().get<std::string>("lang"); }
+std::string getPlayerLang(Player& player) { return getInstance().get<json>(player.getUuid().asString())["lang"]; }
 } // namespace TLUtil::PlayerData

@@ -1,8 +1,8 @@
 #pragma once
 
 
-namespace ll::event::inline TLEvent {
-    void initTLEvent();
+namespace TLEvent {
+void initTLEvent();
 
-    void RegListener();
-} // namespace ll::event::inline TLEvent
+void RegListener();
+} // namespace TLEvent

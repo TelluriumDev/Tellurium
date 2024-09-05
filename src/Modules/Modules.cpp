@@ -34,6 +34,7 @@ Modules::Modules() {
     logger.debug("Loading Money Module...");
     std::string scoreName = "money";
 
+    mWarp  = new Warp();
     mMoney = new Money(scoreName);
     // mBack  = new Back();
     // TODO: 其他模块
@@ -43,6 +44,7 @@ Modules::~Modules() {
     delete mTPA;
     delete mMoney;
     delete mBack;
+    delete mWarp;
     // TODO: 其他模块
 
     // !: 感觉有大问题 delete 会调用析构函数(这算不算析构递归)

@@ -12,20 +12,20 @@ namespace TLModule {
 
 class Warp {
 public:
+
     Warp();
-    ~Warp();
 
 private:
     std::unique_ptr<TLUtil::JsonHandler> mWarpData;
 
 public:
-    bool addWarp(std::string& name, Vec3& pos, Dimension& dim);
+    bool addWarp(std::string const& name, const Vec3& pos, Dimension& dim);
 
-    bool removeWarp(std::string& name);
+    bool removeWarp(std::string const& name);
 
     std::vector<std::string> listWarps();
 
-    bool warpTo(Player& player, std::string& name);
+    bool warpTo(Player& player, std::string const& name);
 };
 
 } // namespace TLModule
