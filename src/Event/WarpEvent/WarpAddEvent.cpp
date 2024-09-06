@@ -2,7 +2,7 @@
 
 namespace TLEvent::inline WarpEvent {
 
-std::string const& WarpAddEvent::getName() { return mName; }
+std::string& WarpAddEvent::getName() { return mName; }
 
 const Vec3& WarpAddEvent::getPos() { return mPos; }
 

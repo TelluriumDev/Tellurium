@@ -1,6 +1,5 @@
 #pragma once
 
-
 namespace TLEvent {
 void initTLEvent();
 

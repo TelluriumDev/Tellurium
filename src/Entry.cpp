@@ -1,4 +1,5 @@
 #include "Entry.h"
+#include "Command/HomeCommand/HomeCommand.h"
 #include "Command/WarpCommand/WarpCommand.h"
 #include "Config/Config.h"
 #include "Event/Event.h"
@@ -22,14 +23,14 @@ namespace Tellurium {
 
 void printWelcomeMsg() {
     auto lock = logger.lock();
-    logger.info("");
+    logger.info(R"(----------------------------------------------------------)");
     logger.info(R"(   _______     _  _               _                       )");
     logger.info(R"(  |__   __|   | || |             (_)                      )");
     logger.info(R"(     | |  ___ | || | _   _  _ __  _  _   _  _ __ ___      )");
     logger.info(R"(     | | / _ \| || || | | || '__|| || | | || '_ ` _ \     )");
     logger.info(R"(     | ||  __/| || || |_| || |   | || |_| || | | | | |    )");
     logger.info(R"(     |_| \___||_||_| \__,_||_|   |_| \__,_||_| |_| |_|    )");
-    logger.info("");
+    logger.info(R"(----------------------------------------------------------)");
     logger.info("Tellurium is a free mod under GPL Version 3 License."_tr());
     logger.info("Help us improve Tellurium! -> https://github.com/TelluriumDev/Tellurium"_tr());
     logger.info("Copyright (C) 2024 TelluriumDev");
@@ -42,7 +43,7 @@ Entry& Entry::getInstance() { return *instance; }
 
 bool Entry::load() {
     TLConfig::initConfig(getSelf());
-    I18n::initI18n(getSelf());
+    TLUtil::I18n::initI18n(getSelf());
     TLUtil::PlayerData::initPlayerData();
     printWelcomeMsg();
     if (TARGET_BDS_PROTOCOL_VERSION != ll::getNetworkProtocolVersion()) {
@@ -63,6 +64,8 @@ bool Entry::enable() {
     logger.info("Repository: {0}"_tr("https://github.com/TelluriumDev/Tellurium"));
     TLModule::initModules();
     TLEvent::RegListener();
+    TLCommand::WarpCommand::RegWarpCommand();
+    TLCommand::HomeCommand::RegHomeCommand();
     return true;
 }
 

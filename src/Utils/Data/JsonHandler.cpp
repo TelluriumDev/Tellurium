@@ -10,18 +10,19 @@ JsonHandler::JsonHandler(const std::filesystem::path& path) {
     if (!std::filesystem::exists(this->mPath.parent_path())) {
         std::filesystem::create_directories(this->mPath.parent_path());
     }
+    mJson = std::make_unique<json>();
     if (std::filesystem::exists(this->mPath)) {
         std::ifstream file(mPath);
         if (!file.is_open()) {
             logger.error("Failed to open file: {0}"_tr(mPath.string()));
         }
-        file >> mJson;
+        file >> *mJson.get();
     }
     std::ofstream file(mPath);
     if (!file.is_open()) {
         logger.error("Failed to open file: {0}"_tr(mPath.string()));
     }
-    file << mJson.dump(4); // 4 spaces indentation
+    file << mJson->dump(4);
     file.close();
 }
 
@@ -31,13 +32,13 @@ void JsonHandler::update() {
         logger.error("Failed to open file: {0}"_tr(mPath.string()));
         return;
     }
-    file << mJson.dump(4); // 4 spaces indentation
+    file << mJson->dump(4);
     file.close();
 }
 
 template <typename T>
 T JsonHandler::get(const std::string& key) {
-    return mJson[key].get<T>();
+    return (*mJson)[key].get<T>();
 }
 
 template int         JsonHandler::get<int>(const std::string& key);
@@ -48,7 +49,7 @@ template json        JsonHandler::get<json>(const std::string& key);
 
 template <typename T>
 void JsonHandler::set(const std::string& key, const T& value) {
-    mJson[key] = value;
+    (*mJson)[key] = value;
     update();
 }
 
@@ -60,7 +61,7 @@ template void JsonHandler::set<json>(const std::string& key, const json& value);
 
 
 void JsonHandler::del(const std::string& key) {
-    mJson.erase(key);
+    mJson->erase(key);
     update();
 }
 
@@ -70,23 +71,23 @@ void JsonHandler::reload() {
         logger.error("Failed to open file: {0}"_tr(mPath.string()));
         return;
     }
-    file >> mJson;
+    file >> *mJson;
     file.close();
 }
 
 void JsonHandler::clear() {
-    mJson.clear();
+    mJson->clear();
     update();
 }
 
 void JsonHandler::write(json& j) {
-    mJson = j;
+    mJson = std::make_unique<json>(j);
     update();
 }
 
-json::iterator JsonHandler::begin() { return mJson.begin(); }
+json::iterator JsonHandler::begin() { return mJson->begin(); }
 
-json::iterator JsonHandler::end() { return mJson.end(); }
+json::iterator JsonHandler::end() { return mJson->end(); }
 
 
 } // namespace TLUtil

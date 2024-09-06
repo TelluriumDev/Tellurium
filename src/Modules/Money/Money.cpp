@@ -21,7 +21,7 @@ using namespace ll::event;
 
 namespace TLModule {
 
-Money::Money(std::string& scoreName) : mScoreName(scoreName) {
+Money::Money(const std::string& scoreName) : mScoreName(scoreName) {
     if (!scoreName.empty()) return;
     isLLMoney   = false;
     mScoreboard = &ll::service::getLevel()->getScoreboard();

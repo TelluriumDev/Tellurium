@@ -15,12 +15,12 @@ using namespace ll::event;
 namespace TLModule {
 Warp::Warp() { mWarpData = std::make_unique<TLUtil::JsonHandler>(TLConfig::getDataDir() / "warp.json"); }
 
-bool Warp::addWarp(std::string const& name, const Vec3& pos, Dimension& dim) {
+bool Warp::addWarp(std::string name, const Vec3& pos, Dimension& dim) {
     try {
         auto event = TLEvent::WarpAddEvent(name, pos, dim);
         EventBus::getInstance().publish(event);
         if (event.isCancelled()) return false;
-        if (!mWarpData->get<json>(name)) {
+        if (mWarpData->get<json>(name).is_null()) {
             mWarpData->set(name, json{(int)pos.x, (int)pos.y, (int)pos.z, (int)dim.getDimensionId().id});
         } else {
             return false;
@@ -32,7 +32,7 @@ bool Warp::addWarp(std::string const& name, const Vec3& pos, Dimension& dim) {
     }
 }
 
-bool Warp::removeWarp(std::string const& name) {
+bool Warp::removeWarp(std::string name) {
 
     try {
         auto event = TLEvent::WarpDelEvent(name);
@@ -66,7 +66,7 @@ std::vector<std::string> Warp::listWarps() {
     return warps;
 }
 
-bool Warp::warpTo(Player& player, std::string const& name) {
+bool Warp::warpTo(Player& player, std::string name) {
     try {
         auto pos = mWarpData->get<json>(name).get<std::vector<int>>();
         if (pos.empty()) return false;

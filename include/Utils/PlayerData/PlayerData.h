@@ -9,5 +9,7 @@ void initPlayerData();
 
 JsonHandler& getInstance();
 
+void        setPlayerLang(Player& player, std::string lang);
+
 std::string getPlayerLang(Player& player);
 } // namespace TLUtil::PlayerData

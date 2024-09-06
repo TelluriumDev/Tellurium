@@ -11,22 +11,22 @@ namespace TLEvent::inline WarpEvent {
 
 class WarpGoEvent final : public ll::event::Cancellable<ll::event::Event> {
 private:
-    Player*      mPlayer;
-    std::string const& mName;
-    const Vec3&        mPos;
-    DimensionType   mDimensionType;
+    Player*       mPlayer;
+    std::string&  mName;
+    const Vec3&   mPos;
+    DimensionType mDimensionType;
 
 public:
-    WarpGoEvent(Player* player, std::string const& name, const Vec3& pos, DimensionType dim)
+    WarpGoEvent(Player* player, std::string& name, const Vec3& pos, DimensionType dim)
     : Cancellable(),
       mPlayer(player),
       mName(name),
       mPos(pos),
       mDimensionType(dim) {}
 
-    Player*      getPlayer();
-    std::string const& getName();
-    const Vec3&        getPos();
-    DimensionType&   getDimensionType();
+    Player*        getPlayer();
+    std::string&   getName();
+    const Vec3&    getPos();
+    DimensionType& getDimensionType();
 };
 }; // namespace TLEvent::inline WarpEvent

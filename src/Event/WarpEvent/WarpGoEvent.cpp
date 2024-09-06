@@ -4,7 +4,7 @@ namespace TLEvent::inline WarpEvent {
 
 Player* WarpGoEvent::getPlayer() { return mPlayer; }
 
-std::string const& WarpGoEvent::getName() { return mName; }
+std::string& WarpGoEvent::getName() { return mName; }
 
 const Vec3& WarpGoEvent::getPos() { return mPos; }
 

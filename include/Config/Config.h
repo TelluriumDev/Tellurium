@@ -1,6 +1,5 @@
 #pragma once
 
-
 #include "ll/api/base/StdInt.h"
 #include "ll/api/mod/NativeMod.h"
 

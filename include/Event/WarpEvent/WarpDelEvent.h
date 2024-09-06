@@ -9,11 +9,11 @@ namespace TLEvent::inline WarpEvent {
 
 class WarpDelEvent final : public ll::event::Cancellable<ll::event::Event> {
 private:
-    std::string const& mName;
+    std::string& mName;
 
 public:
-    WarpDelEvent(std::string const& name) : Cancellable(), mName(name) {}
+    WarpDelEvent(std::string& name) : Cancellable(), mName(name) {}
 
-    std::string const& getName();
+    std::string& getName();
 };
 }; // namespace TLEvent::inline WarpEvent

@@ -4,7 +4,7 @@
 #include <filesystem>
 
 
-namespace Tellurium::I18n {
+namespace TLUtil::I18n {
 
 std::filesystem::path   LangDir;
 ll::i18n::MultiFileI18N i18n;
@@ -22,4 +22,4 @@ std::string translate(const std::string& key, const std::string& locale) {
 }
 std::filesystem::path getLangDir() { return LangDir; }
 
-} // namespace Tellurium::I18n
+} // namespace TLUtil::I18n

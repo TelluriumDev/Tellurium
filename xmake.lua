@@ -26,6 +26,7 @@ target("Tellurium") -- Change this to your mod name.
         "/w45204",
         "/WX"
     )
+    -- set_toolchains("msvc")
     add_defines("NOMINMAX", "UNICODE")
     add_files("src/**.cpp")
     add_files("src/Tellurium.rc")
@@ -42,6 +43,8 @@ target("Tellurium") -- Change this to your mod name.
     set_optimize("fastest")
     set_languages("c++20")
     set_symbols("debug")
+
+    
 
     after_build(function (target)
         local mod_packer = import("scripts.after_build")
