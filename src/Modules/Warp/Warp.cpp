@@ -17,6 +17,7 @@ Warp::Warp() { mWarpData = std::make_unique<TLUtil::JsonHandler>(TLConfig::getDa
 
 bool Warp::addWarp(std::string name, const Vec3& pos, Dimension& dim) {
     try {
+        auto warp  = mWarpData->get<json>(name);
         auto event = TLEvent::WarpAddEvent(name, pos, dim);
         EventBus::getInstance().publish(event);
         if (event.isCancelled()) return false;
@@ -33,12 +34,12 @@ bool Warp::addWarp(std::string name, const Vec3& pos, Dimension& dim) {
 }
 
 bool Warp::removeWarp(std::string name) {
-
     try {
+        auto warp  = mWarpData->get<json>(name);
         auto event = TLEvent::WarpDelEvent(name);
         EventBus::getInstance().publish(event);
         if (event.isCancelled()) return false;
-        if (mWarpData->get<json>(name)) {
+        if (!warp.get<std::vector<int>>().empty()) {
             mWarpData->del(name);
         } else {
             return false;

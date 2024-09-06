@@ -19,7 +19,7 @@ namespace TLCommand::HomeCommand {
 
 void RegHomeCommand() {
     auto& cmd = ll::command::CommandRegistrar::getInstance()
-                    .getOrCreateCommand("home", "home to a location", CommandPermissionLevel::Any);
+                    .getOrCreateCommand("home", "home to a location"_tr(), CommandPermissionLevel::Any);
     cmd.overload<Param>()
 
         .text("add")

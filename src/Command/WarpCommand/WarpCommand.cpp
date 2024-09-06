@@ -17,7 +17,7 @@ namespace TLCommand::WarpCommand {
 
 void RegWarpCommand() {
     auto& cmd = ll::command::CommandRegistrar::getInstance()
-                    .getOrCreateCommand("warp", "Warp to a location", CommandPermissionLevel::Any);
+                    .getOrCreateCommand("warp", "Warp to a location"_tr(), CommandPermissionLevel::Any);
     cmd.overload<Param>()
 
         .text("add")

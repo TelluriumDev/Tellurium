@@ -53,8 +53,6 @@ bool Entry::load() {
             std::to_string(ll::getNetworkProtocolVersion())
         ));
     }
-    // logger.info(I18n::translate("test","zh_CN"));
-    // logger.info(I18n::translate("test","en_US"));
     return true;
 }
 
