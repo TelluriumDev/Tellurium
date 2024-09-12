@@ -1,19 +1,17 @@
-#include "Modules/Money/Money.h"
+#include "Modules/Money.h"
 #include "Event/MoneyEvent/MoneyAddEvent.h"
 #include "Event/MoneyEvent/MoneyReduceEvent.h"
 #include "Event/MoneyEvent/MoneySetEvent.h"
 #include "Event/MoneyEvent/MoneyTransEvent.h"
-#include "Global.h" // IWYU pragma: keep
+#include "Global.h"
 
-#include <ll/api/event/EventBus.h>
-#include <ll/api/service/Bedrock.h>
+#include "ll/api/event/EventBus.h"
+#include "ll/api/service/Bedrock.h"
 
-
-#include <mc/world/actor/player/PlayerScoreSetFunction.h>
-#include <mc/world/level/Level.h>
-#include <mc/world/scores/ScoreInfo.h>
-#include <mc/world/scores/ScoreboardId.h>
-
+#include "mc/world/actor/player/PlayerScoreSetFunction.h"
+#include "mc/world/level/Level.h"
+#include "mc/world/scores/ScoreInfo.h"
+#include "mc/world/scores/ScoreboardId.h"
 
 #include <LLMoney.h>
 

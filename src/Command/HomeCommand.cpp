@@ -1,7 +1,8 @@
-#include "Command/HomeCommand/HomeCommand.h"
+#include "Command/HomeCommand.h"
+#include "Config/Config.h"
 #include "Modules/Modules.h"
-#include "Utils/I18n/I18n.h"
-#include "Utils/PlayerData/PlayerData.h"
+#include "Utils/I18n.h"
+#include "Utils/PlayerData.h"
 
 #include "ll/api/command/CommandHandle.h"
 #include "ll/api/command/CommandRegistrar.h"
@@ -13,6 +14,8 @@
 #include "mc/server/commands/CommandPermissionLevel.h"
 #include "mc/world/actor/Actor.h"
 #include "mc/world/actor/player/Player.h"
+
+#include <memory>
 
 
 namespace TLCommand::HomeCommand {
@@ -36,6 +39,7 @@ void RegHomeCommand() {
                 output.success(
                     TLUtil::I18n::translate("command.home.add.success", TLUtil::PlayerData::getPlayerLang(*player))
                 );
+                TLModule::getInstance()->mMoney->reduceMoney(*player, config.Modules.Home.SaveRequiredMoney, "HomeAdd");
             } else {
                 output.error(
                     TLUtil::I18n::translate("command.home.add.error", TLUtil::PlayerData::getPlayerLang(*player))
@@ -58,6 +62,7 @@ void RegHomeCommand() {
                 output.success(
                     TLUtil::I18n::translate("command.home.del.success", TLUtil::PlayerData::getPlayerLang(*player))
                 );
+                TLModule::getInstance()->mMoney->addMoney(*player, config.Modules.Home.DelHomeBackOffMoney, "HomeDel");
             } else {
                 output.error(
                     TLUtil::I18n::translate("command.home.del.error", TLUtil::PlayerData::getPlayerLang(*player))
@@ -80,6 +85,8 @@ void RegHomeCommand() {
                 output.success(
                     TLUtil::I18n::translate("command.home.go.success", TLUtil::PlayerData::getPlayerLang(*player))
                 );
+                TLModule::getInstance()
+                    ->mMoney->reduceMoney(*player, config.Modules.Home.GoHomeRequiredMoney, "HomeGo");
             } else {
                 output.error(
                     TLUtil::I18n::translate("command.home.go.error", TLUtil::PlayerData::getPlayerLang(*player))

@@ -1,5 +1,8 @@
 #include "Modules/Modules.h"
 #include "Global.h"
+
+#include "Config/Config.h"
+
 #include <memory>
 
 namespace TLModule {
@@ -31,9 +34,9 @@ Modules* getInstance() {
 }
 Modules::Modules() {
     // mTPA   = std::make_shared<TPA>();
-    // mMoney = std::make_shared<Money>("money");
-    mWarp = std::make_shared<Warp>();
-    mHome = std::make_shared<Home>();
+    mMoney = std::make_shared<Money>(config.Modules.Money.ScoreName);
+    mWarp  = std::make_shared<Warp>();
+    mHome  = std::make_shared<Home>();
     // mBack  = std::make_shared<Back>();
 }
 } // namespace TLModule

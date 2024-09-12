@@ -1,12 +1,12 @@
 #include "Entry.h"
-#include "Command/HomeCommand/HomeCommand.h"
-#include "Command/WarpCommand/WarpCommand.h"
+#include "Command/HomeCommand.h"
+#include "Command/WarpCommand.h"
 #include "Config/Config.h"
 #include "Event/Event.h"
 #include "Global.h"
 #include "Modules/Modules.h"
-#include "Utils/I18n/I18n.h"
-#include "Utils/PlayerData/PlayerData.h"
+#include "Utils/I18n.h"
+#include "Utils/PlayerData.h"
 #include "Versions.h"
 
 

@@ -1,4 +1,4 @@
-#include "Modules/Shop/Shop.h"
+#include "Modules/Shop.h"
 #include "Config/Config.h"
 #include "Global.h"
 

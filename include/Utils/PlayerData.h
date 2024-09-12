@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Utils/Data/JsonHandler.h"
+#include "Utils/JsonHandler.h"
 
 #include "mc/world/actor/player/Player.h"
 

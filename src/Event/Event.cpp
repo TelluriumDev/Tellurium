@@ -1,6 +1,6 @@
 #include "Event/Event.h"
 #include "Config/Config.h"
-#include "Utils/PlayerData/PlayerData.h"
+#include "Utils/PlayerData.h"
 
 
 #include "ll/api/event/EventBus.h"

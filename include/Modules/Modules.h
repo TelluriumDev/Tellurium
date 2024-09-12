@@ -1,10 +1,10 @@
 #pragma once
 
-#include "Modules/Back/Back.h"
-#include "Modules/Home/Home.h"
-#include "Modules/Money/Money.h"
-#include "Modules/TPA/TPA.h"
-#include "Modules/Warp/Warp.h"
+#include "Modules/Back.h"
+#include "Modules/Home.h"
+#include "Modules/Money.h"
+#include "Modules/TPA.h"
+#include "Modules/Warp.h"
 
 
 namespace TLModule {
@@ -13,7 +13,7 @@ class Modules {
 private:
 public:
     // std::shared_ptr<TPA>   mTPA;
-    // std::shared_ptr<Money> mMoney;
+    std::shared_ptr<Money> mMoney;
     // std::shared_ptr<Back>  mBack;
     std::shared_ptr<Warp> mWarp;
     std::shared_ptr<Home>  mHome;

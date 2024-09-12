@@ -1,7 +1,8 @@
-#include "Command/WarpCommand/WarpCommand.h"
+#include "Command/WarpCommand.h"
+#include "Config/Config.h"
 #include "Modules/Modules.h"
-#include "Utils/I18n/I18n.h"
-#include "Utils/PlayerData/PlayerData.h"
+#include "Utils/I18n.h"
+#include "Utils/PlayerData.h"
 
 #include "ll/api/command/CommandHandle.h"
 #include "ll/api/command/CommandRegistrar.h"
@@ -62,6 +63,7 @@ void RegWarpCommand() {
                     output.success(
                         TLUtil::I18n::translate("command.warp.del.success", TLUtil::PlayerData::getPlayerLang(*player))
                     );
+
                 } else {
                     output.error(
                         TLUtil::I18n::translate("command.warp.del.error", TLUtil::PlayerData::getPlayerLang(*player))
@@ -87,6 +89,7 @@ void RegWarpCommand() {
                 output.success(
                     TLUtil::I18n::translate("command.warp.go.success", TLUtil::PlayerData::getPlayerLang(*player))
                 );
+                TLModule::getInstance()->mMoney->reduceMoney(*player, config.Modules.WARP.ConsumeMoney, "WarpGo");
             } else {
                 output.error(
                     TLUtil::I18n::translate("command.warp.go.error", TLUtil::PlayerData::getPlayerLang(*player))
