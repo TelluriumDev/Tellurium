@@ -24,4 +24,17 @@ void setPlayerLang(Player& player, std::string lang) {
 }
 
 std::string getPlayerLang(Player& player) { return getInstance().get<json>(player.getUuid().asString())["lang"]; }
+
+void setPlayerAnnouncement(Player& player, bool announcement) {
+    json j = getInstance().get<json>(player.getUuid().asString());
+    if (j.empty()) {
+        j = json();
+    }
+    j["announcement"] = announcement;
+    getInstance().set(player.getUuid().asString(), j);
+}
+
+bool getPlayerAnnouncement(Player& player) {
+    return getInstance().get<json>(player.getUuid().asString())["announcement"];
+}
 } // namespace TLUtil::PlayerData

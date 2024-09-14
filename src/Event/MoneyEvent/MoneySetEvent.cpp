@@ -1,10 +1,16 @@
 #include "Event/MoneyEvent/MoneySetEvent.h"
 
+#include "ll/api/service/Bedrock.h"
 
 #include "mc/world/level/Level.h"
 
 namespace TLEvent::inline MoneyEvent {
-Player* MoneySetEvent::getPlayer() { return mPlayer; }
+
+const mce::UUID& MoneySetEvent::getUUID() { return mUUID; }
+
+Player* MoneySetEvent::getPlayer() {
+    return static_cast<Player*>(ll::service::getLevel()->fetchEntity(ActorUniqueID::fromUUID(mUUID)));
+}
 
 long long MoneySetEvent::getMoney() { return mMoney; }
 

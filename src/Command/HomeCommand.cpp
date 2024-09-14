@@ -39,7 +39,8 @@ void RegHomeCommand() {
                 output.success(
                     TLUtil::I18n::translate("command.home.add.success", TLUtil::PlayerData::getPlayerLang(*player))
                 );
-                TLModule::getInstance()->mMoney->reduceMoney(*player, config.Modules.Home.SaveRequiredMoney, "HomeAdd");
+                TLModule::getInstance()
+                    ->mMoney->reduceMoney(player->getUuid(), config.Modules.Home.SaveRequiredMoney, "HomeAdd");
             } else {
                 output.error(
                     TLUtil::I18n::translate("command.home.add.error", TLUtil::PlayerData::getPlayerLang(*player))
@@ -62,7 +63,8 @@ void RegHomeCommand() {
                 output.success(
                     TLUtil::I18n::translate("command.home.del.success", TLUtil::PlayerData::getPlayerLang(*player))
                 );
-                TLModule::getInstance()->mMoney->addMoney(*player, config.Modules.Home.DelHomeBackOffMoney, "HomeDel");
+                TLModule::getInstance()
+                    ->mMoney->addMoney(player->getUuid(), config.Modules.Home.DelHomeBackOffMoney, "HomeDel");
             } else {
                 output.error(
                     TLUtil::I18n::translate("command.home.del.error", TLUtil::PlayerData::getPlayerLang(*player))
@@ -86,7 +88,7 @@ void RegHomeCommand() {
                     TLUtil::I18n::translate("command.home.go.success", TLUtil::PlayerData::getPlayerLang(*player))
                 );
                 TLModule::getInstance()
-                    ->mMoney->reduceMoney(*player, config.Modules.Home.GoHomeRequiredMoney, "HomeGo");
+                    ->mMoney->reduceMoney(player->getUuid(), config.Modules.Home.GoHomeRequiredMoney, "HomeGo");
             } else {
                 output.error(
                     TLUtil::I18n::translate("command.home.go.error", TLUtil::PlayerData::getPlayerLang(*player))

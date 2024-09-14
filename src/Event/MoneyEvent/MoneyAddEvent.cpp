@@ -5,7 +5,13 @@
 #include "mc/world/level/Level.h"
 
 namespace TLEvent::inline MoneyEvent {
-Player* MoneyAddEvent::getPlayer() { return mPlayer; }
+
+const mce::UUID& MoneyAddEvent::getUUID() { return mUUID; }
+
+
+Player* MoneyAddEvent::getPlayer() {
+    return static_cast<Player*>(ll::service::getLevel()->fetchEntity(ActorUniqueID::fromUUID(mUUID)));
+}
 
 long long MoneyAddEvent::getMoney() { return mMoney; }
 

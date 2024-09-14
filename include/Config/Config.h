@@ -22,6 +22,15 @@ struct Config {
     std::string Language = "zh_CN";
     // 模块设置
     struct {
+        // 公告模块设置
+        struct {
+            // 是否启用
+            bool Enabled = true;
+            // 公告标题
+            std::string Title = "公告";
+            // 公告内容
+            std::string Content = "欢迎使用此插件";
+        } Announcement;
         // 互传模块设置
         struct {
             // 是否启用

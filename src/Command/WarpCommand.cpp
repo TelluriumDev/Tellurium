@@ -89,7 +89,8 @@ void RegWarpCommand() {
                 output.success(
                     TLUtil::I18n::translate("command.warp.go.success", TLUtil::PlayerData::getPlayerLang(*player))
                 );
-                TLModule::getInstance()->mMoney->reduceMoney(*player, config.Modules.WARP.ConsumeMoney, "WarpGo");
+                TLModule::getInstance()
+                    ->mMoney->reduceMoney(player->getUuid(), config.Modules.WARP.ConsumeMoney, "WarpGo");
             } else {
                 output.error(
                     TLUtil::I18n::translate("command.warp.go.error", TLUtil::PlayerData::getPlayerLang(*player))

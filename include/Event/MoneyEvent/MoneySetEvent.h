@@ -11,17 +11,18 @@ namespace TLEvent::inline MoneyEvent {
 class MoneySetEvent final : public ll::event::Cancellable<ll::event::Event> {
 
 private:
-    Player*           mPlayer;
+    const mce::UUID&  mUUID;
     long long         mMoney;
     const std::string mNote;
 
 public:
-    MoneySetEvent(Player* player, long long money, const std::string& note)
+    MoneySetEvent(const mce::UUID& uuid, long long money, const std::string& note)
     : Cancellable(),
-      mPlayer(player),
+      mUUID(uuid),
       mMoney(money),
       mNote(note) {}
 
+    const mce::UUID&   getUUID();
     Player*            getPlayer();
     long long          getMoney();
     const std::string& getNote();

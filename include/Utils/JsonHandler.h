@@ -26,7 +26,8 @@ public:
     template <typename T>
     T get(const std::string& key);
     template <typename T>
-    void           set(const std::string& key, const T& value);
+    void set(const std::string& key, const T& value);
+
     void           del(const std::string& key);
     void           reload();
     void           clear();
