@@ -6,13 +6,23 @@
 #include <memory>
 #include <string>
 
+/*
+struct PlayerData {
+    std::string lang;
+    bool announcement;
+    long long int money;
+    ...
+    };
+}
+*/
+
 namespace TLUtil::PlayerData {
 
 std::shared_ptr<JsonHandler> playerData = nullptr;
 
 void initPlayerData() { playerData = std::make_shared<JsonHandler>(TLConfig::getDataDir() / "playerData.json"); }
 
-JsonHandler& getInstance() { return *playerData.get(); };
+JsonHandler& getInstance() { return *playerData; };
 
 void setPlayerLang(Player& player, std::string lang) {
     json j = getInstance().get<json>(player.getUuid().asString());

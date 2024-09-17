@@ -17,8 +17,7 @@
 #include "mc/world/scores/ScoreInfo.h"
 #include "mc/world/scores/ScoreboardId.h"
 
-#include <LLMoney.h>
-#include <string>
+#include <windows.h>
 
 using namespace ll::event;
 
@@ -45,11 +44,10 @@ bool Money::addMoney(const mce::UUID& uuid, long long money, const std::string& 
     if (mScoreboard && mObjective) {
         result = modifyPlayerScore(uuid, money, PlayerScoreSetFunction::Add).value();
     } else if (isLLMoney) {
-        result = LLMoney_Add(ll::service::PlayerInfo::getInstance().fromUuid(uuid)->xuid, money);
+        result = LegacyMoney::add(ll::service::PlayerInfo::getInstance().fromUuid(uuid)->xuid, money);
     } else {
         logger.error("No scoreboard or LLMoney"_tr());
     }
-    // if (!result) player.sendMessage("§cFailed to add money"_tr()); // TODO: 由于玩家数据系统缺失 i18n 搁置
     return result;
 }
 
@@ -70,12 +68,11 @@ bool Money::setMoney(const mce::UUID& uuid, long long money, const std::string& 
     if (mScoreboard && mObjective) {
         result = modifyPlayerScore(uuid, money, PlayerScoreSetFunction::Set).value();
     } else if (isLLMoney) {
-        result = LLMoney_Set(ll::service::PlayerInfo::getInstance().fromUuid(uuid)->xuid, money);
+        result = LegacyMoney::set(ll::service::PlayerInfo::getInstance().fromUuid(uuid)->xuid, money);
     } else {
         logger.error("No scoreboard or LLMoney"_tr());
         result = false;
     }
-    // if (!result) player.sendMessage("§cFailed to set money"_tr()); // TODO: 由于玩家数据系统缺失 i18n 搁置
     return result;
 }
 
@@ -86,7 +83,7 @@ long long Money::getMoney(const mce::UUID& uuid) {
         int                 money = mObjective->getPlayerScore(id).mScore;
         return money;
     } else if (isLLMoney) {
-        // return LLMoney_Get(actorUniqueid);
+        return LegacyMoney::get(uuid);
         return 0;
     } else {
         logger.error("No scoreboard or LLMoney"_tr());
@@ -102,17 +99,15 @@ bool Money::reduceMoney(const mce::UUID& uuid, long long money, const std::strin
     bool result = false;
     if (mScoreboard && mObjective) {
         if (!checkMoney(uuid, money)) {
-            // player.sendMessage("§cMoney not enough"_tr()); // TODO: 由于玩家数据系统缺失 i18n 搁置
             return false;
         }
         result = modifyPlayerScore(uuid, money, PlayerScoreSetFunction::Subtract).value();
     } else if (isLLMoney) {
-        result = LLMoney_Reduce(ll::service::PlayerInfo::getInstance().fromUuid(uuid)->xuid, money);
+        result = LegacyMoney::add(ll::service::PlayerInfo::getInstance().fromUuid(uuid)->xuid, money);
     } else {
         logger.error("No scoreboard or LLMoney"_tr());
         result = false;
     }
-    // if (!result) player.sendMessage("§cFailed to add money"_tr()); // TODO: 由于玩家数据系统缺失 i18n 搁置
     return result;
 };
 
@@ -123,22 +118,16 @@ bool Money::transMoney(const mce::UUID& uuid, const mce::UUID& uuid2, long long 
     bool result = false;
     if (mScoreboard && mObjective) {
         if (!checkMoney(uuid, money)) {
-            // player.sendMessage("§cMoney not enough"_tr()); // TODO: 由于玩家数据系统缺失 i18n 搁置
             return false;
         }
         result = modifyPlayerScore(uuid, money, PlayerScoreSetFunction::Subtract)
               && modifyPlayerScore(uuid2, money, PlayerScoreSetFunction::Add);
     } else if (isLLMoney) {
-        result = LLMoney_Trans(
-            ll::service::PlayerInfo::getInstance().fromUuid(uuid)->xuid,
-            ll::service::PlayerInfo::getInstance().fromUuid(uuid2)->xuid,
-            money
-        );
+        result = LegacyMoney::trans(uuid, uuid2, money, note);
     } else {
         logger.error("No scoreboard or LLMoney"_tr());
         result = false;
     }
-    // if (!result) player.sendMessage("§cFailed to add money"_tr()); // TODO: 由于玩家数据系统缺失 i18n 搁置
     return result;
 }
 
@@ -158,3 +147,118 @@ const ScoreboardId& Money::getOrCreatePlayerScoreId(const mce::UUID& uuid) {
 }
 
 }; // namespace TLModule
+
+
+namespace LegacyMoney {
+
+const wchar_t* fileName = L"LegacyMoney.dll";
+
+bool isValid() { return GetModuleHandle(fileName) != nullptr; }
+
+std::vector<std::pair<std::string, long long>> ranking(ushort num) {
+    try {
+        return ((std::vector<std::pair<std::string, long long>> (*)(ushort))GetProcAddress(
+        GetModuleHandle(fileName),
+        "?LLMoney_Ranking@@YA?AV?$vector@U?$pair@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@_J@std@@"
+        "V?$allocator@U?$pair@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@_J@std@@@2@@std@@G@Z"
+    ))(num);
+    } catch (...) {
+        return std::vector<std::pair<std::string, long long>>();
+    }
+}
+
+bool add(std::string xuid, long long money) {
+    try {
+        return ((bool (*)(std::string, long long)
+        )GetProcAddress(GetModuleHandle(fileName), "LLMoney_Add"))(xuid, money);
+    } catch (...) {
+        return false;
+    }
+}
+
+void clearHist(int difftime) {
+    try {
+        ((void (*)(int))GetProcAddress(GetModuleHandle(fileName), "LLMoney_ClearHist"))(difftime);
+    } catch (...) {}
+}
+
+long long get(std::string xuid) {
+    try {
+        return ((long long (*)(std::string))GetProcAddress(GetModuleHandle(fileName), "LLMoney_Get"))(xuid);
+    } catch (...) {
+        return 0;
+    }
+}
+
+std::string getHist(std::string xuid, int timediff) {
+    try {
+        return ((std::string(*)(std::string, int)
+        )GetProcAddress(GetModuleHandle(fileName), "LLMoney_GetHist"))(xuid, timediff);
+    } catch (...) {
+        return "";
+    }
+}
+
+bool reduce(std::string xuid, long long money) {
+    try {
+        return ((bool (*)(std::string, long long)
+        )GetProcAddress(GetModuleHandle(fileName), "LLMoney_Reduce"))(xuid, money);
+    } catch (...) {
+        return false;
+    }
+}
+
+bool set(std::string xuid, long long money) {
+    try {
+        return ((bool (*)(std::string, long long)
+        )GetProcAddress(GetModuleHandle(fileName), "LLMoney_Set"))(xuid, money);
+    } catch (...) {
+        return false;
+    }
+}
+
+bool trans(std::string from, std::string to, long long val, std::string const& note) {
+    try {
+        return ((bool (*)(std::string, std::string, long long, std::string const&)
+        )GetProcAddress(GetModuleHandle(fileName), "LLMoney_Trans"))(from, to, val, note);
+    } catch (...) {
+        return false;
+    }
+}
+
+void listenAfterEvent(LLMoneyAfterEventCallback callback) {
+    try {
+        ((void (*)(LLMoneyAfterEventCallback)
+        )GetProcAddress(GetModuleHandle(fileName), "LLMoney_ListenAfterEvent"))(callback);
+    } catch (...) {}
+}
+
+void listenBeforeEvent(LLMoneyBeforeEventCallback callback) {
+    try {
+        ((void (*)(LLMoneyBeforeEventCallback)
+        )GetProcAddress(GetModuleHandle(fileName), "LLMoney_ListenBeforeEvent"))(callback);
+    } catch (...) {}
+}
+
+std::string getXuidFromUuid(mce::UUID const& uuid, std::string const& defaultValue) {
+    try {
+        return ll::service::PlayerInfo::getInstance().fromUuid(uuid)->xuid;
+    } catch (...) {
+        return defaultValue;
+    }
+}
+
+bool add(mce::UUID uuid, long long money) { return add(getXuidFromUuid(uuid), money); }
+
+bool reduce(mce::UUID uuid, long long money) { return reduce(getXuidFromUuid(uuid), money); }
+
+bool set(mce::UUID uuid, long long money) { return set(getXuidFromUuid(uuid), money); }
+
+std::string getHist(mce::UUID uuid, int timediff) { return getHist(getXuidFromUuid(uuid), timediff); }
+
+bool trans(mce::UUID from, mce::UUID to, long long val, std::string const& note) {
+    return trans(getXuidFromUuid(from), getXuidFromUuid(to), val, note);
+}
+
+long long get(mce::UUID uuid) { return get(getXuidFromUuid(uuid)); }
+} // namespace LegacyMoney
