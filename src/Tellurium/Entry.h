@@ -1,3 +1,5 @@
+#pragma once
+
 #include <span> // temporary repair workflow
 
 #include <ll/api/mod/NativeMod.h>
@@ -7,7 +9,7 @@ namespace Tellurium {
 class Entry {
 
 public:
-    static Entry& getInstance();
+    static std::unique_ptr<Entry>& getInstance();
 
     Entry(ll::mod::NativeMod& self) : mSelf(self) {}
 

@@ -5,6 +5,7 @@ add_repositories("groupmountain-repo https://github.com/GroupMountain/xmake-repo
 
 add_requires(
     "levilamina 0.13.5",
+    "preloader v1.12.0",
     "gmlib 0.13.7"
 )
 
@@ -39,7 +40,11 @@ target("Tellurium")
     add_files("src/**.cpp")
     add_headerfiles("src/(Tellurium/**.h)")
     add_includedirs("src")
-    add_packages("levilamina")
+    add_packages(
+        "levilamina",
+        "preloader",
+        "gmlib"
+    )
     add_shflags("/DELAYLOAD:bedrock_server.dll")
     set_exceptions("none")
     set_kind("shared")
@@ -87,6 +92,8 @@ target("Tellurium")
         end)
 
         os.cp(target:targetfile(), path.join(output_directory, target:name() .. ".dll"))
+
+        os.cp(path.join(os.projectdir(), "lang"), path.join(output_directory, "lang"))
 
         local pdb_path = path.join(output_directory, target:name() .. ".pdb")
         if os.isfile(target:symbolfile()) then

@@ -1,35 +1,25 @@
-# LeviLamina Mod Template
 
-A LeviLamina mod template
+编写规范
+- 头文件禁止引用全局头文件(Gloabl.h)
+- 头文件函数`声明`中，需在函数前面加上`TUAPI`，保证外部插件能够正常调用函数
+- 头文件引用用，请写完整路径！完整！！！
+- 所有东西，请务必套上`Tellurium`命名空间
+- 添加第三方库，请务必锁版本
 
-This mod is a template for developing LeviLamina mods.
-
-## Install
-
-Generate a new repository from this template.
-
-## Usage
-
-Before using this mod template, make sure that you have installed XMake and a Minecraft Bedrock Server with LeviLamina.
-
-1. Clone the new repository into a local folder.
-
-1. Change the mod name and the expected LeviLamina version in `xmake.lua`.
-
-1. Add your code.
-
-1. Run `xmake repo -u` in the root of the repository.
-
-1. Run `xmake` to build the mod.
-
-Now the build is complete at `bin/`.
-
-## Contributing
-
-Ask questions by creating an issue.
-
-PRs accepted.
-
-## License
-
-CC0-1.0 © LiteLDev
+文件目录
+./
+|
+|── Entry.cpp Entry.h - 入口文件
+|
+├── modules - 模块功能
+│   ├── 功能名字 - 功能分类
+│   │   ├── 具体的代码和事件
+|
+├── base 基础
+│   ├── Gloabl.h - 全局头文件
+│   ├── Config.cpp Config.h - 配置文件
+│   ├── Macro.h - 宏定义
+│   ├── I18n.cpp I18n.cpp - i18n翻译
+|
+├── utils - 工具
+│   ├── 
