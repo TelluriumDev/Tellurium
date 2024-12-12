@@ -2,5 +2,17 @@
     "name": "${modName}",
     "entry": "${modFile}",
     "version": "${modVersion}",
-    "type": "native"
+    "type": "native",
+    "author": "TelluriumDev",
+    "description": "A shit mountain baseisc plugin",
+    "dependencies": [
+        {
+            "name": "GMLIB"
+        }
+    ],
+    "optionalDependencies": [
+        {
+            "name": "LegacyMoney"
+        }
+    ]
 }
