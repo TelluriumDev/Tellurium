@@ -48,7 +48,7 @@ target("Tellurium")
     add_shflags("/DELAYLOAD:bedrock_server.dll")
     set_exceptions("none")
     set_kind("shared")
-    set_languages("c++23")
+    set_languages("c++20")
     set_symbols("debug")
 
     if is_mode("debug") then
