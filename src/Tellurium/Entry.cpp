@@ -55,7 +55,11 @@ bool Entry::load() {
 
 bool Entry::enable() { return true; }
 
-bool Entry::disable() { return true; }
+bool Entry::disable() {
+    Config::getInstance().reset();
+    LoggerManage::getInstance().reset();
+    return true;
+}
 
 bool Entry::unload() { return true; }
 

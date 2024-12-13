@@ -4,11 +4,26 @@
 
 #include <ll/api/base/StdInt.h>
 #include <memory>
+#include <optional>
+#include <string>
 
 namespace Tellurium {
 struct Config {
 public:
+    enum class EconomicType {
+        LLMoney,
+        Scoreboard,
+    };
+
+public:
     int64 version = 1;
+
+    struct {
+        bool                       Enabled        = false;
+        bool                       RegisterCmd    = true;
+        EconomicType               Type           = EconomicType::LLMoney;
+        std::optional<std::string> scoreboardName = "money";
+    } EconomicSytem;
 
 public:
     TUAPI static std::unique_ptr<Config>& getInstance();
