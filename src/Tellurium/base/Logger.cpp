@@ -8,12 +8,12 @@ std::unique_ptr<LoggerManage>& LoggerManage::getInstance() {
     return instance;
 }
 
-std::shared_ptr<ll::Logger> LoggerManage::getOrCreateLogger(std::string const& moduleName) {
-    if (!mLoggers.contains(moduleName)) {
-        mLoggers[moduleName] =
-            std::make_shared<ll::Logger>(fmt::format("{0}-{1}", getSelfMod().getManifest().name, moduleName));
+std::unique_ptr<ll::Logger>& LoggerManage::getOrCreateLogger(std::string const& name) {
+    if (!mLoggers.contains(name)) {
+        mLoggers[name] = std::make_unique<ll::Logger>(getSelfMod().getManifest().name + "-" + name);
     }
-    return mLoggers[moduleName];
+    return mLoggers[name];
 }
 
+void LoggerManage::removeLogger(std::string const& name) { mLoggers.erase(name); }
 } // namespace Tellurium

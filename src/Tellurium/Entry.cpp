@@ -9,7 +9,7 @@
 namespace Tellurium {
 
 void printWelcomeMsg() {
-    auto logger = LoggerManage::getInstance()->getOrCreateLogger("WelcomeMsg");
+    auto& logger = LoggerManage::getInstance()->getOrCreateLogger("WelcomeMsg");
 
     auto print = [&logger](const std::string& str) -> void {
         logger->info(
@@ -29,6 +29,8 @@ void printWelcomeMsg() {
     print(R"(    Help us improve Tellurium! -> https://github.com/TelluriumDev/Tellurium    )");
     print(R"(                    Copyright (C)  2024 TelluriumDev                           )");
     print(R"(                                                                               )");
+
+    LoggerManage::getInstance()->removeLogger("WelcomeMsg");
 }
 
 std::unique_ptr<Entry>& Entry::getInstance() {
