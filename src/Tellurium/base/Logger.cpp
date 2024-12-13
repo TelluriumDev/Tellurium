@@ -1,5 +1,11 @@
 #include "Tellurium/base/Global.h"
 
+#ifdef TU_DEBUG
+#include <ll/api/service/Bedrock.h>
+#include <mc/world/actor/player/Player.h>
+#include <mc/world/level/Level.h>
+#endif
+
 namespace Tellurium {
 
 std::unique_ptr<LoggerManage>& LoggerManage::getInstance() {
@@ -10,7 +16,18 @@ std::unique_ptr<LoggerManage>& LoggerManage::getInstance() {
 
 std::unique_ptr<ll::Logger>& LoggerManage::getOrCreateLogger(std::string const& name) {
     if (!mLoggers.contains(name)) {
-        mLoggers[name] = std::make_unique<ll::Logger>(getSelfMod().getManifest().name + "-" + name);
+        mLoggers[name] = std::make_unique<ll::Logger>(I18n::tr(getSelfMod().getManifest().name + "-" + name));
+#ifdef TU_DEBUG
+        mLoggers[name]->setPlayerOutputFunc([](std::string_view msg) -> void {
+            ll::service::getLevel().and_then([&msg](Level& level) -> bool {
+                level.forEachPlayer([&msg](Player& player) -> bool {
+                    player.sendMessage(msg);
+                    return true;
+                });
+                return true;
+            });
+        });
+#endif
     }
     return mLoggers[name];
 }

@@ -35,6 +35,7 @@ target("Tellurium")
         "UNICODE", 
         "_HAS_CXX17",
         "_HAS_CXX20",
+        "_HAS_CXX23",
         "TU_EXPORT"
     )
     add_files("src/**.cpp")

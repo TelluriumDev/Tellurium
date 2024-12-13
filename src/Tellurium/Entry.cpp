@@ -11,7 +11,7 @@ namespace Tellurium {
 void printWelcomeMsg() {
     auto& logger = LoggerManage::getInstance()->getOrCreateLogger("WelcomeMsg");
 
-    auto print = [&logger](const std::string& str) -> void {
+    auto print = [&logger](std::string const& str) -> void {
         logger->info(
             ll::sys_utils::isStdoutSupportAnsi() && pl::pl_color_log ? fmt::format(fmt::fg(fmt::color::aqua), str) : str
         );
