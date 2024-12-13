@@ -84,7 +84,6 @@ target("Tellurium")
             modName = target:name(),
             modFile = path.filename(target:targetfile()),
             modVersion = version,
-            passive = not has_config("tests")
         }
 
         io.gsub(manifest_path, "%${(.-)}", function(var)
