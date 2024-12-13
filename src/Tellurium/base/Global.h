@@ -1,5 +1,7 @@
 #pragma once
 
+#include <span> // temporary repair workflow
+
 #include "Tellurium/base/Config.h"
 #include "Tellurium/base/Logger.h"
 #include "Tellurium/base/Macro.h"
