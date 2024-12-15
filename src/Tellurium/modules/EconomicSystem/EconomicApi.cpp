@@ -8,7 +8,7 @@
 namespace Tellurium {
 
 bool EconomicSystem::isValid() {
-    auto& setting = Config::getInstance()->EconomicSytem;
+    auto& setting = Config::getInstance()->EconomicSystem;
 
     switch (setting.Type) {
     case Config::EconomicType::LLMoney: {
@@ -26,7 +26,7 @@ bool EconomicSystem::isValid() {
 
 std::optional<EconomicSystem>& EconomicSystem::getInstance() {
     static std::optional<EconomicSystem> instance;
-    if (!instance.has_value() && Config::getInstance()->EconomicSytem.Enabled && isValid()) {
+    if (!instance.has_value() && Config::getInstance()->EconomicSystem.Enabled && isValid()) {
         instance.emplace();
     }
     return instance;
@@ -34,7 +34,7 @@ std::optional<EconomicSystem>& EconomicSystem::getInstance() {
 
 int EconomicSystem::getMoney(mce::UUID target) const {
     if (!isValid()) return 0;
-    switch (Config::getInstance()->EconomicSytem.Type) {
+    switch (Config::getInstance()->EconomicSystem.Type) {
     case Config::EconomicType::LLMoney: {
         auto playerInfo = PlayerInfo::fromUuid(target);
         if (!playerInfo.has_value()) return 0;
@@ -45,7 +45,7 @@ int EconomicSystem::getMoney(mce::UUID target) const {
     case Config::EconomicType::Scoreboard: {
         return GMLIB_Scoreboard::getInstance()
             .transform([&target](GMLIB_Scoreboard& scoreboard) -> int {
-                return scoreboard.getPlayerScore(*Config::getInstance()->EconomicSytem.scoreboardName, target)
+                return scoreboard.getPlayerScore(*Config::getInstance()->EconomicSystem.scoreboardName, target)
                     .value_or(0);
             })
             .value_or(0);
@@ -62,7 +62,7 @@ int EconomicSystem::getMoney(mce::UUID target) const {
         auto beforeEvent = Event::EVENT_PREFIX##EconomicBeforeEvent(target, value);                                    \
         if (beforeEvent.isCancelled()) return false;                                                                   \
         bool result = false;                                                                                           \
-        switch (Config::getInstance()->EconomicSytem.Type) {                                                           \
+        switch (Config::getInstance()->EconomicSystem.Type) {                                                           \
         case Config::EconomicType::LLMoney: {                                                                          \
             auto playerInfo = PlayerInfo::fromUuid(target);                                                            \
             if (!playerInfo.has_value()) return false;                                                                 \
@@ -75,7 +75,7 @@ int EconomicSystem::getMoney(mce::UUID target) const {
                          .transform([&target, &value](GMLIB_Scoreboard& scoreboard) -> bool {                          \
                              return scoreboard                                                                         \
                                  .setPlayerScore(                                                                      \
-                                     *Config::getInstance()->EconomicSytem.scoreboardName,                             \
+                                     *Config::getInstance()->EconomicSystem.scoreboardName,                             \
                                      target,                                                                           \
                                      value,                                                                            \
                                      PlayerScoreSetFunction::OBJECT_TYPE                                               \

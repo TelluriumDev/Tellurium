@@ -1,5 +1,6 @@
 #include "Tellurium/Entry.h"
 #include "Tellurium/base/Global.h"
+#include "Tellurium/modules/HomeSystem/HomeSystem.h"
 
 #include <ll/api/i18n/I18n.h>
 #include <pl/Config.h>
@@ -53,7 +54,8 @@ bool Entry::load() {
     return true;
 }
 
-bool Entry::enable() { return true; }
+bool Entry::enable() {
+    return true; }
 
 bool Entry::disable() {
     Config::getInstance().reset();

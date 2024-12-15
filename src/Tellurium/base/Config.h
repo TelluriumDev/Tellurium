@@ -18,12 +18,24 @@ public:
 public:
     int64 version = 1;
 
+    std::string DataPath = "./data/";
     struct {
         bool                       Enabled        = false;
         bool                       RegisterCmd    = true;
         EconomicType               Type           = EconomicType::LLMoney;
         std::optional<std::string> scoreboardName = "money";
-    } EconomicSytem;
+    } EconomicSystem;
+
+    struct {
+        bool Enabled     = false;
+        bool RegisterCmd = true;
+        struct {
+            uint PerPlayerMaxHome        = 3;
+            uint DeleteHomeReturn        = 0;
+            uint CreateHomeConsumption   = 0;
+            uint TeleportHomeConsumption = 0;
+        } Home;
+    } HomeSystem;
 
 public:
     TUAPI static std::unique_ptr<Config>& getInstance();
