@@ -18,7 +18,6 @@ public:
 public:
     int64 version = 1;
 
-    std::string DataPath = "./data/";
     struct {
         bool                       Enabled        = false;
         bool                       RegisterCmd    = true;

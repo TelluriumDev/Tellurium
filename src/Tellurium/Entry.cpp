@@ -1,5 +1,7 @@
 #include "Tellurium/Entry.h"
 #include "Tellurium/base/Global.h"
+#include "Tellurium/modules/EconomicSystem/EconomicSystem.h"
+#include "Tellurium/modules/HomeSystem/HomeSystem.h"
 
 #include <ll/api/i18n/I18n.h>
 #include <pl/Config.h>
@@ -39,17 +41,20 @@ std::unique_ptr<Entry>& Entry::getInstance() {
 }
 
 bool Entry::load() {
-    auto& config = Config::getInstance();
-    config->loadConfig();
-    config->saveConfig();
-
     ll::i18n::load(getSelf().getLangDir());
     if (ll::i18n::getInstance() == nullptr) {
         getSelf().getLogger().error("Failed to load i18n.");
         return false;
     }
 
+    auto& config = Config::getInstance();
+    config->loadConfig();
+    config->saveConfig();
+
     printWelcomeMsg();
+
+    EconomicSystem::getInstance();
+    HomeSystem::getInstance();
     return true;
 }
 

@@ -11,8 +11,13 @@
 #include <ll/api/base/StdInt.h>
 #include <ll/api/event/EventBus.h>
 #include <ll/api/mod/Mod.h>
+#include <ll/api/reflection/DESerialization.h>
+#include <ll/api/reflection/Serialization.h>
+#include <ll/api/reflection/Serialization.h>
+
 #include <ll/api/utils/ErrorUtils.h>
 #include <memory>
+#include <nlohmann/json.hpp>
 
 namespace Tellurium {
 extern TUAPI ll::mod::Mod& getSelfMod();
