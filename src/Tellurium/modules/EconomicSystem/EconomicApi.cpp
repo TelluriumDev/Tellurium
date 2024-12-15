@@ -60,9 +60,10 @@ int EconomicSystem::getMoney(mce::UUID target) const {
     bool EconomicSystem::NAME(mce::UUID target, int value) {                                                           \
         if (!isValid()) return false;                                                                                  \
         auto beforeEvent = Event::EVENT_PREFIX##EconomicBeforeEvent(target, value);                                    \
+        ll::event::EventBus::getInstance().publish(beforeEvent);                                                       \
         if (beforeEvent.isCancelled()) return false;                                                                   \
         bool result = false;                                                                                           \
-        switch (Config::getInstance()->EconomicSystem.Type) {                                                           \
+        switch (Config::getInstance()->EconomicSystem.Type) {                                                          \
         case Config::EconomicType::LLMoney: {                                                                          \
             auto playerInfo = PlayerInfo::fromUuid(target);                                                            \
             if (!playerInfo.has_value()) return false;                                                                 \
@@ -75,7 +76,7 @@ int EconomicSystem::getMoney(mce::UUID target) const {
                          .transform([&target, &value](GMLIB_Scoreboard& scoreboard) -> bool {                          \
                              return scoreboard                                                                         \
                                  .setPlayerScore(                                                                      \
-                                     *Config::getInstance()->EconomicSystem.scoreboardName,                             \
+                                     *Config::getInstance()->EconomicSystem.scoreboardName,                            \
                                      target,                                                                           \
                                      value,                                                                            \
                                      PlayerScoreSetFunction::OBJECT_TYPE                                               \

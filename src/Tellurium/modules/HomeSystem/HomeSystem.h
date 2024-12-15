@@ -1,7 +1,5 @@
 #pragma once
 
-#include <span>
-
 #include "Tellurium/base/Macro.h"
 
 #include <ll/api/data/KeyValueDB.h>
