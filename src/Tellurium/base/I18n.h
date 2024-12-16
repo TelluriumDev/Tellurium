@@ -3,21 +3,18 @@
 #include "Tellurium/base/Macro.h"
 
 #include <string>
+#include <vector>
 
 class Player;
 class CommandOrigin;
 
 namespace Tellurium::I18n {
 
-TUAPI std::string tr(std::string const& key, std::string const& language = {});
+TUAPI std::string
+      tr(std::string const& key, std::string const& language = {}, std::vector<std::string> const& params = {});
 
-template <typename... Args>
-TUAPI std::string tr(std::string const& key, std::string const& language, Args&&... args);
+TUAPI std::string tr(std::string const& key, Player const& player, std::vector<std::string> const& params = {});
 
-template <typename... Args>
-TUAPI std::string tr(std::string const& key, Player const& player, Args&&... args);
-
-template <typename... Args>
-TUAPI std::string tr(std::string const& key, CommandOrigin const& origin, Args&&... args);
+TUAPI std::string tr(std::string const& key, CommandOrigin const& origin, std::vector<std::string> const& params = {});
 
 } // namespace Tellurium::I18n

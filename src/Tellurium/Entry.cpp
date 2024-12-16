@@ -3,10 +3,14 @@
 #include "Tellurium/modules/EconomicSystem/EconomicSystem.h"
 #include "Tellurium/modules/HomeSystem/HomeSystem.h"
 
-#include <ll/api/i18n/I18n.h>
-#include <pl/Config.h>
+#include <GMLIB/Files/FileUtils.h>
+#include <GMLIB/Files/Language/ResourceLanguage.h>
+#include <GMLIB/Server/I18nAPI.h>
+#include <ll/api/io/FileUtils.h>
 #include <ll/api/mod/RegisterHelper.h>
+#include <ll/api/utils/StringUtils.h>
 #include <memory>
+#include <pl/Config.h>
 
 namespace Tellurium {
 
@@ -41,17 +45,9 @@ std::unique_ptr<Entry>& Entry::getInstance() {
 }
 
 bool Entry::load() {
-    ll::i18n::load(getSelf().getLangDir());
-    if (ll::i18n::getInstance() == nullptr) {
-        getSelf().getLogger().error("Failed to load i18n.");
-        return false;
-    }
-
     auto& config = Config::getInstance();
     config->loadConfig();
     config->saveConfig();
-
-    printWelcomeMsg();
 
     EconomicSystem::getInstance();
     HomeSystem::getInstance();
@@ -59,7 +55,22 @@ bool Entry::load() {
 }
 
 bool Entry::enable() {
-    return true; }
+    auto version = getSelf().getManifest().version.value_or(ll::data::Version(0, 0, 0));
+
+    I18nAPI::loadLanguagesFromDirectory(getSelf().getLangDir());
+
+    GMLIB::Files::ResourceLanguage
+        language(getSelf().getLangDir(), "Tellurium", version.major, version.minor, version.patch);
+    for (auto& name : GMLIB::Files::FileUtils::getAllFileFullNameInDirectory(getSelf().getLangDir())) {
+        if (!name.ends_with(".lang")) continue;
+        auto content = ll::file_utils::readFile(getSelf().getLangDir() / name);
+        if (!content.has_value() || content->empty()) continue;
+        language.addLanguage(ll::string_utils::replaceAll(name, ".lang", ""), *content);
+    }
+
+    printWelcomeMsg();
+    return true;
+}
 
 bool Entry::disable() {
     Config::getInstance().reset();

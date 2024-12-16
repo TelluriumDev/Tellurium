@@ -16,7 +16,7 @@ std::unique_ptr<LoggerManage>& LoggerManage::getInstance() {
 
 std::unique_ptr<ll::Logger>& LoggerManage::getOrCreateLogger(std::string const& name) {
     if (!mLoggers.contains(name)) {
-        mLoggers[name] = std::make_unique<ll::Logger>(I18n::tr(getSelfMod().getManifest().name + "-" + name));
+        mLoggers[name] = std::make_unique<ll::Logger>(I18n::tr("Tellurium.Logger.Title." + name));
 #ifdef TU_DEBUG
         mLoggers[name]->setPlayerOutputFunc([](std::string_view msg) -> void {
             ll::service::getLevel().and_then([&msg](Level& level) -> bool {
